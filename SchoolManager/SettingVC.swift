@@ -28,6 +28,7 @@ class SettingVC: UIViewController {
     @IBOutlet var switchSunday: UISwitch!
     
     var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,82 +55,118 @@ class SettingVC: UIViewController {
     @IBAction func switchMondayAction(sender: AnyObject) {
         //saves new day Monday to core data
         if switchMonday.on {
-            AddNewDay(lbl_MondaySwitch.text!, idStr: "1")
+            let rep = DayRepository(context: context)
+            let entity = rep.CreateEmptyEntityObject(Day.EntityName)
+            entity.setValue(lbl_MondaySwitch.text!, forKey: Day.Key_day)
+            entity.setValue("1", forKey: Day.Key_id)
+            rep.Save(entity)
         }
         if !switchMonday.on{
-            DeleteDay(lbl_MondaySwitch.text!)
+            let rep = DayRepository(context: context)
+            let entity = rep.FetchDataWithPredicate(Day.EntityName, predicateKey: Day.Key_day, value: lbl_MondaySwitch.text!)
+            if entity != nil{
+                for i in 0..<entity!.count{
+                    rep.DeleteData(entity![i])
+                }
+            }
         }
     }
     
     @IBAction func switchTuesdayAction(sender: AnyObject) {
         //saves new day Monday to core data
         if switchTuesday.on {
-            AddNewDay(lbl_TuesdaySwitch.text!, idStr: "2")
+            let rep = DayRepository(context: context)
+            let entity = rep.CreateEmptyEntityObject(Day.EntityName)
+            entity.setValue(lbl_TuesdaySwitch.text!, forKey: Day.Key_day)
+            entity.setValue("2", forKey: Day.Key_id)
+            rep.Save(entity)
         }
         if !switchTuesday.on{
-            DeleteDay(lbl_TuesdaySwitch.text!)
+//            DeleteDay(lbl_TuesdaySwitch.text!)
         }
     }
     
     @IBAction func switchWensdayAction(sender: AnyObject) {
         //saves new day Monday to core data
         if switchWensday.on {
-            AddNewDay(lbl_WensdaySwitch.text!, idStr: "3")
+            let rep = DayRepository(context: context)
+            let entity = rep.CreateEmptyEntityObject(Day.EntityName)
+            entity.setValue(lbl_WensdaySwitch.text!, forKey: Day.Key_day)
+            entity.setValue("3", forKey: Day.Key_id)
+            rep.Save(entity)
         }
         if !switchWensday.on{
-            DeleteDay(lbl_WensdaySwitch.text!)
+//            DeleteDay(lbl_WensdaySwitch.text!)
         }
     }
     
     @IBAction func switchThursdayAction(sender: AnyObject) {
         //saves new day Monday to core data
         if switchThursday.on {
-            AddNewDay(lbl_ThursdaySwitch.text!, idStr: "4")
+            let rep = DayRepository(context: context)
+            let entity = rep.CreateEmptyEntityObject(Day.EntityName)
+            entity.setValue(lbl_ThursdaySwitch.text!, forKey: Day.Key_day)
+            entity.setValue("4", forKey: Day.Key_id)
+            rep.Save(entity)
         }
         if !switchThursday.on{
-            DeleteDay(lbl_ThursdaySwitch.text!)
+//            DeleteDay(lbl_ThursdaySwitch.text!)
         }
     }
     
     @IBAction func switchFridayAction(sender: AnyObject) {
         //saves new day Monday to core data
         if switchFriday.on {
-            AddNewDay(lbl_FridaySwitch.text!, idStr: "5")
+            let rep = DayRepository(context: context)
+            let entity = rep.CreateEmptyEntityObject(Day.EntityName)
+            entity.setValue(lbl_FridaySwitch.text!, forKey: Day.Key_day)
+            entity.setValue("5", forKey: Day.Key_id)
+            rep.Save(entity)
         }
         if !switchFriday.on{
-            DeleteDay(lbl_FridaySwitch.text!)
+//            DeleteDay(lbl_FridaySwitch.text!)
         }
     }
     
     @IBAction func switchSaturdayAction(sender: AnyObject) {
         //saves new day Monday to core data
         if switchSaturday.on {
-            AddNewDay(lbl_SaturdaySwitch.text!, idStr: "6")
+            let rep = DayRepository(context: context)
+            let entity = rep.CreateEmptyEntityObject(Day.EntityName)
+            entity.setValue(lbl_SaturdaySwitch.text!, forKey: Day.Key_day)
+            entity.setValue("6", forKey: Day.Key_id)
+            rep.Save(entity)
         }
         if !switchSaturday.on{
-            DeleteDay(lbl_SaturdaySwitch.text!)
+//            DeleteDay(lbl_SaturdaySwitch.text!)
         }
     }
     
     @IBAction func switchSundayAction(sender: AnyObject) {
         //saves new day Monday to core data
         if switchSunday.on {
-            AddNewDay(lbl_SundaySwitch.text!, idStr: "7")
+            let rep = DayRepository(context: context)
+            let entity = rep.CreateEmptyEntityObject(Day.EntityName)
+            entity.setValue(lbl_SaturdaySwitch.text!, forKey: Day.Key_day)
+            entity.setValue("7", forKey: Day.Key_id)
+            rep.Save(entity)
         }
         if !switchSunday.on{
-            DeleteDay(lbl_SundaySwitch.text!)
+//            DeleteDay(lbl_SundaySwitch.text!)
         }
     }
     
     /**Sets the initial state of the Enabled Days switches
      corresponding to saved days in core data*/
     func SetSwitchStateCorrespondingToSavedValues(){
-        let fetchResults = FetchDays()
-        let days = fetchResults as! [Day]
-        if days.count > 0 {
-            for i in 0..<days.count{
+        
+        let rep = DayRepository(context: context)
+        let fetchResults = rep.FetchData(Day.EntityName)
+        let days = fetchResults as! [Day]?
+        if days != nil {
+            for i in 0..<days!.count{
                 
-                switch days[i].valueForKey("day")! as! String{
+                switch days![i].valueForKey("day")! as! String{
                 case lbl_MondaySwitch.text!:
                     switchMonday.on = true
                     break
@@ -154,86 +191,20 @@ class SettingVC: UIViewController {
                 default:
                     break
                 }
-                print(days[i].valueForKey("day")!)
+                print(days![i].valueForKey("day")!)
             }
         }
     }
-    
-    /** Creates Day Entity NSManagedObject
-     :returns: Day Entity NSManagedObject*/
-    func CreateEmptyDayEntityObject()->NSManagedObject{
-        let rep = DayRepository(context: context)
-        let day = rep.CreateEmptyEntityObject()
-        return day
-    }
-    
-    /**Creates Day Entity NSManagedObject
-     :param: strID - String for key ID
-     :param: strDay - String for key day
-     :returns: Day Entity NSManagedObject*/
-    func CreateDayEntityObject(strID: String, strDay: String) -> Day {
-        let rep = DayRepository(context: context)
-        let day = rep.CreateEmptyEntityObject() as! Day
-        //let day = NSEntityDescription.insertNewObjectForEntityForName(Day.EntityName, inManagedObjectContext: self.context) as! Day
-        day.id = strID
-        day.day = strDay
-        return day
-    }
-    
-    /**Saves a NSManagedObject
-     How to use:
-     let result = saveContext(context)
-     if !result.success {
-     println("Error: \(result.error)")
-     } */
-     //func saveContext(self.managedObjectContext!) -> (success: Bool, error: NSError?)
-     
-     
-     /**Adds a new record to Day Entity
-     :param: daystring     The day to add as string.*/
-    func AddNewDay(dayStr:String, idStr:String){
-        let entity = CreateEmptyDayEntityObject()
-        
-        entity.setValue(dayStr, forKey: Day.Key_day)
-        entity.setValue(idStr, forKey: Day.Key_id)
-        
-        do{
-            try self.context.save()
-            print(entity)
-        }
-            
-        catch let error as NSError{
-            print("\(dayStr) not saved \(error.localizedDescription)")
-        }
-    }
-    
-    /**Fetches all records from "Day" Entity
-     :returns NSObject?*/
-    func FetchDays() ->[NSManagedObject]?{
-        do{
-            let fetchRequest = NSFetchRequest(entityName: Day.EntityName)
-            let fetchResults = try self.context.executeFetchRequest(fetchRequest) as? [NSManagedObject]
-            
-            if fetchResults!.count > 0 {
-                return fetchResults
-            }
-        }
-            
-        catch let error as NSError{
-            print("\(Day.EntityName) not fetched \(error)")
-        }
-        return nil
-    }
-    
     
     /**Deletes a specific day from "Day" Eintity
      :param: daystring  The day to delete as String*/
-    func DeleteDay(dayString:String){
+    func DeleteDay(entity:NSManagedObject){
         do{
+//            let rep = DayRepository(context: <#T##NSManagedObjectContext#>)
             let fetchRequest = NSFetchRequest(entityName: Day.EntityName)
             let sortDescriptor = NSSortDescriptor(key: Day.Key_day, ascending: true)
             fetchRequest.sortDescriptors = [sortDescriptor]
-            let predicate = NSPredicate(format: "\(Day.Key_day) == %@", dayString)
+            let predicate = NSPredicate(format: "\(Day.Key_day) == %@", "day")
             fetchRequest.predicate = predicate
             let fetchResults = try self.context.executeFetchRequest(fetchRequest) as? [NSManagedObject]
             let days = fetchResults as! [Day]
