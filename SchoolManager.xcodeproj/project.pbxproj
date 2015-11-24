@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CF00CB491C00E90800099960 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00CB481C00E90800099960 /* SettingVC.swift */; };
+		CF00CB491C00E90800099960 /* EnabledDaysSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00CB481C00E90800099960 /* EnabledDaysSettingsVC.swift */; };
 		CF00CB5A1C00EF8700099960 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF00CB591C00EF8700099960 /* Start.storyboard */; };
 		CF119F671C00AE9F00FF1569 /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF119F631C00AE9F00FF1569 /* Day+CoreDataProperties.swift */; };
 		CF119F691C00AE9F00FF1569 /* Subject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF119F651C00AE9F00FF1569 /* Subject+CoreDataProperties.swift */; };
@@ -24,6 +24,11 @@
 		CF57A2F11BFF7CAA00081348 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF57A2DE1BFF711600081348 /* MainVC.swift */; };
 		CF9FCDD31C04D16100CD10BB /* DayRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9FCDD21C04D16100CD10BB /* DayRepository.swift */; };
 		CF9FCDD51C04D69F00CD10BB /* IRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9FCDD41C04D69F00CD10BB /* IRepository.swift */; };
+		CFCBF31E1C04FF350046048E /* SettingsMenueVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBF31D1C04FF350046048E /* SettingsMenueVC.swift */; };
+		CFCBF3201C0500880046048E /* calendar-week.png in Resources */ = {isa = PBXBuildFile; fileRef = CFCBF31F1C0500880046048E /* calendar-week.png */; };
+		CFCBF3221C0508520046048E /* Door-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CFCBF3211C0508520046048E /* Door-icon.png */; };
+		CFCBF3241C0509F10046048E /* RoomsSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBF3231C0509F10046048E /* RoomsSettingsVC.swift */; };
+		CFCBF3261C050C840046048E /* Pencil-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CFCBF3251C050C840046048E /* Pencil-icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CF00CB481C00E90800099960 /* SettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		CF00CB481C00E90800099960 /* EnabledDaysSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnabledDaysSettingsVC.swift; sourceTree = "<group>"; };
 		CF00CB591C00EF8700099960 /* Start.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Start.storyboard; path = ../Start.storyboard; sourceTree = "<group>"; };
 		CF119F631C00AE9F00FF1569 /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CF119F651C00AE9F00FF1569 /* Subject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Subject+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -58,6 +63,11 @@
 		CF57A2E41BFF72AD00081348 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		CF9FCDD21C04D16100CD10BB /* DayRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayRepository.swift; sourceTree = "<group>"; };
 		CF9FCDD41C04D69F00CD10BB /* IRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRepository.swift; sourceTree = "<group>"; };
+		CFCBF31D1C04FF350046048E /* SettingsMenueVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenueVC.swift; sourceTree = "<group>"; };
+		CFCBF31F1C0500880046048E /* calendar-week.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "calendar-week.png"; path = "../../../../../Volumes/Macintosh HD/OneDrive/XCode/Resources/calendar-week.png"; sourceTree = "<group>"; };
+		CFCBF3211C0508520046048E /* Door-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Door-icon.png"; path = "../../../../../Volumes/Macintosh HD/OneDrive/XCode/Resources/Door-icon.png"; sourceTree = "<group>"; };
+		CFCBF3231C0509F10046048E /* RoomsSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomsSettingsVC.swift; sourceTree = "<group>"; };
+		CFCBF3251C050C840046048E /* Pencil-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Pencil-icon.png"; path = "../../../../../Volumes/Macintosh HD/OneDrive/XCode/Resources/Pencil-icon.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,8 +148,11 @@
 		CF57A2DD1BFF70F100081348 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				CFCBF3251C050C840046048E /* Pencil-icon.png */,
 				CF57A2DE1BFF711600081348 /* MainVC.swift */,
-				CF00CB481C00E90800099960 /* SettingVC.swift */,
+				CF00CB481C00E90800099960 /* EnabledDaysSettingsVC.swift */,
+				CFCBF31D1C04FF350046048E /* SettingsMenueVC.swift */,
+				CFCBF3231C0509F10046048E /* RoomsSettingsVC.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -154,6 +167,8 @@
 		CF57A2E91BFF736600081348 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CFCBF3211C0508520046048E /* Door-icon.png */,
+				CFCBF31F1C0500880046048E /* calendar-week.png */,
 				CF2C44DA1C0089E30020A8A6 /* Setting-icon.png */,
 				CF2C44D81C0089CF0020A8A6 /* Calendar02.png */,
 			);
@@ -244,7 +259,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFCBF3201C0500880046048E /* calendar-week.png in Resources */,
 				CF57A2C81BFF70DD00081348 /* LaunchScreen.storyboard in Resources */,
+				CFCBF3221C0508520046048E /* Door-icon.png in Resources */,
+				CFCBF3261C050C840046048E /* Pencil-icon.png in Resources */,
 				CF57A2C51BFF70DD00081348 /* Assets.xcassets in Resources */,
 				CF2C44D91C0089CF0020A8A6 /* Calendar02.png in Resources */,
 				CF2C44DB1C0089E30020A8A6 /* Setting-icon.png in Resources */,
@@ -272,9 +290,11 @@
 				CF9FCDD31C04D16100CD10BB /* DayRepository.swift in Sources */,
 				CF119F671C00AE9F00FF1569 /* Day+CoreDataProperties.swift in Sources */,
 				CF57A2DF1BFF711600081348 /* MainVC.swift in Sources */,
-				CF00CB491C00E90800099960 /* SettingVC.swift in Sources */,
+				CFCBF3241C0509F10046048E /* RoomsSettingsVC.swift in Sources */,
+				CF00CB491C00E90800099960 /* EnabledDaysSettingsVC.swift in Sources */,
 				CF57A2BB1BFF70DD00081348 /* AppDelegate.swift in Sources */,
 				CF119F691C00AE9F00FF1569 /* Subject+CoreDataProperties.swift in Sources */,
+				CFCBF31E1C04FF350046048E /* SettingsMenueVC.swift in Sources */,
 				CF9FCDD51C04D69F00CD10BB /* IRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

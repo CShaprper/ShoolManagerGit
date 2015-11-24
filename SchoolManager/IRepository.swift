@@ -12,6 +12,14 @@ protocol IRepository{
     
     func FetchData(entityName:String)->[NSManagedObject]?
     
+    /**Fetches Data with Predicate
+     :param: entityName: String of EntityName
+     :param: predicateKey: String of key to filter
+     :param: value: Value of Key to filter*/
     func FetchDataWithPredicate(entityName:String, predicateKey: String, value: String)->[NSManagedObject]?
+    
+    /**Deletes a specific Entity
+     :param: entity  -  entity NSMannagedObject*/
+    func DeleteData(entity:NSManagedObject?)
 }
 

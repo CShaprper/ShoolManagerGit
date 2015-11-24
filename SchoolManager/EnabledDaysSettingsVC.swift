@@ -9,7 +9,8 @@
 import UIKit
 import CoreData
 
-class SettingVC: UIViewController {
+class EnabledDaysSettingsVC: UIViewController {
+    //Outlets
     @IBOutlet var lbl_EnabledDays: UILabel!
     @IBOutlet var lbl_MondaySwitch: UILabel!
     @IBOutlet var lbl_TuesdaySwitch: UILabel!
@@ -18,7 +19,6 @@ class SettingVC: UIViewController {
     @IBOutlet var lbl_FridaySwitch: UILabel!
     @IBOutlet var lbl_SaturdaySwitch: UILabel!
     @IBOutlet var lbl_SundaySwitch: UILabel!
-    
     @IBOutlet var switchMonday: UISwitch!
     @IBOutlet var switchTuesday: UISwitch!
     @IBOutlet var switchWensday: UISwitch!
@@ -27,11 +27,14 @@ class SettingVC: UIViewController {
     @IBOutlet var switchSaturday: UISwitch!
     @IBOutlet var switchSunday: UISwitch!
     
+    // Coret Data context
     var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Sets the State of UISwitches corresponding to saved values
         SetSwitchStateCorrespondingToSavedValues()
     }
     
@@ -82,7 +85,13 @@ class SettingVC: UIViewController {
             rep.Save(entity)
         }
         if !switchTuesday.on{
-//            DeleteDay(lbl_TuesdaySwitch.text!)
+            let rep = DayRepository(context: context)
+            let entity = rep.FetchDataWithPredicate(Day.EntityName, predicateKey: Day.Key_day, value: lbl_TuesdaySwitch.text!)
+            if entity != nil{
+                for i in 0..<entity!.count{
+                    rep.DeleteData(entity![i])
+                }
+            }
         }
     }
     
@@ -96,7 +105,13 @@ class SettingVC: UIViewController {
             rep.Save(entity)
         }
         if !switchWensday.on{
-//            DeleteDay(lbl_WensdaySwitch.text!)
+            let rep = DayRepository(context: context)
+            let entity = rep.FetchDataWithPredicate(Day.EntityName, predicateKey: Day.Key_day, value: lbl_WensdaySwitch.text!)
+            if entity != nil{
+                for i in 0..<entity!.count{
+                    rep.DeleteData(entity![i])
+                }
+            }
         }
     }
     
@@ -110,7 +125,13 @@ class SettingVC: UIViewController {
             rep.Save(entity)
         }
         if !switchThursday.on{
-//            DeleteDay(lbl_ThursdaySwitch.text!)
+            let rep = DayRepository(context: context)
+            let entity = rep.FetchDataWithPredicate(Day.EntityName, predicateKey: Day.Key_day, value: lbl_ThursdaySwitch.text!)
+            if entity != nil{
+                for i in 0..<entity!.count{
+                    rep.DeleteData(entity![i])
+                }
+            }
         }
     }
     
@@ -124,7 +145,13 @@ class SettingVC: UIViewController {
             rep.Save(entity)
         }
         if !switchFriday.on{
-//            DeleteDay(lbl_FridaySwitch.text!)
+            let rep = DayRepository(context: context)
+            let entity = rep.FetchDataWithPredicate(Day.EntityName, predicateKey: Day.Key_day, value: lbl_FridaySwitch.text!)
+            if entity != nil{
+                for i in 0..<entity!.count{
+                    rep.DeleteData(entity![i])
+                }
+            }
         }
     }
     
@@ -138,21 +165,32 @@ class SettingVC: UIViewController {
             rep.Save(entity)
         }
         if !switchSaturday.on{
-//            DeleteDay(lbl_SaturdaySwitch.text!)
+            let rep = DayRepository(context: context)
+            let entity = rep.FetchDataWithPredicate(Day.EntityName, predicateKey: Day.Key_day, value: lbl_SaturdaySwitch.text!)
+            if entity != nil{
+                for i in 0..<entity!.count{
+                    rep.DeleteData(entity![i])
+                }
+            }
         }
     }
     
     @IBAction func switchSundayAction(sender: AnyObject) {
-        //saves new day Monday to core data
         if switchSunday.on {
             let rep = DayRepository(context: context)
             let entity = rep.CreateEmptyEntityObject(Day.EntityName)
-            entity.setValue(lbl_SaturdaySwitch.text!, forKey: Day.Key_day)
+            entity.setValue(lbl_SundaySwitch.text!, forKey: Day.Key_day)
             entity.setValue("7", forKey: Day.Key_id)
             rep.Save(entity)
         }
         if !switchSunday.on{
-//            DeleteDay(lbl_SundaySwitch.text!)
+            let rep = DayRepository(context: context)
+            let entity = rep.FetchDataWithPredicate(Day.EntityName, predicateKey: Day.Key_day, value: lbl_SundaySwitch.text!)
+            if entity != nil{
+                for i in 0..<entity!.count{
+                    rep.DeleteData(entity![i])
+                }
+            }
         }
     }
     
@@ -195,29 +233,4 @@ class SettingVC: UIViewController {
             }
         }
     }
-    
-    /**Deletes a specific day from "Day" Eintity
-     :param: daystring  The day to delete as String*/
-    func DeleteDay(entity:NSManagedObject){
-        do{
-//            let rep = DayRepository(context: <#T##NSManagedObjectContext#>)
-            let fetchRequest = NSFetchRequest(entityName: Day.EntityName)
-            let sortDescriptor = NSSortDescriptor(key: Day.Key_day, ascending: true)
-            fetchRequest.sortDescriptors = [sortDescriptor]
-            let predicate = NSPredicate(format: "\(Day.Key_day) == %@", "day")
-            fetchRequest.predicate = predicate
-            let fetchResults = try self.context.executeFetchRequest(fetchRequest) as? [NSManagedObject]
-            let days = fetchResults as! [Day]
-            if days.count > 0 {
-                for i in 0..<days.count{
-                    context.deleteObject(days[i])
-                }
-            }            
-        }
-        catch let error as NSError{
-            print(error)
-        }
-    }
-    
-    
 }

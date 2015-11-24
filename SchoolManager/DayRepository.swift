@@ -15,7 +15,7 @@ class DayRepository: IRepository {
     /** Creates Day Entity NSManagedObject
      :returns: Day Entity NSManagedObject*/
     func CreateEmptyEntityObject(entityName:String) -> NSManagedObject {
-        let obj = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self.context)        
+        let obj = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self.context)
         return obj
     }
     
@@ -24,7 +24,6 @@ class DayRepository: IRepository {
     func Save(entity: NSManagedObject){
         do{
             try self.context.save()
-            print(entity)
         }
         catch let error as NSError{
             print(error)
@@ -48,10 +47,14 @@ class DayRepository: IRepository {
         return nil
     }
     
+    /**Fetches Data with Predicate
+     :param: entityName: String of EntityName
+     :param: predicateKey: String of key to filter
+     :param: value: Value of Key to filter*/
     func FetchDataWithPredicate(entityName:String, predicateKey: String, value:String )->[NSManagedObject]?{
         do{
             let fetchRequest = NSFetchRequest(entityName: entityName)
-            let sortDescriptor = NSSortDescriptor(key: Day.Key_day, ascending: true)
+            let sortDescriptor = NSSortDescriptor(key: predicateKey, ascending: true)
             fetchRequest.sortDescriptors = [sortDescriptor]
             let predicate = NSPredicate(format: "\(predicateKey) == %@", value)
             fetchRequest.predicate = predicate
@@ -64,11 +67,12 @@ class DayRepository: IRepository {
         return nil
     }
     
+    /**Deletes a specific Entity
+     :param: entity  -  entity NSMannagedObject*/
     func DeleteData(entity:NSManagedObject?){
         do{
             context.deleteObject(entity!)
             try context.save()
-            print("Deleted Record: \(entity)")
         }
         catch let error as NSError{
             print(error)
