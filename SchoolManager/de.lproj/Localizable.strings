@@ -1,0 +1,95 @@
+/* 
+  Localizeable.strings
+  SchoolManager
+
+  Created by Peter Sypek on 02.02.16.
+  Copyright © 2016 Peter Sypek. All rights reserved.
+ */
+
+/*Global*/
+"Alert_AddingDisabled_Title" = "Hinzufügen deaktiviert";
+"Alert_Error_Title" = "Fehler";
+"Alert_Action_Cancel" = "abbrechen";
+"Alert_Delete_Title" = "Löschaktion";
+"Alert_Action_Delete" = "löschen";
+"Alert_Action_Edit" = "bearbeiten";
+"Alert_MissingData_Title" = "Fehlende Eingabe";
+"ActionSheet_ElementAction_Title" = "Augewähltes Element Aktionen";
+"Hour_Number" = "Stunde Nr.:";
+"Alert_WrongUserInput_Title" = "Unkorrekte Eingabe!";
+"Alert_GotToSettings" = "zu den Einstellungen";
+"RemoveAds" = "RemoveAdsWood_DE";
+"RateNow" = "RateNowWood_DE";
+"openNote" = "Notiz öffnen";
+
+/*MainVC*/
+"MainVC_NowLabelText" = "Jetzt";
+"MainVC_NowRoomLabelText" = "Raum:";
+"MainVC_NextLabelText" = "Gleich";
+"MainVC_NowHourStartLabelText" = "von:";
+"MainVC_NowHourEndLabelText" = "bis:";
+"TimeTableTitleOdd" = "Stundenplan gerade Woche";
+"TimeTableTitleUneven" = "Stundenplan ungerade Woche";
+"DashboardWelcomeHeader" = "Willkommen bei School Manager";
+"DashboardWelcomeMessage" = "Fast geschafft! Hier siehst Du in Zukunft Deine aktuelle und nächste Schulstunde. Zuerst solltest Du jedoch den 'Einstellungen' einen Besuch abstatten, um Deinen persönlichen 'Stundenplan' zu konfigurieren.";
+
+/*EnabledDaysVC*/
+"EnabledDaysVC_AlertHourDeleteDisabled_Title" = "Deaktiviert!";
+"EnabledDaysVC_AlertHourDeleteDisabled_MessagePaart1" = "Du kannst Stunde ";
+"EnabledDaysVC_AlertHourDeleteDisabled_MessagePaart2" = "nicht löschen. Diese Stunde ist ein Element in Deinem 'Tagesablauf'. Wenn Du den Anzahl der Stunden je Tag verkleinern möchtest, solltest Du zuerst den 'Tagesablauf' in den Einstellungen ändern.";
+"EnabledDaysVC_AlertDeleteDayDisables_Title" = "Löschen deaktiviert";
+"EnabledDaysVC_AlertDeleteDayDisables_Message" =  "Du kannst diesen Tag nicht entfernen. In Deinem 'Stundenplan' gibt es aktive Elemente an diesem Tag. Du solltest erst alle Elemente zu diesem Tag aus dem 'Stundenplan' entfernen um einen neuen Wochenablauf zu erstellen.";
+"EnabledDaysInfoHeader" = "Verfügbare Tage";
+"EnabledDaysInfoMessage" = "Zuerst solltest Du die 'Verfügbaren Tage' für Deinen persönlichen 'Stundenplan' einstellen. Hier bekommst Du auch die Möglichkeit die Anzahl der Stunden pro Tag zu konfigurieren.";
+"TimelineInfoHeader" = "Tagesablauf / Zeitplan";
+"TimelineInfoMessage" = "Als nächstes ist es wichtig Deinen persönlichen Zeitplan zu gestalten. Konfiguriere die Start- und Endzeit für jede Schulstunde.";
+"TeacherInfoHeader" = "Liste Deiner Lehrer";
+"TeacherInfoMessage" = "Jetzt kannst Du all Deine Lehrer in der nächsten Ansicht speichern.";
+"SubjectsInfoHeader" = "Liste Deiner Schulfächer";
+"SubjectsInfoMessage" = "Fast fertig! Speicher Deine Schulfächer mit Hilfe der nächsten Ansicht.";
+"TimeTableWelcomeHeader" = "Stundenplan";
+"TimeTableWelcomeMessage" = "Super! Jetzt ist es an der Zeit Deinen Stundenplan zu konfigurieren. Tippe auf die sichtbaren Stundenplan Elemente. School Manager ermöglicht verschiedene Ansichten an geraden und ungeraden Kalenderwochen. Später kannst Du mittels long press zwischen den Ansichten wechseln.";
+
+/*TeacherTableVC*/
+"TeacherTable_TeacherActionSheet_Title" = "Lehrer Aktion";
+"TeacherTable_TeacherActionSheet_Message" = "Hier siehst Du mögliche Aktionen zum ausgewählten Element. Für eine Löschkation solltest Du zuerst alle Elemente des aktiven 'Stundenplans' mit diesem Lehrer löschen!";
+
+/*TimelineVC*/
+"TimelineVC_AlertHourNumberColliding_Message" = "Die Stundennummmer existiert bereits. Versuche eine andere Stundennummer!";
+"TimelineVC_AlertTimePeriodColliding_Message" = "Die Zeitperiode Deiner Eingabe überschneidet sich mit einer existierenden Zeitperiode!";
+"TimelineVC_AlertStartTimeSmallerThanEndTime_Message" = "Die Startzeit ist kleiner als die Endzeit!";
+"TimelineVC_ActionSheetTimeTableActions_Message" = "Hier siehst Du die möglichen Aktionen zum ausgewählten Element. Für eine Löschaktion solltest Du zuerst alle 'Stundenplan' Elemente mit dieser Stunde löschen!";
+
+/*SubjectsVC*/
+"SubjectsVC_ActionSheetTimeTableActions_Message" = "Hier siehst Du die möglichen Aktionen zum ausgewählten Element. Für eine Löschaktion solltest Du zuerst alle 'Stundenplan' Elemente mit diesem Schulfach aus dem 'Stundenplan' entfernen.";
+"Alert_MissingSubject_Message" = "Gib ein Schulfach ein!";
+"Alert_MissingColor_Message" = "Wähle eine Farbe!";
+
+/*AddNote*/
+"AddNotePlaceholderText" = "Gib hier Deine Notiz ein ....";
+"AddNoteAddNoteText" = "Gib einen Text zu Deiner Notiz ein!";
+
+/*Planer Setup*/
+"PlanerSetup_MissingRoom_Message" = "Gib eine Raumnummer an!";
+"PlanerSetup_MissingSubject_Message" = "Wähle ein Schulfach!";
+"PlanerSetup_MissingTeacher_Message" = "Wähle einen Lehrer!";
+"PlanerSetup_MissingHour_Message" = "Wähle eine Stunde!";
+"PlanerSetup_MissingDay_Message" = "Wähle einen Tag!";
+"PlanerSetup_MissingWeeknumber_Message" = "Wähle ob das 'Stundenplan' Element an 'geraden' - 'ungeraden' oder 'beiden' Wochen erscheinen soll!";
+"PlanerSetup_Hour" = "Stunde:";
+"PlanerSetup_Hour_Message" = "Stunde:";
+"PlanerSetup_HourOnDay_Message" = "am:";
+"PlanerSetup_HourCollides_Message" = "überschneidet sich mit";
+"PlanerSetup_AtTime_Message" = "an Stunde";
+"PlanerSetup_OnDay_Message" = "am";
+"PlanerSetup_RestMessage" = "in Deinem 'Stundenplan'. Versuche einen anderen Tag / eine andere Stunde oder lösche das existtierende 'Stundenplan' Element!";
+
+/*TimeTableVC*/
+"TimeTableVC_DeleteCompleteTimeTable" = "Bist Du sicher, dass Du den gesamten Stundenplan löschen möchtest?";
+"TimeTableVC_DeleteAll" = "alle löschen";
+"TimeTableVC_AddNote" = "Notiz hinzufügen zu:";
+"TimeTableVC_SwitchWeek" = "Wochenansicht wechseln";
+"TimeTableVC_PossibleActions" = "Hier siehst Du die möglichen Aktionen zum ausgewählten Element!";
+
+/*SelectReminderVC*/
+"Alert_WrongReminderDate_Message" = "Das Erinnerungsdatum muss in der Zukunft liegen!";

@@ -1,0 +1,95 @@
+/* 
+  Localizeable.strings
+  SchoolManager
+
+  Created by Peter Sypek on 02.02.16.
+  Copyright © 2016 Peter Sypek. All rights reserved.
+*/
+
+/*Global*/
+"Alert_AddingDisabled_Title" = "Adding Disabled";
+"Alert_Error_Title" = "Error";
+"Alert_Delete_Title" = "Delete Action";
+"Alert_Action_Cancel" = "cancel";
+"Alert_Action_Delete" = "delete";
+"Alert_Action_Edit" = "edit";
+"Alert_MissingData_Title" = "Missing Input";
+"ActionSheet_ElementAction_Title" = "Selected Element Action";
+"Hour_Number" = "Hour-no.:";
+"Alert_WrongUserInput_Title" = "Wrong Input!";
+"Alert_GotToSettings" = "go to settings";
+"RemoveAds" = "RemoveAdsWood";
+"RateNow" = "RateNowWood";
+"openNote" = "open note";
+
+/*MainVC*/
+"MainVC_NowLabelText" = "Now";
+"MainVC_NowRoomLabelText" = "room:";
+"MainVC_NextLabelText" = "Next";
+"MainVC_NowHourStartLabelText" = "from:";
+"MainVC_NowHourEndLabelText" = "to:";
+"TimeTableTitleOdd" = "Time Table odd Week";
+"TimeTableTitleUneven" = "Time Table uneven Week";
+"DashboardWelcomeHeader" = "Welcome to School Manager";
+"DashboardWelcomeMessage" = "Almost done! Here you will see your acutal and upcoming school lessons after you have configured your personal 'Time Table'. You first should visit the 'Settings' to configure your 'Time Table'.";
+
+/*EnabledDaysVC*/
+"EnabledDaysVC_AlertHourDeleteDisabled_Title" = "Delete hour disabled!";
+"EnabledDaysVC_AlertHourDeleteDisabled_MessagePaart1" = "You cannot delete hour";
+"EnabledDaysVC_AlertHourDeleteDisabled_MessagePaart2" = ". You have set up this hour in your 'Timeline'. If you want to decrease the hours per day. You should first change the 'Timeline' in the settings.";
+"EnabledDaysVC_AlertDeleteDayDisables_Title" = "Delete action disabled";
+"EnabledDaysVC_AlertDeleteDayDisables_Message" =  "You cannot remove this day. There are active 'Time Table' elements for this day. Please clear the whole 'Time Table' first to setup a new 'weekly Timeline'";
+"EnabledDaysInfoHeader" = "Enabled Days";
+"EnabledDaysInfoMessage" = "The first settings you should configure are the 'Enabled Days' that you will see in your personal 'Time Table'. Here you have the chance to configure also the count of hours per day.";
+"TimelineInfoHeader" = "Day Timline";
+"TimelineInfoMessage" = "Next you should design your daily timeline. Set the starttime and endtime for each of your school hours.";
+"TeacherInfoHeader" = "List of Teachers";
+"TeacherInfoMessage" = "Now you should list all your teachers in the in the 'Teacher Settings' view.";
+"SubjectsInfoHeader" = "List of School Subjects";
+"SubjectsInfoMessage" = "Almost finished! Save your school subjects at the next view.";
+"TimeTableWelcomeHeader" = "Time Table";
+"TimeTableWelcomeMessage" = "Great! Now its time to configure your 'Time Table'. Tap on the visible elements to configure. School Manager supports odd and uneven week configuration. Later you can try a long press to switch the 'Time Table' view between odd and uneven week view.";
+
+/*TeacherTableVC*/
+"TeacherTable_TeacherActionSheet_Title" = "Teacher Element action";
+"TeacherTable_TeacherActionSheet_Message" = "Here you see all possible actions to the selected element. For delete action, you first need to clear your 'Time Table' from elements containing this teacher!";
+
+/*TimelineVC*/
+"TimelineVC_AlertHourNumberColliding_Message" = "Your hour number still exists. Try a different hour number!";
+"TimelineVC_AlertTimePeriodColliding_Message" = "Your input time period overlaps with an existing time period!";
+"TimelineVC_AlertStartTimeSmallerThanEndTime_Message" = "Your startime is smaller than your endtime.";
+"TimelineVC_ActionSheetTimeTableActions_Message" = "Here you see teh possible actions to the selected element. For delete action you first should delete all 'Time Table' elements containing this hours";
+
+/*SubjectsVC*/
+"SubjectsVC_ActionSheetTimeTableActions_Message" = "Here you see the possible actions to the selected element. For delete action you first should to delete all 'Time Table' elements containing this subject.";
+"Alert_MissingSubject_Message" = "Enter a subject!";
+"Alert_MissingColor_Message" = "Choose a color!";
+
+/*AddNote*/
+"AddNotePlaceholderText" = "Enter your text here ....";
+"AddNoteAddNoteText" = "Enter your note text!";
+
+/*Planer Setup*/
+"PlanerSetup_MissingRoom_Message" = "Enter a room number!";
+"PlanerSetup_MissingSubject_Message" = "Select a subject!";
+"PlanerSetup_MissingTeacher_Message" = "Select a teacher!";
+"PlanerSetup_MissingHour_Message" = "Select an hour!";
+"PlanerSetup_MissingDay_Message" = "Select a day!";
+"PlanerSetup_MissingWeeknumber_Message" = "Select wether your 'Time Table' element should show up on 'odd' - 'uneven' - 'both' weeknumbers!";
+"PlanerSetup_Hour" = "hour:";
+"PlanerSetup_Hour_Message" = "Hour:";
+"PlanerSetup_HourOnDay_Message" = "on day:";
+"PlanerSetup_HourCollides_Message" = "overlaps with";
+"PlanerSetup_AtTime_Message" = "at time";
+"PlanerSetup_OnDay_Message" = "on";
+"PlanerSetup_RestMessage" = "in your 'Time Table'. Try a different day/hour or delete the existing 'Time Table' element!";
+
+/*TimeTableVC*/
+"TimeTableVC_DeleteCompleteTimeTable" = "Do you really want to delete the whole Time Table?";
+"TimeTableVC_DeleteAll" = "delete all";
+"TimeTableVC_AddNote" = "add note to:";
+"TimeTableVC_SwitchWeek" = "switch 'Time Table' week view";
+"TimeTableVC_PossibleActions" = "Here you see the possible actions for the selected element!";
+
+/*SelectReminderVC*/
+"Alert_WrongReminderDate_Message" = "The reminder date must be a future date!";
