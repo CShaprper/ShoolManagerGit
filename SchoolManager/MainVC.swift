@@ -39,6 +39,7 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
     var selectedNextSubject:Subject!
     let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
     let transition = BounceTransition()
+    var isNowStackTapped = false
     
     
     /*ViewController Delegate
@@ -112,9 +113,9 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
         if segue.identifier! == "ShowAddNotesFromMain"{
             if selectedNowSubject != nil || selectedNextSubject != nil{
                 let dest = segue.destinationViewController as! AddNoteVC
-                if selectedNowSubject != nil{
+                if selectedNowSubject != nil && isNowStackTapped{
                     dest.selectedSubject = selectedNowSubject
-                } else if selectedNextSubject != nil{
+                } else if selectedNextSubject != nil && !isNowStackTapped{
                     dest.selectedSubject = selectedNextSubject
                 }
             }
@@ -266,12 +267,14 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
     
     func handleNowStackTap(sender: UITapGestureRecognizer? = nil) {
         if selectedNowSubject != nil {
+            isNowStackTapped = true
             self.performSegueWithIdentifier("ShowAddNotesFromMain", sender: selectedNowSubject)
         }
     }
     
     func handleNextStackTap(sender: UITapGestureRecognizer? = nil) {
         if selectedNextSubject != nil{
+            isNowStackTapped = false
             self.performSegueWithIdentifier("ShowAddNotesFromMain", sender: selectedNextSubject)
         }
     }

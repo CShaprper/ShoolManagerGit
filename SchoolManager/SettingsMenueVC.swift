@@ -195,7 +195,7 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
     }
     
     @IBAction func rateMeButtonAction() {
-        UIApplication.sharedApplication().openURL(NSURL(string : "https://itunes.apple.comrate/app/school-manager/id1071047172")!);
+        UIApplication.sharedApplication().openURL(NSURL(string : "itms-apps://itunes.apple.com/app/id1071047172")!)
     }
     
     /*MARK: Helper Functions    ###############################################################################################################*/
