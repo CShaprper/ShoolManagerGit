@@ -86,9 +86,9 @@ public class TimelineManager{
      - Resets the element count to 0 before appending new elements*/
    private func SetHoursPerDayElementCount(){
     ResetHoursPerDayArrayCount()
-        for i in 1...self.hoursPerDay{
-           // self.HoursPerDayArray.append("\(i)")
-        }
+//        for i in 1...self.hoursPerDay{
+//           self.HoursPerDayArray.append("\(i)")
+//        }
     }
     /** Sets last Endtime value
     :param: lastEndTime: time of latest set Time*/
