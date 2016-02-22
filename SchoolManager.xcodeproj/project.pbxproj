@@ -221,6 +221,8 @@
 		CF2197391C1306350028B250 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CF6F2DC51C29BEFE00227714 /* Transitions */,
+				CF316D611C19EB2600236201 /* DatabaseModel */,
 				CF21973B1C1306DC0028B250 /* TimelineManager.swift */,
 				CF6DBC2C1C340D9E00D33BE7 /* ColorHelper.swift */,
 				CF6060541C39A2B800F49F45 /* DateHelper.swift */,
@@ -293,8 +295,6 @@
 			isa = PBXGroup;
 			children = (
 				CFE5FC921C36CCD6000C8C56 /* SchoolManager.entitlements */,
-				CF6F2DC51C29BEFE00227714 /* Transitions */,
-				CF316D611C19EB2600236201 /* DatabaseModel */,
 				CF2197391C1306350028B250 /* Model */,
 				CF21973A1C13068C0028B250 /* View */,
 				CF57A2DD1BFF70F100081348 /* Controller */,
