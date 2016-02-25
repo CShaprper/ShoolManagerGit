@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol IAlert: class{
+protocol IAlert: class{    
     func showAlert(title:String, message:String)
 }

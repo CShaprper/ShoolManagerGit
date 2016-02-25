@@ -242,7 +242,6 @@
 				CF38211F1C3AC20100890009 /* UIDesignHelper.swift */,
 				CF4A2BA21C3E5F1A001E146A /* NotificationManager.swift */,
 				CF4A2BA41C3E81E8001E146A /* EventManager.swift */,
-				CF7A25D31C7F658400CADA4A /* InAppPurchaseManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -375,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				CF7A25D51C7F679F00CADA4A /* IInAppPruchase.swift */,
+				CF7A25D31C7F658400CADA4A /* InAppPurchaseManager.swift */,
 				CF7A25D81C7F6B3500CADA4A /* IAlert.swift */,
 				CF7A25DA1C7F6B6900CADA4A /* ActionSheet_OK_Only.swift */,
 				CF7A25DC1C7F6B8E00CADA4A /* Alert_OK_Only.swift */,

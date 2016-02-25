@@ -9,7 +9,7 @@
 import Foundation
 import StoreKit
 
-class InAppPurchaseManager:IInAppPurchase, I{
+class InAppPurchaseManager:IInAppPurchase, IAlert{
     private var _productIdentifiers: Set<NSObject>?
     private vor _storeKitDelegate:
     
