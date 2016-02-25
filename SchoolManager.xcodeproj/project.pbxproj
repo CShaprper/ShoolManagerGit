@@ -61,6 +61,8 @@
 		CF6F2DC41C29BE4F00227714 /* DismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6F2DC31C29BE4F00227714 /* DismissTransition.swift */; };
 		CF764C811C30758E00592F2A /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF764C801C30758E00592F2A /* ColorPickerViewController.swift */; };
 		CF764C831C30759A00592F2A /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF764C821C30759A00592F2A /* Colors.plist */; };
+		CF7A25D41C7F658400CADA4A /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25D31C7F658400CADA4A /* InAppPurchaseManager.swift */; };
+		CF7A25D61C7F679F00CADA4A /* IInAppPruchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25D51C7F679F00CADA4A /* IInAppPruchase.swift */; };
 		CF7C3FF51C09BBAE00215D3F /* TeacherTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7C3FF41C09BBAE00215D3F /* TeacherTableVC.swift */; };
 		CF7C3FF81C09C32200215D3F /* TeacherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7C3FF71C09C32200215D3F /* TeacherCell.swift */; };
 		CF7C3FFD1C09CD8C00215D3F /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7C3FFA1C09CD8C00215D3F /* Day+CoreDataProperties.swift */; };
@@ -165,6 +167,8 @@
 		CF6F2DC31C29BE4F00227714 /* DismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissTransition.swift; sourceTree = "<group>"; };
 		CF764C801C30758E00592F2A /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPickerViewController.swift; path = "../../../../../../Users/petersypek/Desktop/SwiftColorPicker-master/SwiftColorPicker/SwiftColorPicker/ColorPickerViewController.swift"; sourceTree = SOURCE_ROOT; };
 		CF764C821C30759A00592F2A /* Colors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Colors.plist; path = "../../../../../../../Users/petersypek/Desktop/SwiftColorPicker-master/SwiftColorPicker/SwiftColorPicker/Colors.plist"; sourceTree = "<group>"; };
+		CF7A25D31C7F658400CADA4A /* InAppPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppPurchaseManager.swift; sourceTree = "<group>"; };
+		CF7A25D51C7F679F00CADA4A /* IInAppPruchase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IInAppPruchase.swift; sourceTree = "<group>"; };
 		CF7C3FF41C09BBAE00215D3F /* TeacherTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherTableVC.swift; sourceTree = "<group>"; };
 		CF7C3FF71C09C32200215D3F /* TeacherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCell.swift; sourceTree = "<group>"; };
 		CF7C3FFA1C09CD8C00215D3F /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -221,7 +225,6 @@
 		CF2197391C1306350028B250 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CF6F2DC51C29BEFE00227714 /* Transitions */,
 				CF316D611C19EB2600236201 /* DatabaseModel */,
 				CF21973B1C1306DC0028B250 /* TimelineManager.swift */,
 				CF6DBC2C1C340D9E00D33BE7 /* ColorHelper.swift */,
@@ -229,6 +232,7 @@
 				CF38211F1C3AC20100890009 /* UIDesignHelper.swift */,
 				CF4A2BA21C3E5F1A001E146A /* NotificationManager.swift */,
 				CF4A2BA41C3E81E8001E146A /* EventManager.swift */,
+				CF7A25D31C7F658400CADA4A /* InAppPurchaseManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -317,6 +321,8 @@
 		CF57A2DD1BFF70F100081348 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CF7A25D71C7F67A700CADA4A /* ProtocolClasses */,
+				CF6F2DC51C29BEFE00227714 /* Transitions */,
 				CFD989FC1C32D5BE00D72EB2 /* Extensions */,
 				CFD989F31C32A9F000D72EB2 /* Custom TableView Cells */,
 				CF57A2DE1BFF711600081348 /* MainVC.swift */,
@@ -353,6 +359,14 @@
 				CF6F2DC31C29BE4F00227714 /* DismissTransition.swift */,
 			);
 			name = Transitions;
+			sourceTree = "<group>";
+		};
+		CF7A25D71C7F67A700CADA4A /* ProtocolClasses */ = {
+			isa = PBXGroup;
+			children = (
+				CF7A25D51C7F679F00CADA4A /* IInAppPruchase.swift */,
+			);
+			name = ProtocolClasses;
 			sourceTree = "<group>";
 		};
 		CFD989F31C32A9F000D72EB2 /* Custom TableView Cells */ = {
@@ -575,6 +589,8 @@
 				CFD1D6F81C137DDE00DFCADD /* TimelineCell.swift in Sources */,
 				CF6E4D371C5FD13300D779EF /* NoteDetailVC.swift in Sources */,
 				CFDDE3141C7234950035DF06 /* SchoolManager.xcdatamodeld in Sources */,
+				CF7A25D61C7F679F00CADA4A /* IInAppPruchase.swift in Sources */,
+				CF7A25D41C7F658400CADA4A /* InAppPurchaseManager.swift in Sources */,
 				CF7C3FFF1C09CD8C00215D3F /* Subject+CoreDataProperties.swift in Sources */,
 				CF00CB491C00E90800099960 /* EnabledDaysSettingsVC.swift in Sources */,
 				CFD98A041C32D73500D72EB2 /* Planer.swift in Sources */,

@@ -27,13 +27,11 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
     /*Members    ###############################################################################################################*/
     //Transition Object
     let transition = WipeTransition()
-    var product_id: NSString?
     let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
     
     /*ViewController Delegates    ###############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        product_id = "com.petersypek.SchoolManager"
         self.tabBarController!.delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         if !appDel.adDefaults.boolForKey("purchased"){
             loadAds()
@@ -89,83 +87,9 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
     
     /*MARK: InApp Purchase    ###############################################################################################################*/
     @IBAction func removeAdsButtunAction(sender: AnyObject) {
-        buyConsumable()
+//        buyConsumable()
     }
-    
-    func buyConsumable(){
-        print("About to fetch the products");
-        // We check that we are allow to make the purchase.
-        if (SKPaymentQueue.canMakePayments())
-        {
-            let productID:NSSet = NSSet(object: self.product_id!);
-            let productsRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as! Set<String>);
-            productsRequest.delegate = self;
-            productsRequest.start();
-            print("Fething Products");
-        }else{
-            print("can't make purchases");
-        }
-    }
-    func buyProduct(product: SKProduct){
-        print("Sending the Payment Request to Apple");
-        let payment = SKPayment(product: product)
-        SKPaymentQueue.defaultQueue().addPayment(payment);
-        
-    }
-    // Delegate Methods for IAP
-    func productsRequest (request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        print("got the request from Apple")
-        let count : Int = response.products.count
-        if (count>0) {
-            _ = response.products
-            let validProduct: SKProduct = response.products[0] as SKProduct
-            if (validProduct.productIdentifier == self.product_id) {
-                let alert = UIAlertController(title: validProduct.localizedTitle, message: validProduct.localizedDescription, preferredStyle: .Alert)
-                let formatter = NSNumberFormatter()
-                formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-                formatter.locale = NSLocale.currentLocale()
-                alert.addAction(UIAlertAction(title: String(formatter.stringFromNumber(validProduct.price)!), style: .Default, handler: { (UIAlertAction) -> Void in self.buyProduct(validProduct); }))
-                alert.addAction(UIAlertAction(title: NSLocalizedString("Alert_Action_Cancel", comment: "-"), style: .Default, handler: { (UIAlertAction) -> Void in  }))
-                presentViewController(alert, animated: true, completion: nil)
-            } else {
-                print(validProduct.productIdentifier)
-            }
-        } else {
-            print("nothing")
-        }
-    }
-    func request(request: SKRequest, didFailWithError error: NSError) {
-        let alert = UIAlertController(title: NSLocalizedString("Alert_Error_Title", comment: "-"), message: error.localizedDescription, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) -> Void in  }))
-        presentViewController(alert, animated: true, completion: nil)
-    }
-    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        print("Received Payment Transaction Response from Apple");
-        
-        for transaction:AnyObject in transactions {
-            if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction{
-                switch trans.transactionState {
-                case .Purchased:
-                    print("Product Purchased");
-                    SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
-                    appDel.adDefaults.setBool(true , forKey: "purchased")
-                    break;
-                case .Failed:
-                    print("Purchased Failed");
-                    SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
-                    appDel.adDefaults.setBool(false , forKey: "purchased")
-                    break;
-                case .Restored:
-                    print("Already Purchased");
-                    SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
-                    appDel.adDefaults.setBool(true , forKey: "purchased")
-                default:
-                    break;
-                }
-            }
-        }
-        
-    }
+  
     
     /*MARK: Navigation    ###############################################################################################################*/
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
