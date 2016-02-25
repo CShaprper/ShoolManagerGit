@@ -63,6 +63,11 @@
 		CF764C831C30759A00592F2A /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF764C821C30759A00592F2A /* Colors.plist */; };
 		CF7A25D41C7F658400CADA4A /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25D31C7F658400CADA4A /* InAppPurchaseManager.swift */; };
 		CF7A25D61C7F679F00CADA4A /* IInAppPruchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25D51C7F679F00CADA4A /* IInAppPruchase.swift */; };
+		CF7A25D91C7F6B3500CADA4A /* IAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25D81C7F6B3500CADA4A /* IAlert.swift */; };
+		CF7A25DB1C7F6B6900CADA4A /* ActionSheet_OK_Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25DA1C7F6B6900CADA4A /* ActionSheet_OK_Only.swift */; };
+		CF7A25DD1C7F6B8E00CADA4A /* Alert_OK_Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25DC1C7F6B8E00CADA4A /* Alert_OK_Only.swift */; };
+		CF7A25DF1C7F6BB600CADA4A /* IAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25DE1C7F6BB600CADA4A /* IAnimation.swift */; };
+		CF7A25E11C7F6C1400CADA4A /* ActivityIndicatorAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25E01C7F6C1400CADA4A /* ActivityIndicatorAnimation.swift */; };
 		CF7C3FF51C09BBAE00215D3F /* TeacherTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7C3FF41C09BBAE00215D3F /* TeacherTableVC.swift */; };
 		CF7C3FF81C09C32200215D3F /* TeacherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7C3FF71C09C32200215D3F /* TeacherCell.swift */; };
 		CF7C3FFD1C09CD8C00215D3F /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7C3FFA1C09CD8C00215D3F /* Day+CoreDataProperties.swift */; };
@@ -169,6 +174,11 @@
 		CF764C821C30759A00592F2A /* Colors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Colors.plist; path = "../../../../../../../Users/petersypek/Desktop/SwiftColorPicker-master/SwiftColorPicker/SwiftColorPicker/Colors.plist"; sourceTree = "<group>"; };
 		CF7A25D31C7F658400CADA4A /* InAppPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppPurchaseManager.swift; sourceTree = "<group>"; };
 		CF7A25D51C7F679F00CADA4A /* IInAppPruchase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IInAppPruchase.swift; sourceTree = "<group>"; };
+		CF7A25D81C7F6B3500CADA4A /* IAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAlert.swift; sourceTree = "<group>"; };
+		CF7A25DA1C7F6B6900CADA4A /* ActionSheet_OK_Only.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheet_OK_Only.swift; sourceTree = "<group>"; };
+		CF7A25DC1C7F6B8E00CADA4A /* Alert_OK_Only.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert_OK_Only.swift; sourceTree = "<group>"; };
+		CF7A25DE1C7F6BB600CADA4A /* IAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAnimation.swift; sourceTree = "<group>"; };
+		CF7A25E01C7F6C1400CADA4A /* ActivityIndicatorAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorAnimation.swift; sourceTree = "<group>"; };
 		CF7C3FF41C09BBAE00215D3F /* TeacherTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherTableVC.swift; sourceTree = "<group>"; };
 		CF7C3FF71C09C32200215D3F /* TeacherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCell.swift; sourceTree = "<group>"; };
 		CF7C3FFA1C09CD8C00215D3F /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -365,6 +375,11 @@
 			isa = PBXGroup;
 			children = (
 				CF7A25D51C7F679F00CADA4A /* IInAppPruchase.swift */,
+				CF7A25D81C7F6B3500CADA4A /* IAlert.swift */,
+				CF7A25DA1C7F6B6900CADA4A /* ActionSheet_OK_Only.swift */,
+				CF7A25DC1C7F6B8E00CADA4A /* Alert_OK_Only.swift */,
+				CF7A25DE1C7F6BB600CADA4A /* IAnimation.swift */,
+				CF7A25E01C7F6C1400CADA4A /* ActivityIndicatorAnimation.swift */,
 			);
 			name = ProtocolClasses;
 			sourceTree = "<group>";
@@ -542,6 +557,7 @@
 				CF19469C1C383D1F0069C8D5 /* TimeTableHeaderCell.swift in Sources */,
 				CF4B93D21C0F9E4000E0D0E9 /* TimelineVC.swift in Sources */,
 				CFBD5FD61C4AA27E002E27B6 /* AddNoteVC.swift in Sources */,
+				CF7A25D91C7F6B3500CADA4A /* IAlert.swift in Sources */,
 				CF6E4D391C5FD56800D779EF /* SelectReminderDateVC.swift in Sources */,
 				CF3821201C3AC20100890009 /* UIDesignHelper.swift in Sources */,
 				CFD98A031C32D73500D72EB2 /* Planer+CoreDataProperties.swift in Sources */,
@@ -567,11 +583,13 @@
 				CF6DBC2B1C33F11300D33BE7 /* SelectSubjectCell.swift in Sources */,
 				CF8DF5EC1C280B0A003A6161 /* ExtensionTabControllerDelegate.swift in Sources */,
 				CF6DBC291C33EFDF00D33BE7 /* SelectSubjectVC.swift in Sources */,
+				CF7A25E11C7F6C1400CADA4A /* ActivityIndicatorAnimation.swift in Sources */,
 				CF6F2DC41C29BE4F00227714 /* DismissTransition.swift in Sources */,
 				CFD989F21C32953300D72EB2 /* PlanerSetupVC.swift in Sources */,
 				CFA37CED1C07906B00F2BE51 /* Teacher.swift in Sources */,
 				CF016B001C2B28990044D67B /* EditTimelinePopUpVC.swift in Sources */,
 				CF7C3FFD1C09CD8C00215D3F /* Day+CoreDataProperties.swift in Sources */,
+				CF7A25DF1C7F6BB600CADA4A /* IAnimation.swift in Sources */,
 				CF8E77401C4EB69E0056AB40 /* SelectSubjectNoteVC.swift in Sources */,
 				CF4A2BA51C3E81E8001E146A /* EventManager.swift in Sources */,
 				CF6DFE151C57DDDF00A86000 /* TimePlanerCell.swift in Sources */,
@@ -593,6 +611,7 @@
 				CF7A25D41C7F658400CADA4A /* InAppPurchaseManager.swift in Sources */,
 				CF7C3FFF1C09CD8C00215D3F /* Subject+CoreDataProperties.swift in Sources */,
 				CF00CB491C00E90800099960 /* EnabledDaysSettingsVC.swift in Sources */,
+				CF7A25DD1C7F6B8E00CADA4A /* Alert_OK_Only.swift in Sources */,
 				CFD98A041C32D73500D72EB2 /* Planer.swift in Sources */,
 				CF8DF5EA1C27F42D003A6161 /* ExtensionUIViewController.swift in Sources */,
 				CF57A2BB1BFF70DD00081348 /* AppDelegate.swift in Sources */,
@@ -606,6 +625,7 @@
 				CF00996D1C6E5D0D0069578C /* User+CoreDataProperties.swift in Sources */,
 				CF21973C1C1306DC0028B250 /* TimelineManager.swift in Sources */,
 				CFA37CF21C0790A000F2BE51 /* Subject.swift in Sources */,
+				CF7A25DB1C7F6B6900CADA4A /* ActionSheet_OK_Only.swift in Sources */,
 				CF8E77421C4EB9A70056AB40 /* SelectSubjectAtNoteCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
