@@ -59,15 +59,19 @@
 		CF6F2DC01C29AF8900227714 /* ExtensionUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6F2DBF1C29AF8900227714 /* ExtensionUITableView.swift */; };
 		CF6F2DC21C29B6C200227714 /* BounceTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6F2DC11C29B6C200227714 /* BounceTransition.swift */; };
 		CF6F2DC41C29BE4F00227714 /* DismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6F2DC31C29BE4F00227714 /* DismissTransition.swift */; };
+		CF70E6211C80C3ED002641FB /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF70E6201C80C3ED002641FB /* StoreKitManager.swift */; };
+		CF70E6231C80D68E002641FB /* ISendProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF70E6221C80D68E002641FB /* ISendProducts.swift */; };
+		CF70E6251C80D8BF002641FB /* PurchaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF70E6241C80D8BF002641FB /* PurchaseCell.swift */; };
 		CF764C811C30758E00592F2A /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF764C801C30758E00592F2A /* ColorPickerViewController.swift */; };
 		CF764C831C30759A00592F2A /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF764C821C30759A00592F2A /* Colors.plist */; };
-		CF7A25D41C7F658400CADA4A /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25D31C7F658400CADA4A /* InAppPurchaseManager.swift */; };
-		CF7A25D61C7F679F00CADA4A /* IInAppPruchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25D51C7F679F00CADA4A /* IInAppPruchase.swift */; };
 		CF7A25D91C7F6B3500CADA4A /* IAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25D81C7F6B3500CADA4A /* IAlert.swift */; };
 		CF7A25DB1C7F6B6900CADA4A /* ActionSheet_OK_Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25DA1C7F6B6900CADA4A /* ActionSheet_OK_Only.swift */; };
 		CF7A25DD1C7F6B8E00CADA4A /* Alert_OK_Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25DC1C7F6B8E00CADA4A /* Alert_OK_Only.swift */; };
 		CF7A25DF1C7F6BB600CADA4A /* IAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25DE1C7F6BB600CADA4A /* IAnimation.swift */; };
 		CF7A25E11C7F6C1400CADA4A /* ActivityIndicatorAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25E01C7F6C1400CADA4A /* ActivityIndicatorAnimation.swift */; };
+		CF7A25E31C7F734900CADA4A /* Alert_OK_GotToSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25E21C7F734900CADA4A /* Alert_OK_GotToSettings.swift */; };
+		CF7A25E51C7F756E00CADA4A /* IAlert_OneAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25E41C7F756E00CADA4A /* IAlert_OneAction.swift */; };
+		CF7A25E71C7F773F00CADA4A /* PurchaseProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A25E61C7F773F00CADA4A /* PurchaseProductVC.swift */; };
 		CF7C3FF51C09BBAE00215D3F /* TeacherTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7C3FF41C09BBAE00215D3F /* TeacherTableVC.swift */; };
 		CF7C3FF81C09C32200215D3F /* TeacherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7C3FF71C09C32200215D3F /* TeacherCell.swift */; };
 		CF7C3FFD1C09CD8C00215D3F /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7C3FFA1C09CD8C00215D3F /* Day+CoreDataProperties.swift */; };
@@ -170,15 +174,19 @@
 		CF6F2DBF1C29AF8900227714 /* ExtensionUITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUITableView.swift; sourceTree = "<group>"; };
 		CF6F2DC11C29B6C200227714 /* BounceTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceTransition.swift; sourceTree = "<group>"; };
 		CF6F2DC31C29BE4F00227714 /* DismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissTransition.swift; sourceTree = "<group>"; };
+		CF70E6201C80C3ED002641FB /* StoreKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
+		CF70E6221C80D68E002641FB /* ISendProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISendProducts.swift; sourceTree = "<group>"; };
+		CF70E6241C80D8BF002641FB /* PurchaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseCell.swift; sourceTree = "<group>"; };
 		CF764C801C30758E00592F2A /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPickerViewController.swift; path = "../../../../../../Users/petersypek/Desktop/SwiftColorPicker-master/SwiftColorPicker/SwiftColorPicker/ColorPickerViewController.swift"; sourceTree = SOURCE_ROOT; };
 		CF764C821C30759A00592F2A /* Colors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Colors.plist; path = "../../../../../../../Users/petersypek/Desktop/SwiftColorPicker-master/SwiftColorPicker/SwiftColorPicker/Colors.plist"; sourceTree = "<group>"; };
-		CF7A25D31C7F658400CADA4A /* InAppPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppPurchaseManager.swift; sourceTree = "<group>"; };
-		CF7A25D51C7F679F00CADA4A /* IInAppPruchase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IInAppPruchase.swift; sourceTree = "<group>"; };
 		CF7A25D81C7F6B3500CADA4A /* IAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAlert.swift; sourceTree = "<group>"; };
 		CF7A25DA1C7F6B6900CADA4A /* ActionSheet_OK_Only.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheet_OK_Only.swift; sourceTree = "<group>"; };
 		CF7A25DC1C7F6B8E00CADA4A /* Alert_OK_Only.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert_OK_Only.swift; sourceTree = "<group>"; };
 		CF7A25DE1C7F6BB600CADA4A /* IAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAnimation.swift; sourceTree = "<group>"; };
 		CF7A25E01C7F6C1400CADA4A /* ActivityIndicatorAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorAnimation.swift; sourceTree = "<group>"; };
+		CF7A25E21C7F734900CADA4A /* Alert_OK_GotToSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert_OK_GotToSettings.swift; sourceTree = "<group>"; };
+		CF7A25E41C7F756E00CADA4A /* IAlert_OneAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAlert_OneAction.swift; sourceTree = "<group>"; };
+		CF7A25E61C7F773F00CADA4A /* PurchaseProductVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseProductVC.swift; sourceTree = "<group>"; };
 		CF7C3FF41C09BBAE00215D3F /* TeacherTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherTableVC.swift; sourceTree = "<group>"; };
 		CF7C3FF71C09C32200215D3F /* TeacherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCell.swift; sourceTree = "<group>"; };
 		CF7C3FFA1C09CD8C00215D3F /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -242,6 +250,7 @@
 				CF38211F1C3AC20100890009 /* UIDesignHelper.swift */,
 				CF4A2BA21C3E5F1A001E146A /* NotificationManager.swift */,
 				CF4A2BA41C3E81E8001E146A /* EventManager.swift */,
+				CF70E6201C80C3ED002641FB /* StoreKitManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -356,6 +365,7 @@
 				CF8E773F1C4EB69E0056AB40 /* SelectSubjectNoteVC.swift */,
 				CF6E4D361C5FD13300D779EF /* NoteDetailVC.swift */,
 				CF6E4D381C5FD56800D779EF /* SelectReminderDateVC.swift */,
+				CF7A25E61C7F773F00CADA4A /* PurchaseProductVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -373,13 +383,14 @@
 		CF7A25D71C7F67A700CADA4A /* ProtocolClasses */ = {
 			isa = PBXGroup;
 			children = (
-				CF7A25D51C7F679F00CADA4A /* IInAppPruchase.swift */,
-				CF7A25D31C7F658400CADA4A /* InAppPurchaseManager.swift */,
 				CF7A25D81C7F6B3500CADA4A /* IAlert.swift */,
 				CF7A25DA1C7F6B6900CADA4A /* ActionSheet_OK_Only.swift */,
 				CF7A25DC1C7F6B8E00CADA4A /* Alert_OK_Only.swift */,
+				CF7A25E41C7F756E00CADA4A /* IAlert_OneAction.swift */,
+				CF7A25E21C7F734900CADA4A /* Alert_OK_GotToSettings.swift */,
 				CF7A25DE1C7F6BB600CADA4A /* IAnimation.swift */,
 				CF7A25E01C7F6C1400CADA4A /* ActivityIndicatorAnimation.swift */,
+				CF70E6221C80D68E002641FB /* ISendProducts.swift */,
 			);
 			name = ProtocolClasses;
 			sourceTree = "<group>";
@@ -400,6 +411,7 @@
 				CF6E94351C5697EF00E23921 /* NotesCollectionViewCell.swift */,
 				CF6DFE141C57DDDF00A86000 /* TimePlanerCell.swift */,
 				CF6DFE161C57E0C000A86000 /* TimePlanerCollectionViewLayout.swift */,
+				CF70E6241C80D8BF002641FB /* PurchaseCell.swift */,
 			);
 			name = "Custom TableView Cells";
 			sourceTree = "<group>";
@@ -567,10 +579,12 @@
 				CF6BA9301C3143FA00850A93 /* SubjectsVC.swift in Sources */,
 				CF316D6A1C19F44800236201 /* HoursPerDayData+CoreDataProperties.swift in Sources */,
 				CF4AEC591C176E5F007CB21F /* HoursPerDayData.swift in Sources */,
+				CF70E6251C80D8BF002641FB /* PurchaseCell.swift in Sources */,
 				CF764C811C30758E00592F2A /* ColorPickerViewController.swift in Sources */,
 				CF4CE7591C1C6578009E3BE9 /* WipeTransition.swift in Sources */,
 				CF6DBC2D1C340D9E00D33BE7 /* ColorHelper.swift in Sources */,
 				CFA37CF11C0790A000F2BE51 /* Day.swift in Sources */,
+				CF7A25E31C7F734900CADA4A /* Alert_OK_GotToSettings.swift in Sources */,
 				CFD98A011C32D73500D72EB2 /* Note+CoreDataProperties.swift in Sources */,
 				CF5BE9031C493F7D0015D78C /* DateExtension.swift in Sources */,
 				CF4A2BA31C3E5F1A001E146A /* NotificationManager.swift in Sources */,
@@ -597,6 +611,7 @@
 				CF6DFE171C57E0C000A86000 /* TimePlanerCollectionViewLayout.swift in Sources */,
 				CF6DBC311C34153600D33BE7 /* SubjectIconPicker.swift in Sources */,
 				CF0A08C21C3BDE83007FC1D8 /* NotesVC.swift in Sources */,
+				CF7A25E51C7F756E00CADA4A /* IAlert_OneAction.swift in Sources */,
 				CF57A2DF1BFF711600081348 /* MainVC.swift in Sources */,
 				CFD98A021C32D73500D72EB2 /* Note.swift in Sources */,
 				CFA37CE61C078DF000F2BE51 /* AddTeacherPopUpVC.swift in Sources */,
@@ -607,23 +622,24 @@
 				CFD1D6F81C137DDE00DFCADD /* TimelineCell.swift in Sources */,
 				CF6E4D371C5FD13300D779EF /* NoteDetailVC.swift in Sources */,
 				CFDDE3141C7234950035DF06 /* SchoolManager.xcdatamodeld in Sources */,
-				CF7A25D61C7F679F00CADA4A /* IInAppPruchase.swift in Sources */,
-				CF7A25D41C7F658400CADA4A /* InAppPurchaseManager.swift in Sources */,
 				CF7C3FFF1C09CD8C00215D3F /* Subject+CoreDataProperties.swift in Sources */,
 				CF00CB491C00E90800099960 /* EnabledDaysSettingsVC.swift in Sources */,
 				CF7A25DD1C7F6B8E00CADA4A /* Alert_OK_Only.swift in Sources */,
 				CFD98A041C32D73500D72EB2 /* Planer.swift in Sources */,
 				CF8DF5EA1C27F42D003A6161 /* ExtensionUIViewController.swift in Sources */,
 				CF57A2BB1BFF70DD00081348 /* AppDelegate.swift in Sources */,
+				CF70E6231C80D68E002641FB /* ISendProducts.swift in Sources */,
 				CFCBF31E1C04FF350046048E /* SettingsMenueVC.swift in Sources */,
 				CF6F2DC01C29AF8900227714 /* ExtensionUITableView.swift in Sources */,
 				CF6BA92E1C31404000850A93 /* SubjectCell.swift in Sources */,
 				CFD989F91C32CD9200D72EB2 /* SelectHourCell.swift in Sources */,
+				CF7A25E71C7F773F00CADA4A /* PurchaseProductVC.swift in Sources */,
 				CF6DBC2F1C34149300D33BE7 /* IconPickerCell.swift in Sources */,
 				CF7C3FF81C09C32200215D3F /* TeacherCell.swift in Sources */,
 				CFD989F51C32AD9100D72EB2 /* SelectDayVC.swift in Sources */,
 				CF00996D1C6E5D0D0069578C /* User+CoreDataProperties.swift in Sources */,
 				CF21973C1C1306DC0028B250 /* TimelineManager.swift in Sources */,
+				CF70E6211C80C3ED002641FB /* StoreKitManager.swift in Sources */,
 				CFA37CF21C0790A000F2BE51 /* Subject.swift in Sources */,
 				CF7A25DB1C7F6B6900CADA4A /* ActionSheet_OK_Only.swift in Sources */,
 				CF8E77421C4EB9A70056AB40 /* SelectSubjectAtNoteCell.swift in Sources */,

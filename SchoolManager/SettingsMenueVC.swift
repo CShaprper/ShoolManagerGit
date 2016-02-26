@@ -11,7 +11,7 @@ enum InfoMessages:String{
     case subjects = "subjects"
 }
 
-class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver{
+class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate{
     /*Outlets    ###############################################################################################################*/
     
     @IBOutlet var infoViewButton: UIButton!
@@ -33,7 +33,7 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController!.delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        if !appDel.adDefaults.boolForKey("purchased"){
+        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
             loadAds()
             UIViewController.prepareInterstitialAds()
         }
@@ -93,7 +93,7 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
     
     /*MARK: Navigation    ###############################################################################################################*/
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if !appDel.adDefaults.boolForKey("purchased"){
+        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
             counter++
             if counter == 2{
                 counter = 0

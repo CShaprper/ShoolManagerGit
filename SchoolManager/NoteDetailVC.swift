@@ -19,7 +19,7 @@ class NoteDetailVC: UIViewController, ADBannerViewDelegate, UITextViewDelegate {
     /*MARK: ViewController Lifecycle    ###############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !appDel.adDefaults.boolForKey("purchased"){
+        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
             loadAds()
         }
     }

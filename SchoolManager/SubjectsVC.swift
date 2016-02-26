@@ -25,7 +25,7 @@ class SubjectsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     /*MARK: ViewController Delegates    ###############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !appDel.adDefaults.boolForKey("purchased"){
+        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
             loadAds()
         }
         ColorButton.layer.cornerRadius = 5

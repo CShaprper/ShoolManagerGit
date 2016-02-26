@@ -34,7 +34,7 @@ class EnabledDaysSettingsVC: UIViewController, ADBannerViewDelegate {
     ###############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !appDel.adDefaults.boolForKey("purchased"){
+        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
             loadAds()
         }
         self.layers.append(switchMonday.layer)

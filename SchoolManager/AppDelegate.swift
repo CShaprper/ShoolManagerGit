@@ -18,10 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      var adBannerView:ADBannerView = ADBannerView()
     let firstCategory = "FIRST_CATEGORY"
     var badgenumber:Int = 1
-    let adDefaults = NSUserDefaults.standardUserDefaults()  
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        //adDefaults.setBool(true, forKey: "purchased")
+        //userDefaults.setBool(true, forKey: "com.petersypek.SchoolManager")
         // Override point for customization after application launch.
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         setupNotificationSettings()       

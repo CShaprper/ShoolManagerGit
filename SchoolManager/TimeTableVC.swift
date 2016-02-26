@@ -38,7 +38,7 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
         TimetableCollectionView.backgroundColor = UIColor.clearColor()
         currentTime = DateHelper.createDateFromComponents(2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(NSDate()), minute: DateHelper.GetTimeAsHour(NSDate()))
         // Initialize the Ad
-        if !appDel.adDefaults.boolForKey("purchased"){
+        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
             loadAds()
             UIViewController.prepareInterstitialAds()
         }
@@ -55,7 +55,7 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         loadTimeTableCollection(iscurrentUIWeekEven)
-        if !appDel.adDefaults.boolForKey("FirstTimeplanerVisit"){
+        if !appDel.userDefaults.boolForKey("FirstTimeplanerVisit"){
             let result = Day.FetchData(appDel.managedObjectContext)
             let res = HoursPerDayData.FetchData(appDel.managedObjectContext)
             let result2 = TimelineData.FetchData(appDel.managedObjectContext)
@@ -139,7 +139,7 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
     
     /*MARK: Navigation    ###############################################################################################################*/
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if !appDel.adDefaults.boolForKey("purchased"){
+        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
             counter++
             if counter == 3 {
                 counter = 0
@@ -332,6 +332,6 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
         UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
         self.infoMessageCenterConstraint.constant -= 800
         self.view.layoutIfNeeded()
-        }, completion: { (hideWelcomeMessageAction) -> Void in self.appDel.adDefaults.setBool(true, forKey: "FirstTimeplanerVisit")})
+        }, completion: { (hideWelcomeMessageAction) -> Void in self.appDel.userDefaults.setBool(true, forKey: "FirstTimeplanerVisit")})
     }
 }
