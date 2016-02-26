@@ -10,7 +10,7 @@ import Foundation
 import StoreKit
 
 class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
-    private let _productIdentifiers = Set(["com.petersypek.SchoolManager-RemoveAds"])
+    private let _productIdentifiers = Set(["com.petersypek.SchoolManager"])
     private var _product: SKProduct?
     private var _productsArray = Array<SKProduct>()
     private let _presentingVC:UIViewController?
@@ -18,17 +18,19 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
     private let _alertOKOnlyDelegate:IAlert?
     private let _alertGoSettingdDelegate:IAlert_OneAction?
     private var _sendProducstDelegate:ISendProducts?
+    private let _activityIndicator:IAnimation?
     
     /**
      **Constructor**
      
      - parameter presentingViewController: - UIViewController: *The ViewController from caller of this class*
      */
-    init(presentingVC:UIViewController, alertOKOnlyDelegate:IAlert, alertGoSettingsDelegate:IAlert_OneAction){
+    init(presentingVC:UIViewController, alertOKOnlyDelegate:IAlert, alertGoSettingsDelegate:IAlert_OneAction, activityIndicatorAnimation:IAnimation){
         self._alertOKOnlyDelegate  = alertOKOnlyDelegate
         self._alertGoSettingdDelegate = alertGoSettingsDelegate
         self._presentingVC = presentingVC
         self._appDel = UIApplication.sharedApplication().delegate as? AppDelegate
+        self._activityIndicator = activityIndicatorAnimation
     }
     
     func setSendProductsDelegate(delegate:ISendProducts){
@@ -44,15 +46,17 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
     
     
     @objc func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+        self._activityIndicator?.beginAnimation()
         print("Products request")
         let products = response.products
         for product in products{
-            self._productsArray.append(product)
             print(product.localizedTitle)
             print(product.localizedDescription)
             print(product.price)
+            self._productsArray.append(product)
         }
         self._sendProducstDelegate?.sendProducts(self._productsArray)
+        self._activityIndicator?.endAnimation() 
     }
     
     func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {

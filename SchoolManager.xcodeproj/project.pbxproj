@@ -177,6 +177,7 @@
 		CF70E6201C80C3ED002641FB /* StoreKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		CF70E6221C80D68E002641FB /* ISendProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISendProducts.swift; sourceTree = "<group>"; };
 		CF70E6241C80D8BF002641FB /* PurchaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseCell.swift; sourceTree = "<group>"; };
+		CF70E6271C80E90A002641FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Start.strings; sourceTree = "<group>"; };
 		CF764C801C30758E00592F2A /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPickerViewController.swift; path = "../../../../../../Users/petersypek/Desktop/SwiftColorPicker-master/SwiftColorPicker/SwiftColorPicker/ColorPickerViewController.swift"; sourceTree = SOURCE_ROOT; };
 		CF764C821C30759A00592F2A /* Colors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Colors.plist; path = "../../../../../../../Users/petersypek/Desktop/SwiftColorPicker-master/SwiftColorPicker/SwiftColorPicker/Colors.plist"; sourceTree = "<group>"; };
 		CF7A25D81C7F6B3500CADA4A /* IAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAlert.swift; sourceTree = "<group>"; };
@@ -688,6 +689,7 @@
 			children = (
 				CF6125971C60E19700DCCDBA /* Base */,
 				CF6125991C60E1B000DCCDBA /* de */,
+				CF70E6271C80E90A002641FB /* en */,
 			);
 			name = Start.storyboard;
 			sourceTree = SOURCE_ROOT;

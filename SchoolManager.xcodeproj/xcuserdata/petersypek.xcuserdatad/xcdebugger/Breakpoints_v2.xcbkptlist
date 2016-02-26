@@ -557,11 +557,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SchoolManager/StoreKitManager.swift"
-            timestampString = "478206495.037383"
+            timestampString = "478207486.790318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "requestProductData()"
             landmarkType = "5">
          </BreakpointContent>
@@ -573,12 +573,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SchoolManager/StoreKitManager.swift"
-            timestampString = "478206495.037383"
+            timestampString = "478207486.790318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "init(presentingVC:alertOKOnlyDelegate:alertGoSettingsDelegate:)"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "init(presentingVC:alertOKOnlyDelegate:alertGoSettingsDelegate:activityIndicatorAnimation:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -594,6 +594,132 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "10"
             endingLineNumber = "10">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SchoolManager/PurchaseProductVC.swift"
+            timestampString = "478208260.999978"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "sendProducts(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SchoolManager.PurchaseProductVC.sendProducts (SchoolManager.PurchaseProductVC)(Swift.Array&lt;__ObjC.SKProduct&gt;) -&gt; ()"
+                  moduleName = "SchoolManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petersypek/Desktop/SchoolManager/SchoolManager/PurchaseProductVC.swift"
+                  timestampString = "478208293.346683"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "@objc SchoolManager.PurchaseProductVC.sendProducts (SchoolManager.PurchaseProductVC)(Swift.Array&lt;__ObjC.SKProduct&gt;) -&gt; ()"
+                  moduleName = "SchoolManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petersypek/Desktop/SchoolManager/SchoolManager/PurchaseProductVC.swift"
+                  timestampString = "478208293.346919"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "protocol witness for SchoolManager.ISendProducts.sendProducts &lt;A where A: SchoolManager.ISendProducts&gt; (A)(Swift.Array&lt;__ObjC.SKProduct&gt;) -&gt; () in conformance SchoolManager.PurchaseProductVC : SchoolManager.ISendProducts in SchoolManager"
+                  moduleName = "SchoolManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petersypek/Desktop/SchoolManager/SchoolManager/PurchaseProductVC.swift"
+                  timestampString = "478208293.347083"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[0] = Owned To Guaranteed&gt; of SchoolManager.PurchaseProductVC.sendProducts (SchoolManager.PurchaseProductVC)(Swift.Array&lt;__ObjC.SKProduct&gt;) -&gt; ()"
+                  moduleName = "SchoolManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petersypek/Desktop/SchoolManager/SchoolManager/PurchaseProductVC.swift"
+                  timestampString = "478208293.347248"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SchoolManager/PurchaseProductVC.swift"
+            timestampString = "478208643.308318"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SchoolManager/PurchaseProductVC.swift"
+            timestampString = "478209424.657691"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SchoolManager/PurchaseCell.swift"
+            timestampString = "478209515.446779"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "configureCell(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
