@@ -45,6 +45,9 @@ class PurchaseProductVC: UIViewController, UITableViewDataSource, UITableViewDel
     func sendProducts(productsArray: Array<SKProduct>) {
         self._productsArray = productsArray
         self.tableview.reloadData()
-        self.tableview.AnimateTable()  
+        self.tableview.AnimateTable()
+    }
+    @IBAction func restorePurchasesButton() {
+        self._iap.requestProductData()
     }
 }

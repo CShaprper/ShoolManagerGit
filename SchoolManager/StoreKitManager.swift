@@ -107,20 +107,6 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
             request.start()
         } else {
             self._alertGoSettingdDelegate?.showAlert_OneAction("In-App Purchases Not Enabled", message: "Please enable In App Purchase in Settings", actionTitle: "Go to Settings")
-//            alert.addAction(UIAlertAction(title: "Settings", style: UIAlertActionStyle.Default, handler: { alertAction in
-//                alert.dismissViewControllerAnimated(true, completion: nil)
-//                
-//                let url: NSURL? = NSURL(string: UIApplicationOpenSettingsURLString)
-//                if url != nil
-//                {
-//                    UIApplication.sharedApplication().openURL(url!)
-//                }
-//                
-//            }))
-//            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { alertAction in
-//                alert.dismissViewControllerAnimated(true, completion: nil)
-//            }))
-//            self._presentingVC?.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
