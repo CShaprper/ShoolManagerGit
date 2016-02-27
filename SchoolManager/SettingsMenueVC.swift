@@ -113,6 +113,9 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
         if let dest = segue.destinationViewController as? SubjectsVC{
             dest.transitioningDelegate = transition
         }
+        if let dest = segue.destinationViewController as? PurchaseProductVC{
+            dest.transitioningDelegate = transition
+        }
     }
     
     @IBAction func unwindToSettings(segue:UIStoryboardSegue){

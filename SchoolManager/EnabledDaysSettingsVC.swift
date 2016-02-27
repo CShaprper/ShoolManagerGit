@@ -71,9 +71,6 @@ class EnabledDaysSettingsVC: UIViewController, ADBannerViewDelegate {
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait
     }
-    override func shouldAutorotate() -> Bool {
-        return true
-    }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }

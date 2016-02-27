@@ -11,6 +11,7 @@ class PurchaseProductVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBOutlet var tableview: UITableView!
     
+    /*MARK: ViewController Life Cycle    ###############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
         tableview.dataSource = self
@@ -20,6 +21,12 @@ class PurchaseProductVC: UIViewController, UITableViewDataSource, UITableViewDel
         self._activityIndicatorAnimation?.beginAnimation()
         self._iap?.setSendProductsDelegate(self)
         self._iap?.requestProductData()
+    }
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
     
     /*MARK: TableView Delegates
