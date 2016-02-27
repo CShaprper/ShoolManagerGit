@@ -9,6 +9,15 @@
 import Foundation
 import StoreKit
 
+extension SKProduct {
+    func localizedPrice() -> String {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .CurrencyStyle
+        formatter.locale = self.priceLocale
+        return formatter.stringFromNumber(self.price)!
+    }    
+}
+
 class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     private let _productIdentifiers = Set(["com.petersypek.SchoolManager"])
     private var _product: SKProduct?
@@ -43,20 +52,28 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
         SKPaymentQueue.defaultQueue().addTransactionObserver(self)
         SKPaymentQueue.defaultQueue().addPayment(payment)
     }
-    
+    func restorePurchases(){
+        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
+        SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
+    }
     
     @objc func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        self._activityIndicator?.beginAnimation()
-        print("Products request")
-        let products = response.products
-        for product in products{
-            print(product.localizedTitle)
-            print(product.localizedDescription)
-            print(product.price)
-            self._productsArray.append(product)
-        }
-        self._sendProducstDelegate?.sendProducts(self._productsArray)
-        self._activityIndicator?.endAnimation() 
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self._activityIndicator?.beginAnimation()
+            print("Products request")
+            let products = response.products
+            for product in products{
+                print(product.productIdentifier)
+                print(product.description)
+                print(product.priceLocale)
+                print(product.localizedTitle)
+                print(product.localizedDescription)
+                print(product.price)
+                self._productsArray.append(product)
+            }
+            self._sendProducstDelegate?.sendProducts(self._productsArray)
+            self._activityIndicator?.endAnimation()
+        })
     }
     
     func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
@@ -81,21 +98,22 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
     }
     
     func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
-        print("Transactions Restored")
-        
-        for transaction in queue.transactions {
-            let t: SKPaymentTransaction = transaction
-            
-            let prodID = t.payment.productIdentifier as String
-            
-            switch prodID {
-            case "com.petersypek.SchoolManager":
-                print("remove ads")
-                self._appDel?.userDefaults.setBool(true, forKey: prodID)
-            default:
-                print("IAP not setup")
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            print("Transactions Restored")
+            for transaction in queue.transactions {
+                let t: SKPaymentTransaction = transaction
+                
+                let prodID = t.payment.productIdentifier as String
+                
+                switch prodID {
+                case "com.petersypek.SchoolManager":
+                    print("remove ads")
+                    self._appDel?.userDefaults.setBool(true, forKey: prodID)
+                default:
+                    print("IAP not setup")
+                }
+                self._alertOKOnlyDelegate?.showAlert("RestorePurchasesHeader".localized, message: "RestorePurchasesMessage".localized)
             }
-            self._alertOKOnlyDelegate?.showAlert("Thank You", message: "Your purchase(s) were restored.")
         }
     }
     
@@ -106,7 +124,9 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
             request.delegate = self
             request.start()
         } else {
-            self._alertGoSettingdDelegate?.showAlert_OneAction("In-App Purchases Not Enabled", message: "Please enable In App Purchase in Settings", actionTitle: "Go to Settings")
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self._alertGoSettingdDelegate?.showAlert_OneAction("IAppNotEnabledHeader".localized, message: "IAppNotEnabledMessage".localized, actionTitle: "IAppNotEnabledActionHeader".localized)
+            })
         }
     }
     

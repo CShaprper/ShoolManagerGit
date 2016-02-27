@@ -6,6 +6,8 @@ import UIKit
 class PurchaseProductVC: UIViewController, UITableViewDataSource, UITableViewDelegate, ISendProducts{
     private var _iap:StoreKitManager?
     private var _productsArray = Array<SKProduct>()
+    private var _activityIndicatorAnimation:IAnimation?
+    private var _selectedProduct:SKProduct?
     
     @IBOutlet var tableview: UITableView!
     
@@ -13,7 +15,9 @@ class PurchaseProductVC: UIViewController, UITableViewDataSource, UITableViewDel
         super.viewDidLoad()
         tableview.dataSource = self
         tableview.delegate = self
-        self._iap = StoreKitManager(presentingVC: self, alertOKOnlyDelegate: Alert_OK_Only(presentingView: self), alertGoSettingsDelegate: Alert_OK_GoToSettings(presentingView: self), activityIndicatorAnimation: ActivityIndicatorAnimation(presentingView: self))
+        self._activityIndicatorAnimation = ActivityIndicatorAnimation(presentingView: self)
+        self._iap = StoreKitManager(presentingVC: self, alertOKOnlyDelegate: Alert_OK_Only(presentingView: self), alertGoSettingsDelegate: Alert_OK_GoToSettings(presentingView: self), activityIndicatorAnimation: self._activityIndicatorAnimation!)
+        self._activityIndicatorAnimation?.beginAnimation()
         self._iap?.setSendProductsDelegate(self)
         self._iap?.requestProductData()
     }
@@ -32,7 +36,9 @@ class PurchaseProductVC: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        _ = tableview.indexPathForSelectedRow
+        self._selectedProduct = self._productsArray[indexPath.row]
+        self._iap?.buyProduct(_selectedProduct!)
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _productsArray.count
@@ -48,6 +54,6 @@ class PurchaseProductVC: UIViewController, UITableViewDataSource, UITableViewDel
         self.tableview.AnimateTable()
     }
     @IBAction func restorePurchasesButton() {
-        self._iap.requestProductData()
+        self._iap!.restorePurchases()   
     }
 }

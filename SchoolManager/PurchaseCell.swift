@@ -14,10 +14,17 @@ class PurchaseCell: UITableViewCell {
     @IBOutlet var productTitle: UILabel!
     @IBOutlet var productDescription: UILabel!
     @IBOutlet var productPrice: UILabel!
+    private var _ProductDescription:String?
+    private var _ProductHeader:String?
     
     func configureCell(product:SKProduct){
-        self.productDescription.text! = product.description
-        self.productTitle.text! = product.localizedDescription
-        self.productPrice.text! = String(product.price)
+        if product.productIdentifier == "com.petersypek.SchoolManager"{
+            self._ProductDescription  =  "RemoveAdsDesription"
+            self._ProductHeader = "RemoveAdsHeader"
+        }
+        self.productDescription.text! = _ProductDescription!.localized
+        self.productTitle.text! = _ProductHeader!.localized
+        self.productPrice.text! = String(product.localizedPrice())
+        self.productPrice.layer.cornerRadius  = 5
     }
 }

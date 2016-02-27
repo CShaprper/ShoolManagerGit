@@ -18,7 +18,7 @@ class Alert_OK_GoToSettings: IAlert_OneAction{
     
     func showAlert_OneAction(title:String, message:String, actionTitle:String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) -> Void in  }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (UIAlertAction) -> Void in  }))
         alert.addAction(UIAlertAction(title: actionTitle, style: .Default, handler: { (UIAlertAction) -> Void in
             alert.dismissViewControllerAnimated(true, completion: nil)
             

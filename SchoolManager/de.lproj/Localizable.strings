@@ -21,6 +21,13 @@
 "RemoveAds" = "RemoveAdsWood_DE";
 "RateNow" = "RateNowWood_DE";
 "openNote" = "Notiz öffnen";
+"RemoveAdsDesription" = "Du möchtest keine lästigen Werbebanner sehen?";
+"RemoveAdsHeader" = "Werbung Entfernen";
+"RestorePurchasesHeader" = "Vielen Dank";
+"RestorePurchasesMessage" = "Ihre Einkäufe wurden wieder hergestellt";
+"IAppNotEnabledHeader" = "In App Käufe nicht möglich";
+"IAppNotEnabledMessage" = "Bitte ermögliche 'In App Käufe' in Deinen Einstellungen";
+"IAppNotEnabledActionHeader" = "zu den Einstellungen";
 
 /*MainVC*/
 "MainVC_NowLabelText" = "Jetzt";

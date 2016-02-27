@@ -326,4 +326,4 @@
 /* Class = "UILabel"; text = "Subject"; ObjectID = "zfr-8Q-D9D"; */
 "zfr-8Q-D9D.text" = "Schulfach";
 
-"tWT-44-BoQ.text" = "Käufe Wiederherstellen"
+"tWT-44-BoQ.normalTitle" = "Käufe Wiederherstellen";

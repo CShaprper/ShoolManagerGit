@@ -33,10 +33,6 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController!.delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
-            loadAds()
-            UIViewController.prepareInterstitialAds()
-        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -57,6 +53,10 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         showInfoMessage()
+        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
+            loadAds()
+            UIViewController.prepareInterstitialAds()
+        }
     }
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait

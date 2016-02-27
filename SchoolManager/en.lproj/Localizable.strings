@@ -21,6 +21,13 @@
 "RemoveAds" = "RemoveAdsWood";
 "RateNow" = "RateNowWood";
 "openNote" = "open note";
+"RemoveAdsDesription" = "You don't want to see annoying ad banners?";
+"RemoveAdsHeader" = "Remove Ads";
+"RestorePurchasesHeader" = "Thank You";
+"RestorePurchasesMessage" = "Your purchase(s) were restored";
+"IAppNotEnabledHeader" = "In App Purchase not Enabled";
+"IAppNotEnabledMessage" = "Please enable 'In App Purchase' in your settings";
+"IAppNotEnabledActionHeader" = "go to settings";
 
 /*MainVC*/
 "MainVC_NowLabelText" = "Now";
@@ -32,6 +39,7 @@
 "TimeTableTitleUneven" = "Time Table uneven Week";
 "DashboardWelcomeHeader" = "Welcome to School Manager";
 "DashboardWelcomeMessage" = "Almost done! Here you will see your acutal and upcoming school lessons after you have configured your personal 'Time Table'. You first should visit the 'Settings' to configure your 'Time Table'.";
+
 
 /*EnabledDaysVC*/
 "EnabledDaysVC_AlertHourDeleteDisabled_Title" = "Delete hour disabled!";
