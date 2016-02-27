@@ -592,7 +592,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "53"
             endingLineNumber = "53"
-            landmarkName = "sendProducts(_:)"
+            landmarkName = "numberOfSectionsInTableView(_:)"
             landmarkType = "5">
             <Locations>
                <Location
@@ -670,7 +670,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
             endingLineNumber = "29"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkName = "preferredStatusBarStyle()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -686,7 +686,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
             endingLineNumber = "30"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkName = "preferredStatusBarStyle()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -718,7 +718,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "39"
             endingLineNumber = "39"
-            landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
