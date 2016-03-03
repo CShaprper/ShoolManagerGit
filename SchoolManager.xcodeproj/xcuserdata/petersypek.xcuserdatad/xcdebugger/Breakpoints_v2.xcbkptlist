@@ -211,11 +211,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SchoolManager/SettingsMenueVC.swift"
-            timestampString = "478265171.551868"
+            timestampString = "478714091.600587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "infoViewButtonAction()"
             landmarkType = "5">
             <Locations>
@@ -259,11 +259,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SchoolManager/SettingsMenueVC.swift"
-            timestampString = "478265171.551868"
+            timestampString = "478714091.600587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240">
+            startingLineNumber = "242"
+            endingLineNumber = "242">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
