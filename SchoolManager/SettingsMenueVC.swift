@@ -21,6 +21,7 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
     @IBOutlet var BackgroundimageView: UIImageView!
     @IBOutlet var removeAdsButon: UIButton!
     @IBOutlet var rateNowButton: UIButton!
+    @IBOutlet var subscribeObserver: UIButton!
     var infomsg:String!
     var counter:Int = 0
     
@@ -33,6 +34,7 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController!.delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        self.subscribeObserver.hidden = true
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
