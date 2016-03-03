@@ -348,7 +348,7 @@
 "vCn-kQ-Dhc.title" = "Notes Detail";
 
 /* Class = "UITextView"; text = "Lorem ipsum "; ObjectID = "wSC-De-lFY"; */
-"wSC-De-lFY.text" = "Lorem ipsum ";
+"wSC-De-lFY.text" = "Enter your text here ...";
 
 /* Class = "UITabBarItem"; title = "Dashboard"; ObjectID = "wln-co-fkH"; */
 "wln-co-fkH.title" = "Dashboard";
