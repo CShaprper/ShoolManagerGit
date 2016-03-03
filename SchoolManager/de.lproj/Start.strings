@@ -1,0 +1,369 @@
+
+/* Class = "UILabel"; text = "Icon"; ObjectID = "07R-cJ-8Al"; */
+"07R-cJ-8Al.text" = "Icon";
+
+/* Class = "UILabel"; text = "Subjects"; ObjectID = "0dl-df-qZd"; */
+"0dl-df-qZd.text" = "Schulfächer";
+
+/* Class = "UILabel"; text = "Select Subject"; ObjectID = "12k-h5-9hp"; */
+"12k-h5-9hp.text" = "wähle Schulfach";
+
+/* Class = "UITextField"; placeholder = "enter teacher name"; ObjectID = "1ZX-XH-RvF"; */
+"1ZX-XH-RvF.placeholder" = "name des Lehrers";
+
+/* Class = "UILabel"; text = "Wen"; ObjectID = "20J-3h-GLo"; */
+"20J-3h-GLo.text" = "Mi";
+
+/* Class = "UILabel"; text = "Subscribe Time Table"; ObjectID = "2Ug-qX-bRu"; */
+"2Ug-qX-bRu.text" = "Abonniere Stundenplan";
+
+/* Class = "UILabel"; text = "Select Subject"; ObjectID = "37z-0m-EsA"; */
+"37z-0m-EsA.text" = "wähle Schulfach";
+
+/* Class = "UITextField"; placeholder = "enter subject name"; ObjectID = "39A-kY-nYj"; */
+"39A-kY-nYj.placeholder" = "Name des Schulfaches";
+
+/* Class = "UILabel"; text = "Teacher"; ObjectID = "3LO-ww-0cs"; */
+"3LO-ww-0cs.text" = "Lehrer";
+
+/* Class = "UITabBarItem"; title = "Time Table"; ObjectID = "4Kd-8T-8Gp"; */
+"4Kd-8T-8Gp.title" = "Stundenplan";
+
+/* Class = "UILabel"; text = "Due Date"; ObjectID = "4h5-wf-SBp"; */
+"4h5-wf-SBp.text" = "Fälligkeitsdatum";
+
+/* Class = "UILabel"; text = "Subscribe as Observer"; ObjectID = "4zC-MJ-HgG"; */
+"4zC-MJ-HgG.text" = "Abonniere als Beobachter";
+
+/* Class = "UILabel"; text = "Time Table"; ObjectID = "5Sg-E8-xDH"; */
+"5Sg-E8-xDH.text" = "Stundenplan";
+
+/* Class = "UILabel"; text = "Start"; ObjectID = "6ZE-kJ-woJ"; */
+"6ZE-kJ-woJ.text" = "Start";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "6ww-mY-vSE"; */
+"6ww-mY-vSE.text" = "Beschreibung";
+
+/* Class = "UILabel"; text = "Room"; ObjectID = "7lx-dl-s0y"; */
+"7lx-dl-s0y.text" = "Raum";
+
+/* Class = "UIViewController"; title = "Select Subject Note"; ObjectID = "7tA-hF-zwB"; */
+"7tA-hF-zwB.title" = "Select Subject Note";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "9jm-xc-lpm"; */
+"9jm-xc-lpm.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "B5q-8t-eg2"; */
+"B5q-8t-eg2.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Teachers"; ObjectID = "BZb-Qx-0i0"; */
+"BZb-Qx-0i0.text" = "Lehrer";
+
+/* Class = "UIViewController"; title = "Select Teacher"; ObjectID = "BpX-pb-paX"; */
+"BpX-pb-paX.title" = "wähle Lehrer";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "CrU-Yc-ed5"; */
+"CrU-Yc-ed5.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "D9M-dT-GdO"; */
+"D9M-dT-GdO.text" = "Label";
+
+/* Class = "UILabel"; text = "Price"; ObjectID = "DNn-hz-KWx"; */
+"DNn-hz-KWx.text" = "Preis";
+
+/* Class = "UILabel"; text = "Subscrition to name"; ObjectID = "Dgm-yL-0d0"; */
+"Dgm-yL-0d0.text" = "Subscrition to name";
+
+/* Class = "UILabel"; text = "Hour"; ObjectID = "DvF-fP-C36"; */
+"DvF-fP-C36.text" = "Stunde";
+
+/* Class = "UILabel"; text = "Select Reminder Date"; ObjectID = "E4e-Ad-ojJ"; */
+"E4e-Ad-ojJ.text" = "wähle Fälligkeistdatum";
+
+/* Class = "UITextView"; text = "Enter your text here ...."; ObjectID = "ERK-CB-qIc"; */
+"ERK-CB-qIc.text" = "Gib hier Deinen Text ein ...";
+
+/* Class = "UILabel"; text = "Set enabled days"; ObjectID = "EdB-wo-743"; */
+"EdB-wo-743.text" = "Mögliche Stundenplan Tage";
+
+/* Class = "UIViewController"; title = "Icon Picker"; ObjectID = "FJT-yi-lXJ"; */
+"FJT-yi-lXJ.title" = "Icon Picker";
+
+/* Class = "UILabel"; text = "no."; ObjectID = "GCC-BS-dIO"; */
+"GCC-BS-dIO.text" = "nr.";
+
+/* Class = "UILabel"; text = "Subscription ID"; ObjectID = "Gn5-4L-D2h"; */
+"Gn5-4L-D2h.text" = "Abonnement ID";
+
+/* Class = "UIViewController"; title = "Dashboard"; ObjectID = "GwS-X5-ADg"; */
+"GwS-X5-ADg.title" = "Dashboard";
+
+/* Class = "UILabel"; text = "Subject"; ObjectID = "GzE-CN-z3Q"; */
+"GzE-CN-z3Q.text" = "Schulfach";
+
+/* Class = "UIViewController"; title = "Select Hour"; ObjectID = "HbT-In-TA6"; */
+"HbT-In-TA6.title" = "wähle Stunde";
+
+/* Class = "UILabel"; text = "Select Teacher"; ObjectID = "Hdu-RO-6HH"; */
+"Hdu-RO-6HH.text" = "wähle Lehrer";
+
+/* Class = "UILabel"; text = "Color"; ObjectID = "IZJ-Np-wZv"; */
+"IZJ-Np-wZv.text" = "Farbe";
+
+/* Class = "UILabel"; text = "endtime"; ObjectID = "JpU-CW-Z3n"; */
+"JpU-CW-Z3n.text" = "Endzeit";
+
+/* Class = "UILabel"; text = "Subscribe Notes"; ObjectID = "KfS-kf-fh5"; */
+"KfS-kf-fh5.text" = "abonniere Notizen";
+
+/* Class = "UILabel"; text = "Select day"; ObjectID = "KyR-Fc-Scv"; */
+"KyR-Fc-Scv.text" = "wähle Tag";
+
+/* Class = "UILabel"; text = "End"; ObjectID = "Kzi-do-f79"; */
+"Kzi-do-f79.text" = "Ende";
+
+/* Class = "UILabel"; text = "Days / Hours"; ObjectID = "M8e-m5-kgZ"; */
+"M8e-m5-kgZ.text" = "Tage / Stunden";
+
+/* Class = "UIViewController"; title = "Teachers"; ObjectID = "MXX-3j-3Kx"; */
+"MXX-3j-3Kx.title" = "Lehrer";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Mn4-SH-bvq"; */
+"Mn4-SH-bvq.text" = "Label";
+
+/* Class = "UILabel"; text = "Dashboard"; ObjectID = "Mol-C2-GDd"; */
+"Mol-C2-GDd.text" = "Dashboard";
+
+/* Class = "UILabel"; text = "Select Subject"; ObjectID = "NOe-xG-OWe"; */
+"NOe-xG-OWe.text" = "wähle Schulfach";
+
+/* Class = "UILabel"; text = "Next"; ObjectID = "ORa-OK-S02"; */
+"ORa-OK-S02.text" = "Gleich";
+
+/* Class = "UILabel"; text = "Select Hour"; ObjectID = "Q5D-dM-TPc"; */
+"Q5D-dM-TPc.text" = "wähle Stunde";
+
+/* Class = "UIViewController"; title = "Subscribe"; ObjectID = "Qbi-zD-qqM"; */
+"Qbi-zD-qqM.title" = "Abonnement";
+
+/* Class = "UILabel"; text = "School Manager Store"; ObjectID = "S7y-Zy-lhb"; */
+"S7y-Zy-lhb.text" = "School Manager Store";
+
+/* Class = "UILabel"; text = "Select Teacher"; ObjectID = "S91-ZW-c5x"; */
+"S91-ZW-c5x.text" = "wähle Lehrer";
+
+/* Class = "UILabel"; text = "Select Day"; ObjectID = "TZe-JV-p9C"; */
+"TZe-JV-p9C.text" = "wähle Tag";
+
+/* Class = "UILabel"; text = "no."; ObjectID = "TeJ-Tr-Hho"; */
+"TeJ-Tr-Hho.text" = "nr.";
+
+/* Class = "UIViewController"; title = "Color Picker"; ObjectID = "TnY-uk-q1l"; */
+"TnY-uk-q1l.title" = "Color Picker";
+
+/* Class = "UIViewController"; title = "Subjects"; ObjectID = "VSs-eL-7pJ"; */
+"VSs-eL-7pJ.title" = "Schulfächer";
+
+/* Class = "UISegmentedControl"; VwA-PD-0VP.segmentTitles[0] = "even weeks"; ObjectID = "VwA-PD-0VP"; */
+"VwA-PD-0VP.segmentTitles[0]" = "gerade Woche";
+
+/* Class = "UISegmentedControl"; VwA-PD-0VP.segmentTitles[1] = "uneven weeks"; ObjectID = "VwA-PD-0VP"; */
+"VwA-PD-0VP.segmentTitles[1]" = "ungerade Wochen";
+
+/* Class = "UISegmentedControl"; VwA-PD-0VP.segmentTitles[2] = "both"; ObjectID = "VwA-PD-0VP"; */
+"VwA-PD-0VP.segmentTitles[2]" = "beide Wochen";
+
+/* Class = "UITabBarItem"; title = "Notes"; ObjectID = "W6s-Nz-4ID"; */
+"W6s-Nz-4ID.title" = "Notizen";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "WJI-sy-vqO"; */
+"WJI-sy-vqO.text" = "Label";
+
+/* Class = "UILabel"; text = "Add Note"; ObjectID = "WZn-6R-htz"; */
+"WZn-6R-htz.text" = "Notiz hinzufügen";
+
+/* Class = "UIViewController"; title = "Edit Teacher"; ObjectID = "WnC-0L-EyS"; */
+"WnC-0L-EyS.title" = "Lehrer bearbeiten";
+
+/* Class = "UITextField"; placeholder = "enter ID of user / group to subscribe"; ObjectID = "Xzg-96-aDO"; */
+"Xzg-96-aDO.placeholder" = "ID des Users / Gruppe fürs Abonnement";
+
+/* Class = "UITextView"; text = "Ok, first thing you need to configure are the enabled days of your personal 'Time Table'"; ObjectID = "Y2w-vn-HSn"; */
+"Y2w-vn-HSn.text" = "Ok, zuerst solltest Du Die möglichen Tage in Deinem 'Stundenplan' aktivieren. Hier kannst Du auch die Anzahl der Stunden mit dem Schieberegler einstellen.";
+
+/* Class = "UISegmentedControl"; Y39-uw-tmv.segmentTitles[0] = "male"; ObjectID = "Y39-uw-tmv"; */
+"Y39-uw-tmv.segmentTitles[0]" = "männlich";
+
+/* Class = "UISegmentedControl"; Y39-uw-tmv.segmentTitles[1] = "female"; ObjectID = "Y39-uw-tmv"; */
+"Y39-uw-tmv.segmentTitles[1]" = "weiblich";
+
+/* Class = "UIViewController"; title = "Planer Setup"; ObjectID = "YjC-6z-4Ux"; */
+"YjC-6z-4Ux.title" = "Stundenplan Setup";
+
+/* Class = "UILabel"; text = "Select Icon"; ObjectID = "YuH-rW-fXT"; */
+"YuH-rW-fXT.text" = "wähle Icon";
+
+/* Class = "UILabel"; text = "Planer Setup"; ObjectID = "Z9B-ve-gjT"; */
+"Z9B-ve-gjT.text" = "Stundenplan Setup";
+
+/* Class = "UILabel"; text = "Fri"; ObjectID = "ZBB-IC-6vz"; */
+"ZBB-IC-6vz.text" = "Fr";
+
+/* Class = "UIViewController"; title = "Enabled Days"; ObjectID = "ZLr-EC-2nc"; */
+"ZLr-EC-2nc.title" = "Mögliche Tage";
+
+/* Class = "UILabel"; text = "note"; ObjectID = "a0C-OZ-hwp"; */
+"a0C-OZ-hwp.text" = "Notiz";
+
+/* Class = "UILabel"; text = "Now"; ObjectID = "bHV-h9-jPT"; */
+"bHV-h9-jPT.text" = "Jetzt";
+
+/* Class = "UIViewController"; title = "Time Table"; ObjectID = "bPT-2j-JOP"; */
+"bPT-2j-JOP.title" = "Stundenplan";
+
+/* Class = "UIViewController"; title = "Select Subject"; ObjectID = "bqQ-oS-cai"; */
+"bqQ-oS-cai.title" = "wähle Schulfach";
+
+/* Class = "UILabel"; text = "Hours per day"; ObjectID = "d7F-gh-kxk"; */
+"d7F-gh-kxk.text" = "Stunden pro Tag";
+
+/* Class = "UILabel"; text = "Select Subject"; ObjectID = "dEZ-68-0rN"; */
+"dEZ-68-0rN.text" = "wähle Schulfach";
+
+/* Class = "UILabel"; text = "endtime"; ObjectID = "dGU-hk-y2x"; */
+"dGU-hk-y2x.text" = "Endzeit";
+
+/* Class = "UISegmentedControl"; dMc-Pm-W0t.segmentTitles[0] = "male"; ObjectID = "dMc-Pm-W0t"; */
+"dMc-Pm-W0t.segmentTitles[0]" = "männlich";
+
+/* Class = "UISegmentedControl"; dMc-Pm-W0t.segmentTitles[1] = "female"; ObjectID = "dMc-Pm-W0t"; */
+"dMc-Pm-W0t.segmentTitles[1]" = "weiblich";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "dWE-DJ-JhO"; */
+"dWE-DJ-JhO.text" = "Label";
+
+/* Class = "UILabel"; text = "Edit Teacher"; ObjectID = "dhF-lF-0RE"; */
+"dhF-lF-0RE.text" = "Lehrer bearbeiten";
+
+/* Class = "UIViewController"; title = "Add Note"; ObjectID = "e8K-zv-gHs"; */
+"e8K-zv-gHs.title" = "Notiz hinzufügen";
+
+/* Class = "UILabel"; text = "Edit Timeline"; ObjectID = "eoU-v9-mIU"; */
+"eoU-v9-mIU.text" = "Zeitplan bearbeiten";
+
+/* Class = "UILabel"; text = "Tue"; ObjectID = "fKW-wj-Jar"; */
+"fKW-wj-Jar.text" = "Di";
+
+/* Class = "UILabel"; text = "Day Timeline"; ObjectID = "giC-fj-ee3"; */
+"giC-fj-ee3.text" = "Tages Zeitplan";
+
+/* Class = "UIViewController"; title = "Select Reminder Date"; ObjectID = "hGN-a1-Kd8"; */
+"hGN-a1-Kd8.title" = "wähle Fälligkeitsdatum";
+
+/* Class = "UILabel"; text = "Sat"; ObjectID = "i2P-48-B2Q"; */
+"i2P-48-B2Q.text" = "Sa";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "iRq-cU-ObQ"; */
+"iRq-cU-ObQ.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "room no."; ObjectID = "jFw-fS-y4f"; */
+"jFw-fS-y4f.placeholder" = "Raum nr.";
+
+/* Class = "UILabel"; text = "Welcome to School Manager"; ObjectID = "jIL-jx-No7"; */
+"jIL-jx-No7.text" = "Willkommen bei School Manager";
+
+/* Class = "UILabel"; text = "Room"; ObjectID = "jtS-vH-YHe"; */
+"jtS-vH-YHe.text" = "Raum";
+
+/* Class = "UILabel"; text = "Room"; ObjectID = "jz8-Lk-auR"; */
+"jz8-Lk-auR.text" = "Raum";
+
+/* Class = "UILabel"; text = "begin time"; ObjectID = "k3m-WR-OUX"; */
+"k3m-WR-OUX.text" = "Startzeit";
+
+/* Class = "UILabel"; text = "Thu"; ObjectID = "ksE-Lt-l2v"; */
+"ksE-Lt-l2v.text" = "Do";
+
+/* Class = "UILabel"; text = "Settings Menu"; ObjectID = "ksx-sz-ubD"; */
+"ksx-sz-ubD.text" = "Verwaltungsmenü";
+
+/* Class = "UILabel"; text = "Subject"; ObjectID = "lt9-iQ-qvA"; */
+"lt9-iQ-qvA.text" = "Schulfach";
+
+/* Class = "UIViewController"; title = "Settings"; ObjectID = "mav-9L-1Ul"; */
+"mav-9L-1Ul.title" = "Verwaltung";
+
+/* Class = "UILabel"; text = "Teacher"; ObjectID = "npu-od-9HE"; */
+"npu-od-9HE.text" = "Lehrer";
+
+/* Class = "UILabel"; text = "Hour"; ObjectID = "oPH-a4-lyW"; */
+"oPH-a4-lyW.text" = "Stunde";
+
+/* Class = "UILabel"; text = "Mon"; ObjectID = "oep-AO-2vn"; */
+"oep-AO-2vn.text" = "Mo";
+
+/* Class = "UILabel"; text = "Subject"; ObjectID = "pbY-ko-1o2"; */
+"pbY-ko-1o2.text" = "Schulfach";
+
+/* Class = "UILabel"; text = "Notes"; ObjectID = "qFj-UX-7SJ"; */
+"qFj-UX-7SJ.text" = "Notizen";
+
+/* Class = "UIViewController"; title = "Notes"; ObjectID = "qSF-NN-OCH"; */
+"qSF-NN-OCH.title" = "Notizen";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "qdb-TJ-FOn"; */
+"qdb-TJ-FOn.title" = "Eintesllungen";
+
+/* Class = "UIViewController"; title = "Days Timeline"; ObjectID = "qnZ-eK-zhi"; */
+"qnZ-eK-zhi.title" = "Tages Zeitplan";
+
+/* Class = "UILabel"; text = "Start"; ObjectID = "qtJ-jv-bQ0"; */
+"qtJ-jv-bQ0.text" = "Start";
+
+/* Class = "UITextField"; placeholder = "enter user / group name"; ObjectID = "r2S-oX-Q8b"; */
+"r2S-oX-Q8b.placeholder" = "User / Guppenname";
+
+/* Class = "UILabel"; text = "begin time"; ObjectID = "r8f-Tv-VUu"; */
+"r8f-Tv-VUu.text" = "Startzeit";
+
+/* Class = "UIViewController"; title = "Edit Timeline"; ObjectID = "r9n-HL-2Dp"; */
+"r9n-HL-2Dp.title" = "Zeitplan bearbeiten";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "tN0-C7-dzz"; */
+"tN0-C7-dzz.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "Restore Purchase(s)"; ObjectID = "tWT-44-BoQ"; */
+"tWT-44-BoQ.normalTitle" = "Käufe Wiederherstellen";
+
+/* Class = "UIViewController"; title = "Select Day"; ObjectID = "uYx-1z-E0T"; */
+"uYx-1z-E0T.title" = "wähle Tag";
+
+/* Class = "UILabel"; text = "Select Reminder Date"; ObjectID = "uuH-RQ-a5Y"; */
+"uuH-RQ-a5Y.text" = "wähle Fälligkeitsdatum";
+
+/* Class = "UILabel"; text = "Select hour"; ObjectID = "vCb-vh-DIc"; */
+"vCb-vh-DIc.text" = "wähle Stunde";
+
+/* Class = "UIViewController"; title = "Notes Detail"; ObjectID = "vCn-kQ-Dhc"; */
+"vCn-kQ-Dhc.title" = "Notizen Details";
+
+/* Class = "UITextView"; text = "Lorem ipsum "; ObjectID = "wSC-De-lFY"; */
+"wSC-De-lFY.text" = "Lorem ipsum ";
+
+/* Class = "UITabBarItem"; title = "Dashboard"; ObjectID = "wln-co-fkH"; */
+"wln-co-fkH.title" = "Dashboard";
+
+/* Class = "UILabel"; text = "Teacher"; ObjectID = "y0I-FK-j9E"; */
+"y0I-FK-j9E.text" = "Lehrer";
+
+/* Class = "UILabel"; text = "End"; ObjectID = "yAh-jZ-mMY"; */
+"yAh-jZ-mMY.text" = "Ende";
+
+/* Class = "UITextField"; placeholder = "edit teacher name"; ObjectID = "yMU-I2-Por"; */
+"yMU-I2-Por.placeholder" = "name des Lehres bearbeiten";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ycE-Z6-b3x"; */
+"ycE-Z6-b3x.text" = "Label";
+
+/* Class = "UILabel"; text = "Subject"; ObjectID = "zfr-8Q-D9D"; */
+"zfr-8Q-D9D.text" = "Schulfach";

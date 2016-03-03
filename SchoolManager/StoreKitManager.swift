@@ -19,7 +19,7 @@ extension SKProduct {
 }
 
 class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
-    private let _productIdentifiers = Set(["com.petersypek.SchoolManager"])
+    private let _productIdentifiers = Set(["com.petersypek.SchoolManager.RemoveAds"])
     private var _product: SKProduct?
     private var _productsArray = Array<SKProduct>()
     private let _presentingVC:UIViewController?
@@ -106,7 +106,7 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
                 let prodID = t.payment.productIdentifier as String
                 
                 switch prodID {
-                case "com.petersypek.SchoolManager":
+                case "com.petersypek.SchoolManager.RemoveAds":
                     print("remove ads")
                     self._appDel?.userDefaults.setBool(true, forKey: prodID)
                 default:
@@ -120,7 +120,7 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
     func requestProductData()
     {
         if SKPaymentQueue.canMakePayments() {
-            let request = SKProductsRequest(productIdentifiers: Set(["com.petersypek.SchoolManager"]))
+            let request = SKProductsRequest(productIdentifiers: Set(["com.petersypek.SchoolManager.RemoveAds"]))
             request.delegate = self
             request.start()
         } else {
@@ -131,7 +131,7 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
     }
     
     func deliverProduct(transaction:SKPaymentTransaction) {
-        if transaction.payment.productIdentifier == "com.petersypek.SchoolManager"
+        if transaction.payment.productIdentifier == "com.petersypek.SchoolManager.RemoveAds"
         {
             print("Non-Consumable Product Remove Ads Purchased")
             self._appDel?.userDefaults.setBool(true, forKey: transaction.payment.productIdentifier)

@@ -18,7 +18,7 @@ class PurchaseCell: UITableViewCell {
     private var _ProductHeader:String?
     
     func configureCell(product:SKProduct){
-        if product.productIdentifier == "com.petersypek.SchoolManager"{
+        if product.productIdentifier == "com.petersypek.SchoolManager.RemoveAds"{
             self._ProductDescription  =  "RemoveAdsDesription"
             self._ProductHeader = "RemoveAdsHeader"
         }

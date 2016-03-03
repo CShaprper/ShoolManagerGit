@@ -179,6 +179,8 @@
 		CF79E3961C883EDD00BE4C69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF79E3981C883F7100BE4C69 /* IconSet.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = IconSet.xcassets; path = SchoolManager/IconSet.xcassets; sourceTree = "<group>"; };
 		CF79E3991C883F7100BE4C69 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = SchoolManager/Media.xcassets; sourceTree = "<group>"; };
+		CF79E3A61C8879BE00BE4C69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Start.strings; sourceTree = "<group>"; };
+		CF79E3A81C8879C800BE4C69 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Start.strings; sourceTree = "<group>"; };
 		CF7A25D81C7F6B3500CADA4A /* IAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAlert.swift; sourceTree = "<group>"; };
 		CF7A25DA1C7F6B6900CADA4A /* ActionSheet_OK_Only.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheet_OK_Only.swift; sourceTree = "<group>"; };
 		CF7A25DC1C7F6B8E00CADA4A /* Alert_OK_Only.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert_OK_Only.swift; sourceTree = "<group>"; };
@@ -696,6 +698,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				CF79E3941C883E2700BE4C69 /* Base */,
+				CF79E3A61C8879BE00BE4C69 /* en */,
+				CF79E3A81C8879C800BE4C69 /* de */,
 			);
 			name = Start.storyboard;
 			sourceTree = "<group>";
