@@ -312,7 +312,7 @@
 "qSF-NN-OCH.title" = "Notizen";
 
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "qdb-TJ-FOn"; */
-"qdb-TJ-FOn.title" = "Eintesllungen";
+"qdb-TJ-FOn.title" = "Verwaltung";
 
 /* Class = "UIViewController"; title = "Days Timeline"; ObjectID = "qnZ-eK-zhi"; */
 "qnZ-eK-zhi.title" = "Tages Zeitplan";
