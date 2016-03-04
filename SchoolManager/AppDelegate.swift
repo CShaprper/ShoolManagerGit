@@ -131,8 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let root  = UIApplication.sharedApplication().keyWindow?.rootViewController
             root?.presentViewController(addNoteVC, animated: true, completion: { () -> Void in
                 completionHandler(true)
-            })
-            
+            })            
         }
     }
     
