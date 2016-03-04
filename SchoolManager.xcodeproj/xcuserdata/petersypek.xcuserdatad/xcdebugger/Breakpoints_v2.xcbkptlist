@@ -211,11 +211,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SchoolManager/SettingsMenueVC.swift"
-            timestampString = "478714091.600587"
+            timestampString = "478790853.056907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "infoViewButtonAction()"
             landmarkType = "5">
             <Locations>
@@ -259,11 +259,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SchoolManager/SettingsMenueVC.swift"
-            timestampString = "478714091.600587"
+            timestampString = "478790853.056907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242">
+            startingLineNumber = "241"
+            endingLineNumber = "241">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -587,11 +587,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SchoolManager/PurchaseProductVC.swift"
-            timestampString = "478263719.477329"
+            timestampString = "478790815.275978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "numberOfSectionsInTableView(_:)"
             landmarkType = "5">
             <Locations>
@@ -665,23 +665,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SchoolManager/PurchaseProductVC.swift"
-            timestampString = "478263719.477329"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "preferredStatusBarStyle()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SchoolManager/PurchaseProductVC.swift"
-            timestampString = "478263719.477329"
+            timestampString = "478790815.275978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
@@ -696,13 +680,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SchoolManager/PurchaseCell.swift"
-            timestampString = "478262291.421247"
+            filePath = "SchoolManager/PurchaseProductVC.swift"
+            timestampString = "478790815.275978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "configureCell(_:)"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "preferredStatusBarStyle()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SchoolManager/PurchaseCell.swift"
+            timestampString = "478791173.009734"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "configureCell(_:appDel:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -713,11 +713,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SchoolManager/PurchaseProductVC.swift"
-            timestampString = "478263719.477329"
+            timestampString = "478790815.275978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>

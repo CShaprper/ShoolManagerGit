@@ -17,13 +17,9 @@ class PurchaseCell: UITableViewCell {
     private var _ProductDescription:String?
     private var _ProductHeader:String?
     
-    func configureCell(product:SKProduct){
-        if product.productIdentifier == "com.petersypek.SchoolManager.RemoveAd"{
-            self._ProductDescription  =  "RemoveAdsDesription"
-            self._ProductHeader = "RemoveAdsHeader"
-        }
-        self.productDescription.text! = _ProductDescription!.localized
-        self.productTitle.text! = _ProductHeader!.localized
+    func configureCell(product:SKProduct, appDel:AppDelegate){
+        self.productDescription.text! = product.localizedDescription
+        self.productTitle.text! = product.localizedTitle
         self.productPrice.text! = String(product.localizedPrice())
         self.productPrice.layer.cornerRadius  = 5
     }

@@ -34,7 +34,7 @@ class PurchaseProductVC: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCellWithIdentifier("PurchaseCell") as? PurchaseCell{
-            cell.configureCell(self._productsArray[indexPath.row])
+            cell.configureCell(self._productsArray[indexPath.row] )
             return cell
         }
         else{
