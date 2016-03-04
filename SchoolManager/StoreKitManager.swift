@@ -19,7 +19,7 @@ extension SKProduct {
 }
 
 class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
-    private let _productIdentifiers = Set(["com.petersypek.SchoolManager.RemoveAd"])
+    private let _productIdentifiers:Set<String>!
     private var _product: SKProduct?
     private var _productsArray = Array<SKProduct>()
     private let _presentingVC:UIViewController?
@@ -28,7 +28,7 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
     private let _alertGoSettingdDelegate:IAlert_OneAction?
     private var _sendProducstDelegate:ISendProducts?
     private let _activityIndicator:IAnimation?
-    
+    private let _removeAdIdentifier:String!
     /**
      **Constructor**
      
@@ -40,6 +40,8 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
         self._presentingVC = presentingVC
         self._appDel = UIApplication.sharedApplication().delegate as? AppDelegate
         self._activityIndicator = activityIndicatorAnimation
+        self._removeAdIdentifier = "com.petersypek.SchoolManager.RemoveAd"
+        self._productIdentifiers = Set([_removeAdIdentifier])
     }
     
     func setSendProductsDelegate(delegate:ISendProducts){
@@ -106,7 +108,7 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
                 let prodID = t.payment.productIdentifier as String
                 
                 switch prodID {
-                case "com.petersypek.SchoolManager.RemoveAd":
+                case self._removeAdIdentifier:
                     print("remove ads")
                     self._appDel?.userDefaults.setBool(true, forKey: prodID)
                 default:
@@ -120,7 +122,7 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
     func requestProductData()
     {
         if SKPaymentQueue.canMakePayments() {
-            let request = SKProductsRequest(productIdentifiers: Set(["com.petersypek.SchoolManager.RemoveAds"]))
+            let request = SKProductsRequest(productIdentifiers: self._productIdentifiers)
             request.delegate = self
             request.start()
         } else {
@@ -131,22 +133,22 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
     }
     
     func deliverProduct(transaction:SKPaymentTransaction) {
-        if transaction.payment.productIdentifier == "com.petersypek.SchoolManager.RemoveAd"
+        if transaction.payment.productIdentifier == self._removeAdIdentifier
         {
             print("Non-Consumable Product Remove Ads Purchased")
             self._appDel?.userDefaults.setBool(true, forKey: transaction.payment.productIdentifier)
         }
-        else if transaction.payment.productIdentifier == "com.brianjcoleman.testiap3"
+        else if transaction.payment.productIdentifier == "com"
         {
             print("Auto-Renewable Subscription Product Purchased")
             // Unlock Feature
         }
-        else if transaction.payment.productIdentifier == "com.brianjcoleman.testiap4"
+        else if transaction.payment.productIdentifier == "com"
         {
             print("Free Subscription Product Purchased")
             // Unlock Feature
         }
-        else if transaction.payment.productIdentifier == "com.brianjcoleman.testiap5"
+        else if transaction.payment.productIdentifier == "com"
         {
             print("Non-Renewing Subscription Product Purchased")
             // Unlock Feature

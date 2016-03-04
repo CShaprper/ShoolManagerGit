@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //userDefaults.setBool(true, forKey: "com.petersypek.SchoolManager")
+        
         // Override point for customization after application launch.
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         setupNotificationSettings()       
@@ -121,6 +122,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+    }
+    
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        if shortcutItem.type == "com.SchoolManager.AddNote"{
+            let sb = UIStoryboard(name: "Start", bundle: nil)
+            let addNoteVC = sb.instantiateViewControllerWithIdentifier("AddNoteViewController") as! AddNoteVC
+            let root  = UIApplication.sharedApplication().keyWindow?.rootViewController
+            root?.presentViewController(addNoteVC, animated: true, completion: { () -> Void in
+                completionHandler(true)
+            })
+            
+        }
     }
     
     // MARK: - Core Data stack

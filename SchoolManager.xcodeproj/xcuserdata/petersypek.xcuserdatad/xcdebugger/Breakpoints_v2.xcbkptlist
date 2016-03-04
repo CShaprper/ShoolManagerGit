@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SchoolManager/AppDelegate.swift"
-            timestampString = "478027827.13157"
+            timestampString = "478780856.728161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "applicationWillTerminate(_:)"
             landmarkType = "5">
             <Locations>
@@ -115,11 +115,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SchoolManager/AppDelegate.swift"
-            timestampString = "478027827.13157"
+            timestampString = "478780856.728161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "applicationDidBecomeActive(_:)"
             landmarkType = "5">
             <Locations>
@@ -335,13 +335,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SchoolManager/AppDelegate.swift"
-            timestampString = "478027827.13157"
+            timestampString = "478782180.665297"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "applicationWillTerminate(_:)"
-            landmarkType = "5">
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "AppDelegate"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -719,6 +719,22 @@
             startingLineNumber = "39"
             endingLineNumber = "39"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SchoolManager/AppDelegate.swift"
+            timestampString = "478782262.945463"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "application(_:performActionForShortcutItem:completionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
