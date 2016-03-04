@@ -48,7 +48,7 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openNoteDetailWithID:", name: "openNote", object: nil)
         self.tabBarController!.delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
+        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
             loadAds()
         }
         //Planer.deleteAllPlanerData(appDel.managedObjectContext)

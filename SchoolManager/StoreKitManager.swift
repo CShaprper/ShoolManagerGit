@@ -40,7 +40,7 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
         self._presentingVC = presentingVC
         self._appDel = UIApplication.sharedApplication().delegate as? AppDelegate
         self._activityIndicator = activityIndicatorAnimation
-        self._removeAdIdentifier = "com.petersypek.SchoolManager.RemoveAd"
+        self._removeAdIdentifier = _appDel?.removeAdsIdentifier 
         self._productIdentifiers = Set([_removeAdIdentifier])
     }
     

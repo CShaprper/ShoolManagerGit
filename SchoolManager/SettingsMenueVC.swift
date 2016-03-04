@@ -55,7 +55,7 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         showInfoMessage()
-        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
+        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
             loadAds()
             UIViewController.prepareInterstitialAds()
         }
@@ -95,7 +95,7 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
     
     /*MARK: Navigation    ###############################################################################################################*/
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
+        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
             counter++
             if counter == 2{
                 counter = 0

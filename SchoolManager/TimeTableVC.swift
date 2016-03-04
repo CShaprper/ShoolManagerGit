@@ -38,7 +38,7 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
         TimetableCollectionView.backgroundColor = UIColor.clearColor()
         currentTime = DateHelper.createDateFromComponents(2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(NSDate()), minute: DateHelper.GetTimeAsHour(NSDate()))
         // Initialize the Ad
-        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
+        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
             loadAds()
             UIViewController.prepareInterstitialAds()
         }
@@ -139,7 +139,7 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
     
     /*MARK: Navigation    ###############################################################################################################*/
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
+        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
             counter++
             if counter == 3 {
                 counter = 0

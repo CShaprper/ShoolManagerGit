@@ -23,7 +23,7 @@ class TeacherTableVC: UIViewController,UITableViewDataSource, UITableViewDelegat
     /*ViewController Delegates    ##############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
+        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
             loadAds()
         }
         tableview.backgroundColor  = UIColor.clearColor()

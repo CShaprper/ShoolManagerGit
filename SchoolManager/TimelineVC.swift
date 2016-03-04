@@ -43,7 +43,7 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     ############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
+        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
             loadAds()
         }
         StartTimePicker.date = NSDate()

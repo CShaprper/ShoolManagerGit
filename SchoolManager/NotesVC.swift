@@ -15,7 +15,7 @@ class NotesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDel
     /*MARK: ViewController Delegates    ###############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
+        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
             loadAds()
         }
     }

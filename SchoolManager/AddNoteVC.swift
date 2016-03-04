@@ -28,7 +28,7 @@ class AddNoteVC: UIViewController,UIPopoverPresentationControllerDelegate, UITex
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
+        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
             loadAds()
         }
         notesTextView.backgroundColor = UIColor.clearColor()

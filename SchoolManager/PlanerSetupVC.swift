@@ -32,7 +32,7 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
     ###############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !appDel.userDefaults.boolForKey("com.petersypek.SchoolManager"){
+        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
             loadAds()
         }
         popoverPresentationController?.delegate = self
