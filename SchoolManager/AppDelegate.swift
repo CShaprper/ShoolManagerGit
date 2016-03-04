@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let firstCategory = "FIRST_CATEGORY"
     var badgenumber:Int = 1
     let userDefaults = NSUserDefaults.standardUserDefaults()
-    let removeAdsIdentifier = "com.petersypek.SchoolManager.RemoveAd"
+    let removeAdsIdentifier = "com.petersypek.SchoolManager.RemoveAdverts"
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //userDefaults.setBool(true, forKey: "com.petersypek.SchoolManager")
