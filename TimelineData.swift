@@ -24,8 +24,8 @@ class TimelineData: NSManagedObject {
     /**Inserts a new Entity object into NSManagedObjectContext
      :param: context: NSManagedObjectContext
      :returns: NSManagedObject*/
-    static func InsertIntoManagedObjectContext(context:NSManagedObjectContext)->TimelineData{
-        let obj = (NSEntityDescription.insertNewObjectForEntityForName(TimelineData.EntityName, inManagedObjectContext: context)) as! TimelineData
+    static func InsertIntoManagedObjectContext(_ context:NSManagedObjectContext)->TimelineData{
+        let obj = (NSEntityDescription.insertNewObject(forEntityName: TimelineData.EntityName, into: context)) as! TimelineData
         print("\(TimelineData.EntityName) Entity object created in NSManagedObjectContext")
         return obj
     }
@@ -33,12 +33,12 @@ class TimelineData: NSManagedObject {
     /*MARK: Fetch actions    ###############################################################################################################*/
     /**Fetches all records
     :returns: Array of [NSManagedObject]?*/
-    static func FetchData(context:NSManagedObjectContext)->[TimelineData]?{
+    static func FetchData(_ context:NSManagedObjectContext)->[TimelineData]?{
         do{
-            let fetchRequest = NSFetchRequest(entityName: TimelineData.EntityName)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: TimelineData.EntityName)
             let sortDescriptor = NSSortDescriptor(key: TimelineData.Key_hour, ascending: true)
             fetchRequest.sortDescriptors = [sortDescriptor]
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [TimelineData]
+            let fetchResults = try context.fetch(fetchRequest) as? [TimelineData]
             print("\(fetchResults!.count) TimelineData fetched from Core Data from TimelineData class")
             
             return fetchResults
@@ -52,14 +52,14 @@ class TimelineData: NSManagedObject {
      :param: predicateKey: String of key to filter
      :param: value: Value of Key to filter
      :param: context: NSManagedObjectContext*/
-    static func FetchDataWithPredicate(predicateKey: String, value:String, context:NSManagedObjectContext )->[TimelineData]?{
+    static func FetchDataWithPredicate(_ predicateKey: String, value:String, context:NSManagedObjectContext )->[TimelineData]?{
         do{
-            let fetchRequest = NSFetchRequest(entityName: TimelineData.EntityName)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: TimelineData.EntityName)
             let sortDescriptor = NSSortDescriptor(key: TimelineData.Key_hour, ascending: true)
             fetchRequest.sortDescriptors = [sortDescriptor]
             let predicate = NSPredicate(format: "\(predicateKey) == %@", value)
             fetchRequest.predicate = predicate
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [TimelineData]
+            let fetchResults = try context.fetch(fetchRequest) as? [TimelineData]
             print("\(fetchResults!.count) TimelineData with predicate \(value) fetched from Core Data from TimelineData class")
             return fetchResults
         }
@@ -72,16 +72,16 @@ class TimelineData: NSManagedObject {
      :param: predicateKey: String of key to filter
      :param: value: Value of Key to filter
      :param: context: NSManagedObjectContext*/
-    static func FetchDataWithAndCompoundPredicate(predicateKey: String, value:String, predicateKey2: String, value2:String, context:NSManagedObjectContext )->[TimelineData]?{
+    static func FetchDataWithAndCompoundPredicate(_ predicateKey: String, value:String, predicateKey2: String, value2:String, context:NSManagedObjectContext )->[TimelineData]?{
         do{
-            let fetchRequest = NSFetchRequest(entityName: TimelineData.EntityName)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: TimelineData.EntityName)
             let sortDescriptor = NSSortDescriptor(key: TimelineData.Key_hour, ascending: true)
             fetchRequest.sortDescriptors = [sortDescriptor]
             let predicate = NSPredicate(format: "\(predicateKey) == %@", value)
             let predicate2 = NSPredicate(format: "\(predicateKey2) == %@", value2)
             let compoundpredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, predicate2])
             fetchRequest.predicate = compoundpredicate
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [TimelineData]
+            let fetchResults = try context.fetch(fetchRequest) as? [TimelineData]
             print("\(fetchResults!.count) TimelineData with predicate \(value) fetched from Core Data from TimelineData class")
             return fetchResults
         }
@@ -97,24 +97,24 @@ class TimelineData: NSManagedObject {
     :praram: starttime: as NSDate
     :param: endtime: as NSDate
     :param: context: NSManagedObjectContext*/
-    static func SaveTimelineData(hour: NSNumber, starttime: NSDate, endtime: NSDate, context: NSManagedObjectContext){
+    static func SaveTimelineData(_ hour: NSNumber, starttime: Date, endtime: Date, context: NSManagedObjectContext){
         //Get current calendar for correct Date conversion
-        let calendar =  NSCalendar.currentCalendar()
+        let calendar =  Calendar.current
         //Get Datecomponents of startdate
-        let sdateComponents:NSDateComponents = calendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute], fromDate: starttime)
+        var sdateComponents:DateComponents = (calendar as NSCalendar).components([NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day, NSCalendar.Unit.hour, NSCalendar.Unit.minute], from: starttime)
         sdateComponents.second = 0
         //Make da date corresponding to current calendar
-        let sDate: NSDate! = NSCalendar.currentCalendar().dateFromComponents(sdateComponents)
+        let sDate: Date! = Calendar.current.date(from: sdateComponents)
         //Get Datecomponents of startdate
-        let edateComponents:NSDateComponents = calendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute], fromDate: endtime)
+        var edateComponents:DateComponents = (calendar as NSCalendar).components([NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day, NSCalendar.Unit.hour, NSCalendar.Unit.minute], from: endtime)
         edateComponents.second = 0
         //Make da date corresponding to current calendar
-        let eDate: NSDate! = NSCalendar.currentCalendar().dateFromComponents(edateComponents)
+        let eDate: Date! = Calendar.current.date(from: edateComponents)
         
         let obj = TimelineData.InsertIntoManagedObjectContext(context)
         obj.hour = hour
-        obj.startTime = sDate
-        obj.endTime = eDate
+        obj.startTime = sDate as! NSDate
+        obj.endTime = eDate as! NSDate
         
         do{ try context.save()
             print("TimelineData saved in Core Data from TimelineData class")
@@ -131,7 +131,7 @@ class TimelineData: NSManagedObject {
     - objToEdit: **TimelineData:**  object to edit
     - context: **NSManagedObjectContext:**   ManagedObjectContext to perform edit action
     */
-    static func EditTimeLineData(objToEdit: TimelineData, context: NSManagedObjectContext){
+    static func EditTimeLineData(_ objToEdit: TimelineData, context: NSManagedObjectContext){
         do{ try context.save()
             print("TimelineData \(objToEdit.hour!) Edited in Core Data")
         }
@@ -149,7 +149,7 @@ class TimelineData: NSManagedObject {
      - editObject: **TimelineData:**   TimelineData object to edit
      - context: **NSManagedObjectContext:**     ManagedObjectContext to perform edit action
      */
-    static func setValuesForExistingTimelineDataAndSaveEditedObject(hour: NSNumber, startDateTime: NSDate, endDateTime: NSDate, editObject: TimelineData, context: NSManagedObjectContext){
+    static func setValuesForExistingTimelineDataAndSaveEditedObject(_ hour: NSNumber, startDateTime: Date, endDateTime: Date, editObject: TimelineData, context: NSManagedObjectContext){
         // Set values to editObject
         editObject.hour = hour
         editObject.startTime = startDateTime
@@ -171,8 +171,8 @@ class TimelineData: NSManagedObject {
     - objTimelineData: **TimelineData:**   TimelineData object to delete
     - context: **NSManagedObjectContext:**   ManagedObjectContext to perform delete action
     */
-    static func DeleteTimelineData(objTimelineData: TimelineData, context: NSManagedObjectContext){
-        context.deleteObject(objTimelineData)
+    static func DeleteTimelineData(_ objTimelineData: TimelineData, context: NSManagedObjectContext){
+        context.delete(objTimelineData)
         do{ try context.save()
             print("TimelineData object deleted from class TimelineData")
             
@@ -183,10 +183,10 @@ class TimelineData: NSManagedObject {
     /** Deletes all TimelineData objects from Core Data containing strDay in Key_Day
      :param: strDay: String predicate to delete
      :param: context: NSManagedObjectContext*/
-    static func DeleteTimelineDataWithPredicate(strDay: String, context: NSManagedObjectContext){
+    static func DeleteTimelineDataWithPredicate(_ strDay: String, context: NSManagedObjectContext){
         let days = TimelineData.FetchDataWithPredicate(Day.Key_day, value: strDay, context: context)
         for d in days!{
-            d.managedObjectContext?.deleteObject(d)
+            d.managedObjectContext?.delete(d)
             
             do{ try context.save()
                 print("TimelineData object \(strDay) deleted with predicate func from class TimelineData")
@@ -204,7 +204,7 @@ class TimelineData: NSManagedObject {
      - context: **NSManagedObjectContext:**   The ManagedObjectContext to perform CoreData actions
      - returns: Bool: **True/False dependend on the containing timetable elements**
      */
-    static func checkIfTimeLineDataContaisPlanerElementsWithSpecificHour(hour:String, context:NSManagedObjectContext )->Bool{
+    static func checkIfTimeLineDataContaisPlanerElementsWithSpecificHour(_ hour:String, context:NSManagedObjectContext )->Bool{
         var containsElements:Bool = false
         let planerElements = TimelineData.FetchDataWithPredicate(TimelineData.Key_hour, value: hour, context: context)
         if planerElements!.count > 0{
@@ -215,41 +215,41 @@ class TimelineData: NSManagedObject {
     }
     
     
-    static func collidesWithExistingTimelineData(itemscount:Int, allData:[TimelineData], cStartDate:NSDate, cEndDate:NSDate)->CollidingTime{
+    static func collidesWithExistingTimelineData(_ itemscount:Int, allData:[TimelineData], cStartDate:Date, cEndDate:Date)->CollidingTime{
         let currSDate = createDateFromComponents(2016, month: 01, day: 01, hour: GetTimeAsHour(cStartDate) , minute: GetTimeAsMinute(cStartDate))
         let currEDate = createDateFromComponents(2016, month: 01, day: 01, hour: GetTimeAsHour(cEndDate) , minute: GetTimeAsMinute(cEndDate))
-        let compareSDate = createDateFromComponents(2016, month: 01, day: 01, hour: GetTimeAsHour(allData[itemscount].startTime!) , minute: GetTimeAsMinute(allData[itemscount].startTime!))
-        let compareEDate = createDateFromComponents(2016, month: 01, day: 01, hour: GetTimeAsHour(allData[itemscount].endTime!) , minute: GetTimeAsMinute(allData[itemscount].endTime!))
+        let compareSDate = createDateFromComponents(2016, month: 01, day: 01, hour: GetTimeAsHour(allData[itemscount].startTime! as Date) , minute: GetTimeAsMinute(allData[itemscount].startTime! as Date))
+        let compareEDate = createDateFromComponents(2016, month: 01, day: 01, hour: GetTimeAsHour(allData[itemscount].endTime! as Date) , minute: GetTimeAsMinute(allData[itemscount].endTime! as Date))
         
-        if currSDate.compare(currEDate) == .OrderedDescending{
+        if currSDate.compare(currEDate) == .orderedDescending{
             return .startTimeIsBiggerThanEndTime
         }
         
         if(itemscount > 0){
             //Compare current Date with possible end startdates
-            if (currSDate.compare(compareSDate) == .OrderedDescending || currSDate.compare(compareSDate) == .OrderedSame)  &&  (currSDate.compare(compareEDate) == .OrderedDescending || currSDate.compare(compareEDate) == .OrderedSame) {
+            if (currSDate.compare(compareSDate) == .orderedDescending || currSDate.compare(compareSDate) == .orderedSame)  &&  (currSDate.compare(compareEDate) == .orderedDescending || currSDate.compare(compareEDate) == .orderedSame) {
                 return collidesWithExistingTimelineData(itemscount - 1, allData: allData, cStartDate: cStartDate, cEndDate: cEndDate)
             }else { return .collidesWithExistingTime }
         }else if (itemscount == 0){
             //Compare current Date with possible end startdates
-            if (currSDate.compare(compareSDate) == .OrderedDescending || currSDate.compare(compareSDate) == .OrderedSame)  &&  (currSDate.compare(compareEDate) == .OrderedDescending || currSDate.compare(compareEDate) == .OrderedSame) {
+            if (currSDate.compare(compareSDate) == .orderedDescending || currSDate.compare(compareSDate) == .orderedSame)  &&  (currSDate.compare(compareEDate) == .orderedDescending || currSDate.compare(compareEDate) == .orderedSame) {
                 return .noCollision
             }else { return .collidesWithExistingTime }
         }
         return .noCollision
     }
     
-    private static func createDateFromComponents(year:Int, month:Int, day:Int, hour:Int, minute:Int)->NSDate{
-        let dateComponents:NSDateComponents = NSDateComponents()
+    fileprivate static func createDateFromComponents(_ year:Int, month:Int, day:Int, hour:Int, minute:Int)->Date{
+        var dateComponents:DateComponents = DateComponents()
         dateComponents.year = year
         dateComponents.month = month
         dateComponents.day = day
         dateComponents.hour = hour
         dateComponents.minute = minute
         dateComponents.second = 0
-        dateComponents.timeZone = NSTimeZone.systemTimeZone()
-        let calendar = NSCalendar.currentCalendar()
-        return calendar.dateFromComponents(dateComponents)!
+        (dateComponents as NSDateComponents).timeZone = TimeZone.current
+        let calendar = Calendar.current
+        return calendar.date(from: dateComponents)!
     }
     
     /**
@@ -259,10 +259,10 @@ class TimelineData: NSManagedObject {
      - date: **NSDate:**   The date which hour will be returned
      - returns: hour as Integer value: **Int**
      */
-    private static func GetTimeAsHour(date:NSDate)->Int{
-        let dateComponents = NSDateComponents()
-        dateComponents.hour = NSCalendar.currentCalendar().components(NSCalendarUnit.Hour, fromDate: date).hour
-        return dateComponents.hour
+    fileprivate static func GetTimeAsHour(_ date:Date)->Int{
+        var dateComponents = DateComponents()
+        dateComponents.hour = (Calendar.current as NSCalendar).components(NSCalendar.Unit.hour, from: date).hour
+        return dateComponents.hour!
     }
     /**
      **Gets minute as Integer value from an NSDate**
@@ -271,10 +271,10 @@ class TimelineData: NSManagedObject {
      - date: **NSDate:**   The date which minutes will be returned
      - returns: minutes as Integer value: **Int**
      */
-    private static func GetTimeAsMinute(date:NSDate)->Int{
-        let dateComponents = NSDateComponents()
-        dateComponents.minute = NSCalendar.currentCalendar().components(NSCalendarUnit.Minute, fromDate: date).minute
-        return dateComponents.minute
+    fileprivate static func GetTimeAsMinute(_ date:Date)->Int{
+        var dateComponents = DateComponents()
+        dateComponents.minute = (Calendar.current as NSCalendar).components(NSCalendar.Unit.minute, from: date).minute
+        return dateComponents.minute!
     }
     
 }

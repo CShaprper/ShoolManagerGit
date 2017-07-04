@@ -14,9 +14,9 @@ import CoreData
 
 extension TimelineData {
 
-    @NSManaged var endTime: NSDate?
+    @NSManaged var endTime: Date?
     @NSManaged var hour: NSNumber?
-    @NSManaged var startTime: NSDate?
+    @NSManaged var startTime: Date?
     @NSManaged var user: User?
 
 }

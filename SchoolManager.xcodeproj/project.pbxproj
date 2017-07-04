@@ -491,6 +491,7 @@
 					CF57A2B61BFF70DD00081348 = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = 9QCPT3JHZE;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -512,6 +513,7 @@
 					CF57A2CD1BFF70DD00081348 = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = 6A92X7D96T;
+						LastSwiftMigration = 0830;
 						TestTargetID = CF57A2B61BFF70DD00081348;
 					};
 				};
@@ -817,6 +819,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -843,6 +846,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -856,6 +860,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = petersypek.com.SchoolManagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SchoolManager.app/SchoolManager";
 			};
 			name = Debug;
@@ -869,6 +874,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = petersypek.com.SchoolManagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SchoolManager.app/SchoolManager";
 			};
 			name = Release;

@@ -2,19 +2,19 @@
 import CoreData
 import UIKit
 
-public class TimelineManager{
+open class TimelineManager{
     /*Members
     ###############################################################################################################*/
-    private var hoursPerDay:Int!
-    private var HoursPerDayUIValue:String! {
+    fileprivate var hoursPerDay:Int!
+    fileprivate var HoursPerDayUIValue:String! {
         get { return "\(hoursPerDay)" }
         set { self.HoursPerDayUIValue = newValue } }
     //var HoursPerDayArray:[String] = []
-    private var StartTime:NSDate!
-    private var EndTime:NSDate!
-    private var LastEndTime:NSDate!
-    private var dateComponets:NSDateComponents!
-    private var calendar:NSCalendar!
+    fileprivate var StartTime:Date!
+    fileprivate var EndTime:Date!
+    fileprivate var LastEndTime:Date!
+    fileprivate var dateComponets:DateComponents!
+    fileprivate var calendar:Calendar!
     var TimeLineDataCollection:[TimelineData]!
     
 /*Public Functions
@@ -32,37 +32,37 @@ public class TimelineManager{
     func GetHoursPerDayAsString()->String{
         return "\(hoursPerDay)"
     }
-    func SetHoursPerDay(hours:Int){
+    func SetHoursPerDay(_ hours:Int){
          self.hoursPerDay = hours
         SetHoursPerDayElementCount()
     }
-    func SetStartTime(time:NSDate){
+    func SetStartTime(_ time:Date){
          self.StartTime = time
         print("StartTime changed in TimeLine Model: \(self.StartTime)")
     }
-    func SetEndTime(time:NSDate){
+    func SetEndTime(_ time:Date){
         self.EndTime = time
         //Automatic set last end Time
         SetLastEndTime(time)
         print("EndTime changed in TimeLine Model: \(self.EndTime)")
     }
-    func GetStartTime()->NSDate{
+    func GetStartTime()->Date{
         return StartTime
     }
-    func GetEndTime()->NSDate{
+    func GetEndTime()->Date{
         return EndTime
     }
-    func GetTimeAsHour(date:NSDate)->Int{
-        let dateComponents = NSDateComponents()
-        dateComponents.hour = NSCalendar.currentCalendar().components(NSCalendarUnit.Hour, fromDate: date).hour
-      return dateComponents.hour
+    func GetTimeAsHour(_ date:Date)->Int{
+        var dateComponents = DateComponents()
+        dateComponents.hour = (Calendar.current as NSCalendar).components(NSCalendar.Unit.hour, from: date).hour
+      return dateComponents.hour!
     }
-    func GetTimeAsMinute(date:NSDate)->Int{
-        let dateComponents = NSDateComponents()
-        dateComponents.minute = NSCalendar.currentCalendar().components(NSCalendarUnit.Minute, fromDate: date).minute
-        return dateComponents.minute
+    func GetTimeAsMinute(_ date:Date)->Int{
+        var dateComponents = DateComponents()
+        dateComponents.minute = (Calendar.current as NSCalendar).components(NSCalendar.Unit.minute, from: date).minute
+        return dateComponents.minute!
     }
-    func LoadHoursPerDayFromCoreData(context:NSManagedObjectContext){
+    func LoadHoursPerDayFromCoreData(_ context:NSManagedObjectContext){
    
         
 //        let hpdArray:HoursPerDayData = HoursPerDayData.FetchData(context)
@@ -77,14 +77,14 @@ public class TimelineManager{
 /*Private Functions
     ###################################################################*/
     /** Resets the element count of the HoursPerDayArray to 0*/
-    private func ResetHoursPerDayArrayCount(){
+    fileprivate func ResetHoursPerDayArrayCount(){
         //self.HoursPerDayArray.removeAll()
     }
     
     /**Sets the number of Elemets in the HoursPerDayArray 
      to the int value of HoursPerDay property
      - Resets the element count to 0 before appending new elements*/
-   private func SetHoursPerDayElementCount(){
+   fileprivate func SetHoursPerDayElementCount(){
     ResetHoursPerDayArrayCount()
 //        for i in 1...self.hoursPerDay{
 //           self.HoursPerDayArray.append("\(i)")
@@ -92,11 +92,11 @@ public class TimelineManager{
     }
     /** Sets last Endtime value
     :param: lastEndTime: time of latest set Time*/
-    private func SetLastEndTime(time:NSDate){
+    fileprivate func SetLastEndTime(_ time:Date){
         self.LastEndTime = time
     }
     
-    private func saveHoursPerDayInCoreData(_hours: Int){
+    fileprivate func saveHoursPerDayInCoreData(_ _hours: Int){
     
     }
 }

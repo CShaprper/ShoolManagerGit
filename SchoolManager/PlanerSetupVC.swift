@@ -89,19 +89,19 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print("Segue from: \(segue.sourceViewController.title!) to: \(segue.destinationViewController.title!)")
         if let dest = segue.destinationViewController as? SelectTeacherVC,
-            popPC = dest.popoverPresentationController{
+            let popPC = dest.popoverPresentationController{
                 popPC.delegate = self
         }
         if let dest = segue.destinationViewController as? SelectDayVC,
-            popPC = dest.popoverPresentationController{
+            let popPC = dest.popoverPresentationController{
                 popPC.delegate = self
         }
         if let dest = segue.destinationViewController as? SelectHourVC,
-            popPC = dest.popoverPresentationController{
+            let popPC = dest.popoverPresentationController{
                 popPC.delegate = self
         }
         if let dest = segue.destinationViewController as? SelectSubjectVC,
-            popPC = dest.popoverPresentationController{
+            let popPC = dest.popoverPresentationController{
                 popPC.delegate = self
         }
         if let dest = segue.destinationViewController as? TimeTableVC{
@@ -190,7 +190,7 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
         }else if self.isAddAction{
             print("selectedWeekSegment: \(selectedWeekSegment) selectedDay: \((selectedDay?.day)!)")
             let planer = Planer.fetchExistingPlanerElement(selectedHour!.hour!, day: selectedDay!.day!,context: appDel.managedObjectContext)
-            if planer!.count > 0 && (selectedWeekSegment  == 2  || planer![0].selectedWeek == selectedWeekSegment) {
+            if planer!.count > 0 && (selectedWeekSegment  == 2  || planer![0].selectedWeek == selectedWeekSegment as Int) {
                 let alert = UIAlertController(title: "Alert_AddingDisabled_Title".localized, message: "\("PlanerSetup_Hour_Message".localized) \(selectedHour!.hour!) \("PlanerSetup_HourOnDay_Message".localized) \(selectedDay!.day!) \("PlanerSetup_HourCollides_Message".localized) \((planer?[0].subject?.subject)!) \("PlanerSetup_AtTime_Message".localized) \((planer?[0].hour?.hour)!). \((planer?[0].hour?.startTime)!) - \((planer?[0].hour?.endTime)!) \("PlanerSetup_OnDay_Message".localized) \((planer?[0].day?.day)!) \("PlanerSetup_RestMessage".localized)", preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                 presentViewController(alert, animated: true, completion: nil)

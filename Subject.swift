@@ -20,8 +20,8 @@ class Subject: NSManagedObject {
      :returns: NSManagedObject
      How to use:
      let myDay:Day = Day.InsertDayIntoManagedObjectContext(appDel.managedObjectContext) as! Day*/
-    static func InsertIntoManagedObjectContext(context:NSManagedObjectContext)->Subject{
-        let obj = (NSEntityDescription.insertNewObjectForEntityForName(Subject.EntityName, inManagedObjectContext: context)) as! Subject
+    static func InsertIntoManagedObjectContext(_ context:NSManagedObjectContext)->Subject{
+        let obj = (NSEntityDescription.insertNewObject(forEntityName: Subject.EntityName, into: context)) as! Subject
         print("\(Subject.EntityName) Entity object created in NSManagedObjectContext")
     
         return obj
@@ -30,10 +30,10 @@ class Subject: NSManagedObject {
     
     /**Fetches all records
      :returns: Array of [NSManagedObject]?*/
-    static func FetchData(context:NSManagedObjectContext)->[Subject]?{
+    static func FetchData(_ context:NSManagedObjectContext)->[Subject]?{
         do{
-            let fetchRequest = NSFetchRequest(entityName: Subject.EntityName)
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [Subject]
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Subject.EntityName)
+            let fetchResults = try context.fetch(fetchRequest) as? [Subject]
             print("\(fetchResults!.count) Subjects fetched from Core Data from Day class")
             
             return fetchResults
@@ -47,14 +47,14 @@ class Subject: NSManagedObject {
     /**Fetches Data with Predicate
      :param: predicateKey: String of key to filter
      :param: value: Value of Key to filter*/
-    static func FetchDataWithPredicate(predicateKey: String, value:String, context:NSManagedObjectContext )->[Subject]?{
+    static func FetchDataWithPredicate(_ predicateKey: String, value:String, context:NSManagedObjectContext )->[Subject]?{
         do{
-            let fetchRequest = NSFetchRequest(entityName: Subject.EntityName)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Subject.EntityName)
             let sortDescriptor = NSSortDescriptor(key: predicateKey, ascending: true)
             fetchRequest.sortDescriptors = [sortDescriptor]
             let predicate = NSPredicate(format: "\(predicateKey) == %@", value)
             fetchRequest.predicate = predicate
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [Subject]
+            let fetchResults = try context.fetch(fetchRequest) as? [Subject]
             print("\(fetchResults!.count) Subjects with predicate \(value) fetched from Core Data from Day class")
             return fetchResults
         }
@@ -65,7 +65,7 @@ class Subject: NSManagedObject {
     }
     
     /**Edits Subject Object*/
-    static func EditTeacher(subjectToEdit: Subject, context: NSManagedObjectContext){
+    static func EditTeacher(_ subjectToEdit: Subject, context: NSManagedObjectContext){
         do{ try context.save()
             print("Subject Edited in Core Data from Teacher class")
         }
@@ -75,7 +75,7 @@ class Subject: NSManagedObject {
     
     /**Saves a Subject Object to Core Data
      :param: strSubject: as String*/
-    static func SaveSubject(strSubject: String, hexColor: String, imageName: String, context: NSManagedObjectContext){
+    static func SaveSubject(_ strSubject: String, hexColor: String, imageName: String, context: NSManagedObjectContext){
         let t = Subject.InsertIntoManagedObjectContext(context)
         t.subject = strSubject
         t.imageName = imageName
@@ -91,8 +91,8 @@ class Subject: NSManagedObject {
     
     /**Deletes an Teacher from Core Data
      :param: objTeacher: Teacher class Object to delete*/
-    static func DeleteSubject(objSubject: Subject, context: NSManagedObjectContext){
-        context.deleteObject(objSubject)        
+    static func DeleteSubject(_ objSubject: Subject, context: NSManagedObjectContext){
+        context.delete(objSubject)        
         
         do{ try context.save()
             print("Subject object deleted from class Subject")
@@ -105,10 +105,10 @@ class Subject: NSManagedObject {
     /** Deletes all Subject objects from Core Data containing strSubject in Key_Subject
      :param: strDay: String predicate to delete
      :param: context: NSManagedObjectContext*/
-    static func DeleteDayWithPredicate(strSubject: String, context: NSManagedObjectContext){
+    static func DeleteDayWithPredicate(_ strSubject: String, context: NSManagedObjectContext){
         let subjects = Subject.FetchDataWithPredicate(Subject.Key_subject, value: strSubject, context: context)
         for s in subjects!{
-            s.managedObjectContext?.deleteObject(s)
+            s.managedObjectContext?.delete(s)
             
             do{ try s.managedObjectContext?.save()                
                 print("Subject object deleted with predicate func from class Subject")
