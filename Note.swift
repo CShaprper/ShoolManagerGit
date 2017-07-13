@@ -20,7 +20,7 @@ class Note: NSManagedObject {
     - returns: Planer: Planer Entity object
     */
     static func InsertIntoManagedObjectContext(context:NSManagedObjectContext)->Note{
-        let obj = (NSEntityDescription.insertNewObjectForEntityForName(Note.EntityName, inManagedObjectContext: context)) as! Note
+        let obj = (NSEntityDescription.insertNewObject(forEntityName: Note.EntityName, into: context)) as! Note
         print("\(Note.EntityName) Entity object created in NSManagedObjectContext")
         return obj
     }
@@ -33,8 +33,8 @@ class Note: NSManagedObject {
      */
     static func FetchData(context:NSManagedObjectContext)->[Note]?{
         do{
-            let fetchRequest = NSFetchRequest(entityName: Note.EntityName)
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [Note]
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Note.EntityName)
+            let fetchResults = try context.fetch(fetchRequest) as? [Note]
             //  print("\(fetchResults!.count) Note objects fetched from Core Data")
             
             return fetchResults
@@ -54,13 +54,13 @@ class Note: NSManagedObject {
      */
     static func fetchNoteWithID(ID:String, context:NSManagedObjectContext)->[Note]?{
         do{
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = (NSEntityDescription.entityForName(Note.EntityName, inManagedObjectContext: context))
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+            fetchRequest.entity = (NSEntityDescription.entity(forEntityName: Note.EntityName, in: context))
             
             let predicate = NSPredicate(format: "%K == %@", "guid", ID)
             fetchRequest.predicate = predicate
             fetchRequest.returnsObjectsAsFaults = false
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [Note]
+            let fetchResults = try context.fetch(fetchRequest) as? [Note]
             print("\(fetchResults!.count) Note objects with predicate \(ID) fetched from Core Data")
             return fetchResults
         }
@@ -77,7 +77,7 @@ class Note: NSManagedObject {
      - parameter noteObj: **Note:**   Note Entity Object
      */
     static func SaveNote(dueDate:NSDate, strUUID:String, strNote:String, subject:Subject, context: NSManagedObjectContext){
-        let n = Note.InsertIntoManagedObjectContext(context)
+        let n = Note.InsertIntoManagedObjectContext(context: context)
         n.note = strNote
         n.subject = subject
         n.guid  = strUUID
@@ -96,7 +96,7 @@ class Note: NSManagedObject {
      - parameter context: NSManagedObjectContext
      */
     static func deleteNote(objNote: Note, context: NSManagedObjectContext){
-        context.deleteObject(objNote)
+        context.delete(objNote)
         
         do{ try context.save()
             print("Note object deleted from Core Data")
@@ -114,14 +114,14 @@ class Note: NSManagedObject {
      Deletes all objects of type Note: in CoreData managed database.
      */
     static func deleteAllNotes(context:NSManagedObjectContext){
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
-        let fetchRequest = NSFetchRequest(entityName: Note.EntityName)
-        fetchRequest.entity = NSEntityDescription.entityForName(Note.EntityName, inManagedObjectContext: context)
+        UIApplication.shared.cancelAllLocalNotifications()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Note.EntityName)
+        fetchRequest.entity = NSEntityDescription.entity(forEntityName: Note.EntityName, in: context)
         fetchRequest.includesPropertyValues = false
         do {
-            if let results = try context.executeFetchRequest(fetchRequest) as? [NSManagedObject] {
+            if let results = try context.fetch(fetchRequest) as? [NSManagedObject] {
                 for result in results {
-                    context.deleteObject(result)
+                    context.delete(result)
                 }
                 
                 try context.save()

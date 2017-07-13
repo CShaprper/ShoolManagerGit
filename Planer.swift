@@ -29,7 +29,7 @@ class Planer: NSManagedObject {
      - returns: Planer: **Planer Entity object**
      */
     static func InsertIntoManagedObjectContext(context:NSManagedObjectContext)->Planer{
-        let obj = (NSEntityDescription.insertNewObjectForEntityForName(Planer.EntityName, inManagedObjectContext: context)) as! Planer
+        let obj = (NSEntityDescription.insertNewObject(forEntityName: Planer.EntityName, into: context)) as! Planer
         print("\(Planer.EntityName) Entity object created in NSManagedObjectContext")
         return obj
     }
@@ -42,8 +42,8 @@ class Planer: NSManagedObject {
      */
     static func fetchData(context:NSManagedObjectContext)->[Planer]?{
         do{
-            let fetchRequest = NSFetchRequest(entityName: Planer.EntityName)
-             planerCollection = try context.executeFetchRequest(fetchRequest) as! [Planer]
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Planer.EntityName)
+             planerCollection = try context.fetch(fetchRequest) as! [Planer]
             
             return planerCollection
         }
@@ -59,16 +59,16 @@ class Planer: NSManagedObject {
      - planerObj: **Planer:**   Planer Entity Object
      */
     static func savePlaner(isHeaderElement:Bool, strRoom:String, selectedWeek: Int, subject:Subject, hour:TimelineData, day:Day, teacher:Teacher, context: NSManagedObjectContext){
-        let t = Planer.InsertIntoManagedObjectContext(context)
+        let t = Planer.InsertIntoManagedObjectContext(context: context)
         t.daystring = day.day!
         t.isEmptyElement = false
         t.room = strRoom
         t.subject = subject
         t.hour = hour
         t.day = day
-        t.selectedWeek = selectedWeek
+        t.selectedWeek = selectedWeek as NSNumber
         t.teacher = teacher
-        t.isHeaderElement = isHeaderElement
+        t.isHeaderElement = isHeaderElement as NSNumber
         
         do{ try context.save()
             print("Planer object saved in Core Data from Day class")
@@ -86,13 +86,13 @@ class Planer: NSManagedObject {
      */
     static func fetchDataWithDaystringPredicate(value: String, context: NSManagedObjectContext )->[Planer]?{
         do{
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = (NSEntityDescription.entityForName(Planer.EntityName, inManagedObjectContext: context))
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+            fetchRequest.entity = (NSEntityDescription.entity(forEntityName: Planer.EntityName, in: context))
             
             let predicate = NSPredicate(format: "\(Planer.Key_daystring)== %@", value)
             fetchRequest.predicate = predicate
             fetchRequest.returnsObjectsAsFaults = false
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [Planer]
+            let fetchResults = try context.fetch(fetchRequest) as? [Planer]
             print("\(fetchResults!.count) Planer objects with predicate \(value) fetched from Core Data")
             return fetchResults
         }
@@ -103,13 +103,13 @@ class Planer: NSManagedObject {
 
     static func fetchPlanerObjectsWithSubjectPredicate(subject:String, context:NSManagedObjectContext)->[Planer]?{
         do{
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = (NSEntityDescription.entityForName(Planer.EntityName, inManagedObjectContext: context))
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+            fetchRequest.entity = (NSEntityDescription.entity(forEntityName: Planer.EntityName, in: context))
             
             let predicate = NSPredicate(format: "%K == %@", "subject.subject", subject)
             fetchRequest.predicate = predicate
             fetchRequest.returnsObjectsAsFaults = false
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [Planer]
+            let fetchResults = try context.fetch(fetchRequest) as? [Planer]
             print("\(fetchResults!.count) Planer objects with predicate \(subject) fetched from Core Data")
             return fetchResults
         }
@@ -121,13 +121,13 @@ class Planer: NSManagedObject {
     
     static func fetchPlanerObjectsWithTeachernamePredicate(teacher:String, context:NSManagedObjectContext)->[Planer]?{
         do{
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = (NSEntityDescription.entityForName(Planer.EntityName, inManagedObjectContext: context))
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+            fetchRequest.entity = (NSEntityDescription.entity(forEntityName: Planer.EntityName, in: context))
             
             let predicate = NSPredicate(format: "%K == %@", "teacher.name", teacher)
             fetchRequest.predicate = predicate
             fetchRequest.returnsObjectsAsFaults = false
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [Planer]
+            let fetchResults = try context.fetch(fetchRequest) as? [Planer]
             print("\(fetchResults!.count) Planer objects with predicate \(teacher) fetched from Core Data")
             return fetchResults
         }
@@ -140,13 +140,13 @@ class Planer: NSManagedObject {
     
     static func fetchPlanerObjectsWithTimeLineDataHourPredicate(hour:String, context:NSManagedObjectContext)->[Planer]?{
         do{
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = (NSEntityDescription.entityForName(Planer.EntityName, inManagedObjectContext: context))
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+            fetchRequest.entity = (NSEntityDescription.entity(forEntityName: Planer.EntityName, in: context))
             
             let predicate = NSPredicate(format: "%K == %@", "hour.hour", hour)
             fetchRequest.predicate = predicate
             fetchRequest.returnsObjectsAsFaults = false
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [Planer]
+            let fetchResults = try context.fetch(fetchRequest) as? [Planer]
             print("\(fetchResults!.count) Planer objects with predicate \(hour) fetched from Core Data")
             return fetchResults
         }
@@ -157,13 +157,13 @@ class Planer: NSManagedObject {
     }
     
     static func deleteAllPlanerData(context:NSManagedObjectContext){
-        let fetchRequest = NSFetchRequest(entityName: Planer.EntityName)
-        fetchRequest.entity = NSEntityDescription.entityForName(Planer.EntityName, inManagedObjectContext: context)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Planer.EntityName)
+        fetchRequest.entity = NSEntityDescription.entity(forEntityName: Planer.EntityName, in: context)
         fetchRequest.includesPropertyValues = false
         do {
-            if let results = try context.executeFetchRequest(fetchRequest) as? [NSManagedObject] {
+            if let results = try context.fetch(fetchRequest) as? [NSManagedObject] {
                 for result in results {
-                    context.deleteObject(result)
+                    context.delete(result)
                 }
                 
                 try context.save()
@@ -175,16 +175,16 @@ class Planer: NSManagedObject {
     
     static func fetchPlanerObjectsWithDaySortnumberPredicate(sortnumber:NSNumber, context:NSManagedObjectContext)->[Planer]?{
         do{
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = (NSEntityDescription.entityForName(Planer.EntityName, inManagedObjectContext: context))
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+            fetchRequest.entity = (NSEntityDescription.entity(forEntityName: Planer.EntityName, in: context))
             
             let predicate = NSPredicate(format: "%K == %@", "day.sortnumber", sortnumber)
-            let predicate2 = NSPredicate(format: "%K == %@", "isEmptyElement", false)
-            let predicate3 = NSPredicate(format: "%K == %@", "isHeaderElement", false)
+            let predicate2 = NSPredicate(format: "%K == %@", "isEmptyElement", false as CVarArg)
+            let predicate3 = NSPredicate(format: "%K == %@", "isHeaderElement", false as CVarArg)
             let compoundpredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, predicate2, predicate3])
             fetchRequest.predicate = compoundpredicate
             fetchRequest.returnsObjectsAsFaults = false
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [Planer]
+            let fetchResults = try context.fetch(fetchRequest) as? [Planer]
             print("\(fetchResults!.count) Planer objects with predicate sortnumber \(sortnumber) fetched from Core Data")
             return fetchResults
         }
@@ -205,16 +205,16 @@ class Planer: NSManagedObject {
     
     static func fetchExistingPlanerElement(hourSortnumber:NSNumber, day:String, context:NSManagedObjectContext)->[Planer]?{
         do{
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = (NSEntityDescription.entityForName(Planer.EntityName, inManagedObjectContext: context))
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+            fetchRequest.entity = (NSEntityDescription.entity(forEntityName: Planer.EntityName, in: context))
             
             let predicate = NSPredicate(format: "%K == %@", "hour.hour", hourSortnumber)
-            let predicate2 = NSPredicate(format: "%K == %@", "isEmptyElement", false)
+            let predicate2 = NSPredicate(format: "%K == %@", "isEmptyElement", false as CVarArg)
             let predicate3 = NSPredicate(format: "%K == %@", "day.day", day)
             let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, predicate2, predicate3])
             fetchRequest.predicate = andPredicate
             fetchRequest.returnsObjectsAsFaults = false
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [Planer]
+            let fetchResults = try context.fetch(fetchRequest) as? [Planer]
             print("\(fetchResults!.count) Planer objects with predicate fetched from Core Data")
             return fetchResults!
         }
@@ -226,16 +226,16 @@ class Planer: NSManagedObject {
     
     static func fetchNotEmptyPlanerElementsWithHour(hourSortnumber:NSNumber, context:NSManagedObjectContext)->[Planer]?{
         do{
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = (NSEntityDescription.entityForName(Planer.EntityName, inManagedObjectContext: context))
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+            fetchRequest.entity = (NSEntityDescription.entity(forEntityName: Planer.EntityName, in: context))
             
             let predicate = NSPredicate(format: "%K == %@", "hour.hour", hourSortnumber)
-            let predicate2 = NSPredicate(format: "%K == %@", "isEmptyElement", false)
-            let predicate3 = NSPredicate(format: "%K == %@", "isHeaderElement", false)
+            let predicate2 = NSPredicate(format: "%K == %@", "isEmptyElement", false as CVarArg)
+            let predicate3 = NSPredicate(format: "%K == %@", "isHeaderElement", false as CVarArg)
             let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, predicate2, predicate3])
             fetchRequest.predicate = andPredicate
             fetchRequest.returnsObjectsAsFaults = false
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [Planer]
+            let fetchResults = try context.fetch(fetchRequest) as? [Planer]
             print("\(fetchResults!.count) Planer objects with predicate fetched from Core Data")
             return fetchResults!
         }
@@ -249,7 +249,7 @@ class Planer: NSManagedObject {
      :param: objTeacher: Teacher class Object to delete
      :param: context: NSManagedObjectContext*/
     static func DeletePlanerObject(objPlaner: Planer, context: NSManagedObjectContext){
-        context.deleteObject(objPlaner)
+        context.delete(objPlaner)
         do{ try context.save()
             print("Planer object deleted from class Planer")
         }
@@ -260,7 +260,7 @@ class Planer: NSManagedObject {
         if(itemscount > 0){
             print("arraycounter: \(itemscount) current hour: \(hour) comparehour: \(allData[itemscount-1].hour!.hour!) selectedWeekIndex: \(selectedWeekIndex)")
             if hour == allData[itemscount-1].hour!.hour! && (selectedWeekIndex == allData[itemscount-1].selectedWeek! || allData[itemscount-1].selectedWeek! == 2){ return true }
-            else { return collidesWithExistingPlanerData(itemscount-1, allData: allData, hour:  hour, selectedWeekIndex: selectedWeekIndex) }
+            else { return collidesWithExistingPlanerData(itemscount: itemscount-1, allData: allData, hour:  hour, selectedWeekIndex: selectedWeekIndex) }
         }
         return false
     }
@@ -277,8 +277,8 @@ class Planer: NSManagedObject {
      */
     static func checkIfDayContaisPlanerElements(day:String, context:NSManagedObjectContext )->Bool{
         var containsElements:Bool = false
-        let planerElements = Planer.fetchDataWithDaystringPredicate(day, context: context )
-        if planerElements?.count > 0{
+        let planerElements = Planer.fetchDataWithDaystringPredicate(value: day, context: context )
+        if (planerElements?.count)! > 0{
             containsElements = true
         }        
         return containsElements
@@ -294,7 +294,7 @@ class Planer: NSManagedObject {
      */
     static func checkIfTimeTableContaisPlanerElementsWithSpecificHour(hour:String, context:NSManagedObjectContext )->Bool{
         var containsElements:Bool = false
-        let planerElements = Planer.fetchPlanerObjectsWithTimeLineDataHourPredicate(hour, context: context)
+        let planerElements = Planer.fetchPlanerObjectsWithTimeLineDataHourPredicate(hour: hour, context: context)
         if planerElements!.count > 0{
             print("Planer contains elements with hour \(hour)")
             containsElements = true
@@ -309,13 +309,13 @@ class Planer: NSManagedObject {
             if day == allData[itemscount-1].daystring && hour == allData[itemscount-1].hour!.hour!{
                 print("appending: \(hour) on day: \(day)")
                 tupelski.append((hour, day))
-            }else{ needsFillEmptyPlanerElement(itemscount-1, allData: allData, hour: hour, day: day) }
+            }else{ needsFillEmptyPlanerElement(itemscount: itemscount-1, allData: allData, hour: hour, day: day) }
         }
         return tupelski
     }
     
     static func fillEmptyPlanerElement(hour:NSNumber, day:String, context:NSManagedObjectContext){
-        let t = Planer.InsertIntoManagedObjectContext(context)
+        let t = Planer.InsertIntoManagedObjectContext(context: context)
         let d = Day.FetchDataWithPredicate(Day.Key_day, value: day, context: context)
         t.day = d![0]
         t.daystring = d![0].day!

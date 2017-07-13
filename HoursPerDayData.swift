@@ -18,21 +18,21 @@ class HoursPerDayData: NSManagedObject {
      :param: context: NSManagedObjectContext
      :returns: NSManagedObject */
      static func InsertIntoManagedObjectContext(context:NSManagedObjectContext)->HoursPerDayData{
-        let obj = (NSEntityDescription.insertNewObjectForEntityForName(HoursPerDayData.EntityName, inManagedObjectContext: context)) as! HoursPerDayData
+        let obj = (NSEntityDescription.insertNewObject(forEntityName: HoursPerDayData.EntityName, into: context)) as! HoursPerDayData
         print("\(HoursPerDayData.EntityName) Entity object created in NSManagedObjectContext")
         return obj
     }
     
     static func GetHoursPerDay(context: NSManagedObjectContext )->NSNumber?{
         do{
-            let fetchRequest = NSFetchRequest(entityName: HoursPerDayData.EntityName)
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [HoursPerDayData]
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: HoursPerDayData.EntityName)
+            let fetchResults = try context.fetch(fetchRequest) as? [HoursPerDayData]
             print("\(fetchResults![0].hoursCount!) fetched from Core Data from HoursPerDay class")
-            if fetchResults?.count > 0{
+            if (fetchResults?.count)! > 0{
                 let num:Int = Int(fetchResults![0].hoursCount!)!
-                return NSNumber(integer: num)
+                return NSNumber(value: num)
             }else{
-                return NSNumber(integer: 1)
+                return NSNumber(value: 1)
             }
         }
         catch let error as NSError{
@@ -45,9 +45,9 @@ class HoursPerDayData: NSManagedObject {
      :returns: Array of [NSManagedObject]?*/
     static func FetchData(context:NSManagedObjectContext)->[HoursPerDayData]?{
         do{
-            let fetchRequest = NSFetchRequest(entityName: HoursPerDayData.EntityName)
-            let fetchResults = try context.executeFetchRequest(fetchRequest) as? [HoursPerDayData]
-            if(fetchResults?.count > 0){
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: HoursPerDayData.EntityName)
+            let fetchResults = try context.fetch(fetchRequest) as? [HoursPerDayData]
+            if((fetchResults?.count)! > 0){
                 print("\(fetchResults![0].hoursCount!) HoursPerDay fetched from Core Data from HoursPerDay class")}
             
             return fetchResults!
@@ -61,7 +61,7 @@ class HoursPerDayData: NSManagedObject {
      :param: strDay: as String
      :param: context: NSManagedObjectContext*/
     static func SaveHoursPerDayCount(strHoursPerDay: String, context: NSManagedObjectContext){
-        let t = HoursPerDayData.InsertIntoManagedObjectContext(context)
+        let t = HoursPerDayData.InsertIntoManagedObjectContext(context: context)
         t.hoursCount = strHoursPerDay
         
         do{ try context.save()
@@ -75,7 +75,7 @@ class HoursPerDayData: NSManagedObject {
      :param: objHoursPerDay: HoursPerDay class Object to delete
      :param: context: NSManagedObjectContext*/
     static func DeleteHoursPerDayCount(objHoursPerDayData: HoursPerDayData, context: NSManagedObjectContext){
-        context.deleteObject(objHoursPerDayData)
+        context.delete(objHoursPerDayData)
         
         do{ try context.save()
             print("HoursPerDay object deleted from class HoursPerDay")
