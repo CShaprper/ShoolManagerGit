@@ -95,11 +95,11 @@ class TeacherTableVC: UIViewController,UITableViewDataSource, UITableViewDelegat
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         _ = tableview.indexPathForSelectedRow
         self.selectedTeacher = self.myTeachers![indexPath.row] as! Teacher
-        createActionSheetAlert(self.selectedTeacher)
+        createActionSheetAlert(selectedElement: self.selectedTeacher)
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("TeacherCell") as? TeacherCell{
-            cell.CofigureCell(myTeachers![indexPath.row] as! Teacher)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "TeacherCell") as? TeacherCell{
+            cell.CofigureCell(teacher: myTeachers![indexPath.row] as! Teacher)
             return cell
         }
         else{
@@ -109,7 +109,7 @@ class TeacherTableVC: UIViewController,UITableViewDataSource, UITableViewDelegat
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return myTeachers!.count
     }
     
@@ -127,7 +127,7 @@ class TeacherTableVC: UIViewController,UITableViewDataSource, UITableViewDelegat
         if txtTeacherName.text! != ""{
             Teacher.SaveTeacher(txtTeacherName.text!, imageName: tisimageName, context: appDel.managedObjectContext)
         }
-        textFieldShouldReturn(txtTeacherName)
+        textFieldShouldReturn(textField: txtTeacherName)
         ReloadTableView()
     }
     
@@ -140,19 +140,19 @@ class TeacherTableVC: UIViewController,UITableViewDataSource, UITableViewDelegat
     
     func createActionSheetAlert(selectedElement:Teacher){
         let alert = UIAlertController(
-            title: "ActionSheet_ElementAction_Title".localized, message: "TeacherTable_TeacherActionSheet_Message".localized, preferredStyle: .ActionSheet)
-        alert.addAction(UIAlertAction(title: "Alert_Action_Edit".localized, style: .Default, handler: { (UIAlertAction) -> Void in
-            self.performSegueWithIdentifier("ShowEditTeacherPage", sender: selectedElement)
+            title: "ActionSheet_ElementAction_Title".localized, message: "TeacherTable_TeacherActionSheet_Message".localized, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Alert_Action_Edit".localized, style: .default, handler: { (UIAlertAction) -> Void in
+            self.performSegue(withIdentifier: "ShowEditTeacherPage", sender: selectedElement)
         }))
-        let plans = Planer.fetchPlanerObjectsWithTeachernamePredicate(selectedElement.name!, context: appDel.managedObjectContext)!
+        let plans = Planer.fetchPlanerObjectsWithTeachernamePredicate(teacher: selectedElement.name!, context: appDel.managedObjectContext)!
         if plans.count == 0{
-            alert.addAction(UIAlertAction(title: "Alert_Action_Delete".localized, style: .Destructive, handler: {  (action: UIAlertAction)-> Void in
+            alert.addAction(UIAlertAction(title: "Alert_Action_Delete".localized, style: .destructive, handler: {  (action: UIAlertAction)-> Void in
                 Teacher.DeleteTeacher(selectedElement, context: self.appDel.managedObjectContext)
                 self.ReloadTableView()
             }))
         }
-        alert.addAction(UIAlertAction(title: "Alert_Action_Cancel".localized, style: .Cancel, handler: { (UIAlertAction) -> Void in }))
-        presentViewController(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Alert_Action_Cancel".localized, style: .cancel, handler: { (UIAlertAction) -> Void in }))
+        present(alert, animated: true, completion: nil)
     }
     
 }

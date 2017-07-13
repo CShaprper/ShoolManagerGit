@@ -31,7 +31,7 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     var HoursPerDayPickerArray:[String] = []
     
     //AppDelegate Object
-    let appDel = UIApplication.sharedApplication().delegate  as! AppDelegate
+    let appDel = UIApplication.shared.delegate  as! AppDelegate
     
     //Selected TimelineDataRowIndex
     //Set to 0 because if no selection is made auto value is first element
@@ -43,48 +43,48 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     ############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
+        if !appDel.userDefaults.bool(forKey: appDel.removeAdsIdentifier){
             loadAds()
         }
-        StartTimePicker.date = NSDate()
-        EndTimePicker.date = NSDate()
+        StartTimePicker.date = NSDate() as Date
+        EndTimePicker.date = NSDate() as Date
         HoursPicker.delegate = self
         HoursPicker.dataSource = self
         TimeLineDataTableView.delegate = self
         TimeLineDataTableView.dataSource = self
         popoverPresentationController?.delegate = self
-        TimeLineDataTableView.backgroundColor  = UIColor.clearColor()
-        EndTimePicker.setValue(UIColor.whiteColor(), forKey: "textColor")
-        StartTimePicker.setValue(UIColor.whiteColor(), forKey: "textColor")
+        TimeLineDataTableView.backgroundColor  = UIColor.clear
+        EndTimePicker.setValue(UIColor.white, forKey: "textColor")
+        StartTimePicker.setValue(UIColor.white, forKey: "textColor")
         StartTimePicker.layer.borderWidth = 2
-        StartTimePicker.layer.borderColor = UIColor.whiteColor().CGColor
+        StartTimePicker.layer.borderColor = UIColor.white.cgColor
         StartTimePicker.layer.cornerRadius = 15
         EndTimePicker.layer.borderWidth = 2
-        EndTimePicker.layer.borderColor = UIColor.whiteColor().CGColor
+        EndTimePicker.layer.borderColor = UIColor.white.cgColor
         EndTimePicker.layer.cornerRadius = 15
         HoursPicker.layer.borderWidth = 2
-        HoursPicker.layer.borderColor = UIColor.whiteColor().CGColor
+        HoursPicker.layer.borderColor = UIColor.white.cgColor
         HoursPicker.layer.cornerRadius = 15
         self.layers.append(saveButton.layer)
-        UIDesignHelper.ShadowMakerMultipleLayers(UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(15), layers: layers)
+        UIDesignHelper.ShadowMakerMultipleLayers(shadowColor: UIColor.black, shadowOffset: CGFloat(15), shadowRadius: CGFloat(15), layers: layers)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         SetHoursPerDayPickerElementCount()
         ReloadTableView()
     }
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+        return UIInterfaceOrientationMask.portrait
     }
     override func shouldAutorotate() -> Bool {
         return true
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+        return .lightContent
     }
     
     /*MARK: Advertising    ###############################################################################################################*/
@@ -97,14 +97,14 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         self.appDel.adBannerView.center = CGPoint(x: view.bounds.size.width / 2, y: view.bounds.size.height - self.appDel.adBannerView.frame.size.height / 2)
         
         self.appDel.adBannerView.delegate = self
-        self.appDel.adBannerView.hidden = true
+        self.appDel.adBannerView.isHidden = true
         view.addSubview(self.appDel.adBannerView)
     }
     func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        self.appDel.adBannerView.hidden = true
+        self.appDel.adBannerView.isHidden = true
     }
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        self.appDel.adBannerView.hidden = false
+        self.appDel.adBannerView.isHidden = false
     }
     
     /* MARK: UIPicker Delegate
@@ -112,8 +112,8 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return HoursPerDayPickerArray[row]
     }
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        let fetchresult:[HoursPerDayData] = HoursPerDayData.FetchData(appDel.managedObjectContext)!
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        let fetchresult:[HoursPerDayData] = HoursPerDayData.FetchData(context: appDel.managedObjectContext)!
         if fetchresult.count > 0{
             SetHoursPerDayPickerElementCount()
             return HoursPerDayPickerArray.count
@@ -129,7 +129,7 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         SelectedHoursPickerValue = HoursPerDayPickerArray[row]
     }
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let attributedString = NSAttributedString(string: HoursPerDayPickerArray[row], attributes: [NSForegroundColorAttributeName : UIColor.whiteColor()])
+        let attributedString = NSAttributedString(string: HoursPerDayPickerArray[row], attributes: [NSForegroundColorAttributeName : UIColor.white])
         return attributedString
     }
     
@@ -139,14 +139,14 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         _ = tableView.indexPathForSelectedRow
         self.SelectedTimeLineData = self.timelineDataArray[indexPath.row]
         self.SelectedTimelineDatoRowIndex = indexPath.row
-        createActionSheetAlert(SelectedTimeLineData)
+        createActionSheetAlert(selectedElement: SelectedTimeLineData)
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if timelineDataArray?.count > 0{
-            if let cell = tableView.dequeueReusableCellWithIdentifier("TimelineCell") as? TimelineCell {
-                cell.CofigureCell(timelineDataArray![indexPath.row])
+        if (timelineDataArray?.count)! > 0{
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineCell") as? TimelineCell {
+                cell.CofigureCell(timeline: timelineDataArray![indexPath.row])
                 
-                cell.backgroundColor = UIColor.clearColor()
+                cell.backgroundColor = UIColor.clear
                 return cell
             }
             else{
@@ -158,22 +158,22 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timelineDataArray!.count
     }
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete{
+        if editingStyle == .delete{
             TimelineData.DeleteTimelineData(timelineDataArray[indexPath.row], context: appDel.managedObjectContext)
-            timelineDataArray.removeAtIndex(indexPath.row)
-            TimeLineDataTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            timelineDataArray.remove(at: indexPath.row)
+            TimeLineDataTableView.deleteRows(at: [indexPath as IndexPath], with: .fade)
         }
     }
     
     
     /*  MARK: - Navigation Prepare For Segue    ##############################################################################################################*/
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dest = segue.destinationViewController as? EditTimelinePopUpVC, popPC = dest.popoverPresentationController{
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let dest = segue.destination as? EditTimelinePopUpVC, let popPC = dest.popoverPresentationController{
             // Set Properties on destination ViewController
             dest.myTimeLineDataToEdit = self.SelectedTimeLineData
             dest.myHoursPickerSource = self.HoursPerDayPickerArray
@@ -189,40 +189,40 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     /* MARK: @IBActions
     ###############################################################################################################*/
     @IBAction func StartTimePickerChanged(sender: UIDatePicker) {
-        self.selectedStartDate = sender.date
+        self.selectedStartDate = sender.date as NSDate
         print("StartDatePicker changed: \(sender.date)")
     }
     @IBAction func EndTimePickerChanged(sender: UIDatePicker) {
-        self.SelectedEndDate = sender.date
+        self.SelectedEndDate = sender.date as NSDate
         print("EndDatePicker changed: \(sender.date)")
     }
     @IBAction func saveTimelineDataAction(sender: AnyObject) {
         let allData:[TimelineData] = TimelineData.FetchData(appDel.managedObjectContext)!
         if  Int(SelectedHoursPickerValue)! <= allData.count {
-            let alert = UIAlertController(title: "Alert_WrongUserInput_Title".localized, message: "TimelineVC_AlertHourNumberColliding_Message".localized, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Alert_WrongUserInput_Title".localized, message: "TimelineVC_AlertHourNumberColliding_Message".localized, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
             return
         }
         
         var cnt:Int = allData.count
         cnt-=1
         if allData.count > 0{
-            let result = TimelineData.collidesWithExistingTimelineData(cnt, allData: allData , cStartDate: selectedStartDate, cEndDate: SelectedEndDate)
+            let result = TimelineData.collidesWithExistingTimelineData(cnt, allData: allData , cStartDate: selectedStartDate as Date, cEndDate: SelectedEndDate as Date)
             if  result == CollidingTime.collidesWithExistingTime{
-                let alert = UIAlertController(title: "Alert_WrongUserInput_Title".localized, message: "TimelineVC_AlertTimePeriodColliding_Message".localized , preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                presentViewController(alert, animated: true, completion: nil)
+                let alert = UIAlertController(title: "Alert_WrongUserInput_Title".localized, message: "TimelineVC_AlertTimePeriodColliding_Message".localized , preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(alert, animated: true, completion: nil)
                 return
             }else if result == CollidingTime.startTimeIsBiggerThanEndTime{
-                let alert = UIAlertController(title: "Alert_WrongUserInput_Title".localized, message: "TimelineVC_AlertStartTimeSmallerThanEndTime_Message".localized , preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                presentViewController(alert, animated: true, completion: nil)
+                let alert = UIAlertController(title: "Alert_WrongUserInput_Title".localized, message: "TimelineVC_AlertStartTimeSmallerThanEndTime_Message".localized , preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(alert, animated: true, completion: nil)
                 return
             }
         }
         // Save TimelineData
-        TimelineData.SaveTimelineData(self.CastStringToNSNumber(SelectedHoursPickerValue)!, starttime: selectedStartDate, endtime: SelectedEndDate, context: appDel.managedObjectContext)
+        TimelineData.SaveTimelineData(self.CastStringToNSNumber(strNumber: SelectedHoursPickerValue)!, starttime: selectedStartDate as Date, endtime: SelectedEndDate as Date, context: appDel.managedObjectContext)
         ReloadTableView()
     }
     
@@ -237,20 +237,20 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     
     func createActionSheetAlert(selectedElement:TimelineData){
         let alert = UIAlertController(
-            title: "ActionSheet_ElementAction_Title".localized, message: "TimelineVC_ActionSheetTimeTableActions_Message".localized, preferredStyle: .ActionSheet)
-        alert.addAction(UIAlertAction(title: "Alert_Action_Edit".localized + " \(selectedElement.hour!)", style: .Default, handler: { (UIAlertAction) -> Void in
-            self.performSegueWithIdentifier("ShowEditTimelinePopOver", sender:  selectedElement)
+            title: "ActionSheet_ElementAction_Title".localized, message: "TimelineVC_ActionSheetTimeTableActions_Message".localized, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Alert_Action_Edit".localized + " \(selectedElement.hour!)", style: .default, handler: { (UIAlertAction) -> Void in
+            self.performSegue(withIdentifier: "ShowEditTimelinePopOver", sender:  selectedElement)
         }))
-        let plans = Planer.fetchNotEmptyPlanerElementsWithHour(selectedElement.hour!, context: appDel.managedObjectContext)!
+        let plans = Planer.fetchNotEmptyPlanerElementsWithHour(hourSortnumber: selectedElement.hour!, context: appDel.managedObjectContext)!
         print(plans.count)
         if plans.count == 0{
-            alert.addAction(UIAlertAction(title: "Alert_Action_Delete".localized + " \(selectedElement.hour!)", style: .Destructive, handler: {  (action: UIAlertAction)-> Void in
+            alert.addAction(UIAlertAction(title: "Alert_Action_Delete".localized + " \(selectedElement.hour!)", style: .destructive, handler: {  (action: UIAlertAction)-> Void in
                 TimelineData.DeleteTimelineData(selectedElement, context: self.appDel.managedObjectContext)
                 self.ReloadTableView()
             }))
         }
-        alert.addAction(UIAlertAction(title: "Alert_Action_Cancel".localized, style: .Cancel, handler: { (UIAlertAction) -> Void in }))
-        presentViewController(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Alert_Action_Cancel".localized, style: .cancel, handler: { (UIAlertAction) -> Void in }))
+        present(alert, animated: true, completion: nil)
     }
     
     
@@ -259,7 +259,7 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
      - Resets the element count to 0 before appending new elements*/
     private func SetHoursPerDayPickerElementCount(){
         //Fetch the HoursPerDay from Core Data
-        HoursPerDayDataArray = HoursPerDayData.FetchData(appDel.managedObjectContext)
+        HoursPerDayDataArray = HoursPerDayData.FetchData(context: appDel.managedObjectContext)
         if HoursPerDayDataArray != nil && HoursPerDayDataArray.count > 0{
             //Reset the HoursPerDayPickerArray
             self.HoursPerDayPickerArray.removeAll()
