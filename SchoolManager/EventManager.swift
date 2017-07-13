@@ -17,8 +17,8 @@ class EventManager {
     
     
     static func requestAuthorization()->Bool{
-        if(EKEventStore.authorizationStatusForEntityType(.Event) != EKAuthorizationStatus.Authorized){
-            eventStore.requestAccessToEntityType(.Event, completion: { granted, Error in })
+        if(EKEventStore.authorizationStatus(for: .event) != EKAuthorizationStatus.authorized){
+            eventStore.requestAccess(to: .event, completion: { granted, Error in })
             return false
         }else{ return true }
     }
@@ -26,19 +26,19 @@ class EventManager {
    static func createEvent(eventStore: EKEventStore, title: String, startDate:NSDate, endDate:NSDate, identifier:String){
         let event = EKEvent(eventStore: eventStore)
         event.title = title
-        event.startDate = startDate
-        event.endDate = endDate
+        event.startDate = startDate as Date
+        event.endDate = endDate as Date
         event.calendar = eventStore.defaultCalendarForNewEvents
         do{
-            try eventStore.saveEvent(event, span: .ThisEvent)
+            try eventStore.save(event, span: .thisEvent)
 //            savedIventIdentifier = event.eventIdentifier
         }catch let error as NSError{ print(error) }
     }
    static func removeEvent(eventStore:EKEventStore, eventIdentifier:String){
-        let eventToRemove = eventStore.eventWithIdentifier(eventIdentifier)
+        let eventToRemove = eventStore.event(withIdentifier: eventIdentifier)
         if eventToRemove != nil{
             do{
-                try eventStore.removeEvent(eventToRemove!, span: .ThisEvent)
+                try eventStore.remove(eventToRemove!, span: .thisEvent)
             }catch let error as NSError{
                 print(error)
             }
