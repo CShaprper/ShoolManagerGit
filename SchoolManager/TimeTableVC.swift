@@ -17,7 +17,7 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
     @IBOutlet var TimetableCollectionView: UICollectionView!
     @IBOutlet var BackgroundImageView: UIImageView!
     
-    let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     var timeTableCollection:[TimeTableElement]!
     let transition = BounceTransition()
     var isEditAction:Bool!
@@ -35,29 +35,29 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
     /*MARK: ViewController Delegates    ###############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        TimetableCollectionView.backgroundColor = UIColor.clearColor()
-        currentTime = DateHelper.createDateFromComponents(2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(NSDate()), minute: DateHelper.GetTimeAsHour(NSDate()))
+        TimetableCollectionView.backgroundColor = UIColor.clear
+        currentTime = DateHelper.createDateFromComponents(year: 2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(date: NSDate()), minute: DateHelper.GetTimeAsHour(date: NSDate()))
         // Initialize the Ad
-        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
+        if !appDel.userDefaults.bool(forKey: appDel.removeAdsIdentifier){
             loadAds()
             UIViewController.prepareInterstitialAds()
         }
         
         // loadAds()
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController!.delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        self.tabBarController!.delegate = UIApplication.shared.delegate as! AppDelegate
         self.isEditAction = false
         self.isAddAction = false
         self.infoMessageCenterConstraint.constant = -800
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        loadTimeTableCollection(iscurrentUIWeekEven)
-        if !appDel.userDefaults.boolForKey("FirstTimeplanerVisit"){
+        loadTimeTableCollection(isCurrentWeekEven: iscurrentUIWeekEven)
+        if !appDel.userDefaults.bool(forKey: "FirstTimeplanerVisit"){
             let result = Day.FetchData(appDel.managedObjectContext)
-            let res = HoursPerDayData.FetchData(appDel.managedObjectContext)
+            let res = HoursPerDayData.FetchData(context: appDel.managedObjectContext)
             let result2 = TimelineData.FetchData(appDel.managedObjectContext)
             let result3 = Teacher.FetchData(appDel.managedObjectContext)
             let result4 = Subject.FetchData(appDel.managedObjectContext)
