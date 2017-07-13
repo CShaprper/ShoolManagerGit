@@ -10,21 +10,21 @@ import UIKit
 
 class UIDesignHelper {
     static func ShadowMaker(shadowColor:UIColor, shadowOffset:CGFloat, shadowRadius:CGFloat, layer:CALayer){
-        layer.shadowColor = shadowColor.CGColor
+        layer.shadowColor = shadowColor.cgColor
         layer.shadowOffset = CGSizeMake(shadowOffset, shadowOffset/2);
         layer.shadowRadius = shadowRadius;
         layer.shadowOpacity = 1.0;
         layer.masksToBounds = false;
-        layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius:  layer.cornerRadius).CGPath
+        layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius:  layer.cornerRadius).cgPath
     }
     static func ShadowMakerMultipleLayers(shadowColor:UIColor, shadowOffset:CGFloat, shadowRadius:CGFloat, layers:[CALayer]){
         for layer in layers{
-            layer.shadowColor = shadowColor.CGColor
+            layer.shadowColor = shadowColor.cgColor
             layer.shadowOffset = CGSizeMake(shadowOffset, shadowOffset/2);
             layer.shadowRadius = shadowRadius;
             layer.shadowOpacity = 1.0;
             layer.masksToBounds = false;
-            layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius:  layer.cornerRadius).CGPath
+            layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius:  layer.cornerRadius).cgPath
         }
     }
 }

@@ -28,8 +28,8 @@ class DateHelper{
         dateComponents.hour = hour
         dateComponents.minute = minute
         dateComponents.second = 0
-        dateComponents.timeZone = NSTimeZone.systemTimeZone()
-        let calendar = NSCalendar.currentCalendar()
+        dateComponents.timeZone = NSTimeZone.system
+        let calendar = NSCalendar.current
         return calendar.dateFromComponents(dateComponents)!
     }
     /**
@@ -41,7 +41,7 @@ class DateHelper{
      */
    static func GetTimeAsHour(date:NSDate)->Int{
         let dateComponents = NSDateComponents()
-        dateComponents.hour = NSCalendar.currentCalendar().components(NSCalendarUnit.Hour, fromDate: date).hour
+        dateComponents.hour = NSCalendar.current.components(NSCalendar.Unit.Hour, fromDate: date).hour
         return dateComponents.hour
     }
     /**
@@ -53,7 +53,7 @@ class DateHelper{
      */
    static func GetTimeAsMinute(date:NSDate)->Int{
         let dateComponents = NSDateComponents()
-        dateComponents.minute = NSCalendar.currentCalendar().components(NSCalendarUnit.Minute, fromDate: date).minute
+        dateComponents.minute = NSCalendar.current.components(NSCalendar.Unit.Minute, fromDate: date).minute
         return dateComponents.minute
     }
     
@@ -62,7 +62,7 @@ class DateHelper{
         //Declare Variables
         var isGreater = false
         //Compare Values
-        if sourceDate.compare(dateToCompare) == NSComparisonResult.OrderedDescending
+        if sourceDate.compare(dateToCompare as Date) == ComparisonResult.orderedDescending
         {
             isGreater = true
         }
@@ -76,7 +76,7 @@ class DateHelper{
         //Declare Variables
         var isLess = false
         //Compare Values
-        if sourceDate.compare(dateToCompare) == NSComparisonResult.OrderedAscending
+        if sourceDate.compare(dateToCompare as Date) == ComparisonResult.orderedAscending
         {
             isLess = true
         }
@@ -90,7 +90,7 @@ class DateHelper{
         //Declare Variables
         var isEqualTo = false
         //Compare Values
-        if sourceDate.compare(dateToCompare) == NSComparisonResult.OrderedSame
+        if sourceDate.compare(dateToCompare as Date) == ComparisonResult.orderedSame
         {
             isEqualTo = true
         }

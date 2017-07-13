@@ -11,10 +11,10 @@ import StoreKit
 
 extension SKProduct {
     func localizedPrice() -> String {
-        let formatter = NSNumberFormatter()
+        let formatter = NumberFormatter()
         formatter.numberStyle = .CurrencyStyle
         formatter.locale = self.priceLocale
-        return formatter.stringFromNumber(self.price)!
+        return formatter.string(from: self.price)!
     }    
 }
 
@@ -38,7 +38,7 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
         self._alertOKOnlyDelegate  = alertOKOnlyDelegate
         self._alertGoSettingdDelegate = alertGoSettingsDelegate
         self._presentingVC = presentingVC
-        self._appDel = UIApplication.sharedApplication().delegate as? AppDelegate
+        self._appDel = UIApplication.shared.delegate as? AppDelegate
         self._activityIndicator = activityIndicatorAnimation
         self._removeAdIdentifier = _appDel?.removeAdsIdentifier 
         self._productIdentifiers = Set([_removeAdIdentifier])
@@ -51,16 +51,16 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
     /*MARK: StoreKit Helpers    ###############################################################################################################*/
     func buyProduct(product:SKProduct) {
         let payment = SKPayment(product: product)
-        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
-        SKPaymentQueue.defaultQueue().addPayment(payment)
+        SKPaymentQueue.default().add(self)
+        SKPaymentQueue.default().add(payment)
     }
     func restorePurchases(){
-        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
-        SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
+        SKPaymentQueue.default().add(self)
+        SKPaymentQueue.default().restoreCompletedTransactions()
     }
     
-    @objc func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+    @objc func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        DispatchQueue.main.async(execute: { () -> Void in
             self._activityIndicator?.beginAnimation()
             print("Products request")
             let products = response.products
@@ -73,25 +73,25 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
                 print(product.price)
                 self._productsArray.append(product)
             }
-            self._sendProducstDelegate?.sendProducts(self._productsArray)
+            self._sendProducstDelegate?.sendProducts(productsArray: self._productsArray)
             self._activityIndicator?.endAnimation()
         })
     }
     
-    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions{
             switch transaction.transactionState {
                 
-            case SKPaymentTransactionState.Purchased:
+            case SKPaymentTransactionState.purchased:
                 print("Transaction Approved")
                 print("Product Identifier: \(transaction.payment.productIdentifier)")
-                self.deliverProduct(transaction)
-                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+                self.deliverProduct(transaction: transaction)
+                SKPaymentQueue.default().finishTransaction(transaction)
                 
-            case SKPaymentTransactionState.Failed:
+            case SKPaymentTransactionState.failed:
                 print("Transaction Failed")
-                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
-                self._appDel?.userDefaults.setBool(false, forKey: transaction.payment.productIdentifier)
+                SKPaymentQueue.default().finishTransaction(transaction)
+                self._appDel?.userDefaults.set(false, forKey: transaction.payment.productIdentifier)
             default:
                 break
             }
@@ -100,7 +100,7 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
     }
     
     func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async() { () -> Void in
             print("Transactions Restored")
             for transaction in queue.transactions {
                 let t: SKPaymentTransaction = transaction
@@ -110,11 +110,11 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
                 switch prodID {
                 case self._removeAdIdentifier:
                     print("remove ads")
-                    self._appDel?.userDefaults.setBool(true, forKey: prodID)
+                    self._appDel?.userDefaults.set(true, forKey: prodID)
                 default:
                     print("IAP not setup")
                 }
-                self._alertOKOnlyDelegate?.showAlert("RestorePurchasesHeader".localized, message: "RestorePurchasesMessage".localized)
+                self._alertOKOnlyDelegate?.showAlert(title: "RestorePurchasesHeader".localized, message: "RestorePurchasesMessage".localized)
             }
         }
     }
@@ -126,8 +126,8 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
             request.delegate = self
             request.start()
         } else {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self._alertGoSettingdDelegate?.showAlert_OneAction("IAppNotEnabledHeader".localized, message: "IAppNotEnabledMessage".localized, actionTitle: "IAppNotEnabledActionHeader".localized)
+            DispatchQueue.main.async(execute: { () -> Void in
+                self._alertGoSettingdDelegate?.showAlert_OneAction(title: "IAppNotEnabledHeader".localized, message: "IAppNotEnabledMessage".localized, actionTitle: "IAppNotEnabledActionHeader".localized)
             })
         }
     }
@@ -136,7 +136,7 @@ class StoreKitManager:NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
         if transaction.payment.productIdentifier == self._removeAdIdentifier
         {
             print("Non-Consumable Product Remove Ads Purchased")
-            self._appDel?.userDefaults.setBool(true, forKey: transaction.payment.productIdentifier)
+            self._appDel?.userDefaults.set(true, forKey: transaction.payment.productIdentifier)
         }
         else if transaction.payment.productIdentifier == "com"
         {

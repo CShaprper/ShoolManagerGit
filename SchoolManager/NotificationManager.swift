@@ -23,10 +23,10 @@ class NotificationManager {
      - returns: Valid Date of current UICalendar: **NSDate**
      */
     static func fixNotificationDate(dateToFix: NSDate) -> NSDate {
-        let calendar = NSCalendar.currentCalendar()
-        let dateComponents:NSDateComponents = calendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute], fromDate: dateToFix)
+        let calendar = NSCalendar.current
+        let dateComponents:NSDateComponents = calendar.components([NSCalendar.Unit.Year, NSCalendar.Unit.Month, .Day, NSCalendar.Unit.Hour, NSCalendar.Unit.Minute], fromDate: dateToFix)
         dateComponents.second = 0
-        let fixedDate: NSDate! = NSCalendar.currentCalendar().dateFromComponents(dateComponents)
+        let fixedDate: NSDate! = NSCalendar.currentCalendar.dateFromComponents(dateComponents)
         return fixedDate
     }
     
@@ -41,13 +41,13 @@ class NotificationManager {
         let notification:UILocalNotification = UILocalNotification ()
         notificationCategory = category
         notification.alertBody = alertBody
-        notification.fireDate = fireDate
+        notification.fireDate = fireDate as Date
         notification.soundName = UILocalNotificationDefaultSoundName
         notification.category = notificationCategory
-        notification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
-        let infoDict :  Dictionary<String,String!> = ["objectId" : objectID]
-        notification.userInfo = infoDict;
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        notification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
+        let infoDict :  Dictionary<String,String?> = ["objectId" : objectID]
+        notification.userInfo = infoDict ?? [:];
+        UIApplication.shared.scheduleLocalNotification(notification)
     }
     
     /**
@@ -58,26 +58,26 @@ class NotificationManager {
      - repatInterval: **NSCalendarUnit:**   The repeat intervall for this notification
      - alertAction: **String:**   Message that is displayed after "side to ..."
      */
-    static func createRepeatableNotification(fireDate:NSDate, alertBody:String, repatInterval:NSCalendarUnit, objectID:String){
+    static func createRepeatableNotification(fireDate:NSDate, alertBody:String, repatInterval:NSCalendar.Unit, objectID:String){
         let notification:UILocalNotification = UILocalNotification ()
         notification.alertBody = alertBody
-        notification.fireDate = fireDate
+        notification.fireDate = fireDate as Date
         notification.soundName = UILocalNotificationDefaultSoundName
         notification.repeatInterval = repatInterval
         notification.category = notificationCategory
-        notification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
-        let infoDict :  Dictionary<String,String!> = ["objectId" : objectID]
+        notification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
+        let infoDict :  Dictionary<String,String?> = ["objectId" : objectID]
         notification.userInfo = infoDict;
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        UIApplication.shared.scheduleLocalNotification(notification)
     }
     
     static func removeNotification(objectID:String){
-        for notification in UIApplication.sharedApplication().scheduledLocalNotifications! {
-            var infoDict :  Dictionary = notification.userInfo as! Dictionary<String,String!>
-            let notifcationObjectId : String = infoDict["objectId"]!
+        for notification in UIApplication.shared.scheduledLocalNotifications! {
+            var infoDict :  Dictionary = notification.userInfo as! Dictionary<String,String?>
+            let notifcationObjectId : String = infoDict["objectId"]!!
             
             if notifcationObjectId == objectID {
-                UIApplication.sharedApplication().cancelLocalNotification(notification)
+                UIApplication.shared.cancelLocalNotification(notification)
             }
         }
     }    
