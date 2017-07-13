@@ -15,7 +15,7 @@ extension NSDate
         //Declare Variables
         var isGreater = false
         //Compare Values
-        if self.compare(dateToCompare) == NSComparisonResult.OrderedDescending
+        if self.compare(dateToCompare as Date) == ComparisonResult.orderedDescending
         {
             isGreater = true
         }
@@ -29,7 +29,7 @@ extension NSDate
         //Declare Variables
         var isLess = false
         //Compare Values
-        if self.compare(dateToCompare) == NSComparisonResult.OrderedAscending
+        if self.compare(dateToCompare as Date) == ComparisonResult.orderedAscending
         {
             isLess = true
         }
@@ -43,7 +43,7 @@ extension NSDate
         //Declare Variables
         var isEqualTo = false
         //Compare Values
-        if self.compare(dateToCompare) == NSComparisonResult.OrderedSame
+        if self.compare(dateToCompare as Date) == ComparisonResult.orderedSame
         {
             isEqualTo = true
         }
@@ -55,8 +55,8 @@ extension NSDate
     
     func addDays(daysToAdd : Int) -> NSDate
     {
-        let secondsInDays : NSTimeInterval = Double(daysToAdd) * 60 * 60 * 24
-        let dateWithDaysAdded : NSDate = self.dateByAddingTimeInterval(secondsInDays)
+        let secondsInDays : TimeInterval = Double(daysToAdd) * 60 * 60 * 24
+        let dateWithDaysAdded : NSDate = self.addingTimeInterval(secondsInDays)
         
         //Return Result
         return dateWithDaysAdded
@@ -65,18 +65,18 @@ extension NSDate
     
     func addHours(hoursToAdd : Int) -> NSDate
     {
-        let secondsInHours : NSTimeInterval = Double(hoursToAdd) * 60 * 60
-        let dateWithHoursAdded : NSDate = self.dateByAddingTimeInterval(secondsInHours)
+        let secondsInHours : TimeInterval = Double(hoursToAdd) * 60 * 60
+        let dateWithHoursAdded : NSDate = self.addingTimeInterval(secondsInHours)
         
         //Return Result
         return dateWithHoursAdded
     }
     
     func getDayOfWeek(date:NSDate)->Int {
-        let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let myComponents = myCalendar.components(.Weekday, fromDate: date)
+        let myCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        let myComponents = myCalendar.components(.weekday, from: date as Date)
         let weekDay = myComponents.weekday
-        return weekDay
+        return weekDay!
     }
     
     /**
@@ -88,9 +88,9 @@ extension NSDate
      - returns: String: **HH:mm from date**
      */
    static func hourFormatter(date:NSDate)->String{
-        let hourFormatter = NSDateFormatter()
+        let hourFormatter = DateFormatter()
         hourFormatter.dateFormat = "HH:mm"
-        let str = hourFormatter.stringFromDate(date)
+        let str = hourFormatter.string(from: date as Date)
         return str
     }
     
@@ -103,9 +103,9 @@ extension NSDate
      - returns: String: **HH:mm from date**
      */
     static func dateTimeFormatter(date:NSDate)->String{
-        let hourFormatter = NSDateFormatter()
+        let hourFormatter = DateFormatter()
         hourFormatter.dateFormat = "EEE dd MMM yy - HH:mm"
-        let str = hourFormatter.stringFromDate(date)
+        let str = hourFormatter.string(from: date as Date)
         return str
     }
 }

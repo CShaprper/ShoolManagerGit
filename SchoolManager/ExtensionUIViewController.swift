@@ -4,18 +4,18 @@ import UIKit
 ///Enables popupview for IPhone
 extension UIViewController:UIPopoverControllerDelegate{ 
     func adaptivePresentationStyleForPresentationController(controller:UIPopoverPresentationController)->UIModalPresentationStyle{
-        return .None
+        return .none
     }
 }
 
 extension UIView {
-    func fadeIn(duration: NSTimeInterval = 1.0, delay: NSTimeInterval = 0.0, completion: ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
-        UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+    func fadeIn(duration: TimeInterval = 1.0, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
+        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.alpha = 1.0
             }, completion: completion)  }
     
-    func fadeOut(duration: NSTimeInterval = 1.0, delay: NSTimeInterval = 0.0, completion: (Bool) -> Void = {(finished: Bool) -> Void in}) {
-        UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+    func fadeOut(duration: TimeInterval = 1.0, delay: TimeInterval = 0.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in}) {
+        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.alpha = 0.0
             }, completion: completion)
     }
@@ -24,15 +24,15 @@ extension UIView {
 extension UITabBarController {
     public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if let selected = selectedViewController {
-            return selected.supportedInterfaceOrientations()
+            return selected.supportedInterfaceOrientations
         }
-        return super.supportedInterfaceOrientations()
+        return super.supportedInterfaceOrientations
     }
     public override func shouldAutorotate() -> Bool {
         if let selected = selectedViewController {
-            return selected.shouldAutorotate()
+            return selected.shouldAutorotate
         }
-        return super.shouldAutorotate()
+        return super.shouldAutorotate
     }
 }
 
@@ -46,7 +46,7 @@ extension UIViewController{
     func CastStringToNSNumber(strNumber:String)->NSNumber?{
         //So lets cast the string value of SelectedHoursPicker to NSNumber
         if let num:Int = Int(strNumber)!{
-        return NSNumber(integer: num)
+        return NSNumber(value: num)
         }else{
             return nil
         } 
@@ -59,7 +59,7 @@ extension UIViewController{
      */
     func GetTimeAsHour(date:NSDate)->Int{
         let dateComponents = NSDateComponents()
-        dateComponents.hour = NSCalendar.currentCalendar().components(NSCalendarUnit.Hour, fromDate: date).hour
+        dateComponents.hour = NSCalendar.current.components(NSCalendar.Unit.Hour, fromDate: date).hour
         return dateComponents.hour
     }
     /**
@@ -70,7 +70,7 @@ extension UIViewController{
      */
     func GetTimeAsMinute(date:NSDate)->Int{
         let dateComponents = NSDateComponents()
-        dateComponents.minute = NSCalendar.currentCalendar().components(NSCalendarUnit.Minute, fromDate: date).minute
+        dateComponents.minute = NSCalendar.current.components(NSCalendar.Unit.Minute, fromDate: date).minute
         return dateComponents.minute
     }
     

@@ -3,7 +3,7 @@ import UIKit
 
 class ColorHelper{
     // convert Hex string '#FF00FF' or 'FF00FF' to UIColor object
-    static func convertHexToUIColor(hexColor hexColor : String) -> UIColor {
+    static func convertHexToUIColor(hexColor : String) -> UIColor {
         
         // define character set (include whitespace, newline character etc.)
         let characterSet = NSCharacterSet.whitespacesAndNewlines as NSCharacterSet

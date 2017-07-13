@@ -17,15 +17,15 @@ extension UITableView{
         
         for i in cells {
             let cell: UITableViewCell = i as UITableViewCell
-            cell.transform = CGAffineTransformMakeTranslation(0, tableHeight)
+            cell.transform = CGAffineTransform(translationX: 0, y: tableHeight)
         }
         
         var index = 0
         
         for a in cells {
             let cell: UITableViewCell = a as UITableViewCell
-            UIView.animateWithDuration(1.0, delay: 0.05 * Double(index), usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
-                cell.transform = CGAffineTransformMakeTranslation(0, 0);
+            UIView.animate(withDuration: 1.0, delay: 0.05 * Double(index), usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                cell.transform = CGAffineTransform(translationX: 0, y: 0);
                 }, completion: nil)
             
             index += 1

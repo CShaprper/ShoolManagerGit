@@ -27,7 +27,7 @@ class DismissTransition: NSObject, UIViewControllerAnimatedTransitioning, UIView
         
         fromViewController.view.removeFromSuperview()
         
-        UIView.animate(withDuration: transitionDuration(transitionContext: transitionContext), animations: {
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
             snapshotView?.frame = fromViewController.view.frame.insetBy(dx: fromViewController.view.frame.size.width / 2, dy: fromViewController.view.frame.size.height / 2)
             toViewController.view.alpha = 1.0
             }, completion: {

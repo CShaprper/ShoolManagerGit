@@ -11,13 +11,13 @@ import UIKit
 
 extension AppDelegate:UITabBarControllerDelegate{
     
-    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController){
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController){
         print("tabBar -- didelectItem: \((viewController.title)!)")
     }
     
-    func tabBarController(tabBarController: UITabBarController, animationControllerForTransitionFromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        print(toVC.title)
+        print(toVC.title ?? "title")
         let animatedTransitioningObject = BounceTransition()
         return animatedTransitioningObject
     }  

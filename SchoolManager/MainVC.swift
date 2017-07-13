@@ -37,7 +37,7 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
     var counter = 0
     var selectedNowSubject:Subject!
     var selectedNextSubject:Subject!
-    let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     let transition = BounceTransition()
     var isNowStackTapped = false
     
@@ -46,29 +46,29 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
     ##############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "openNoteDetailWithID:", name: "openNote", object: nil)
-        self.tabBarController!.delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
+        NotificationCenter.default.addObserver(self, selector: #selector(openNoteDetailWithID), name: NSNotification.Name(rawValue: "openNote"), object: nil)
+        self.tabBarController!.delegate = UIApplication.shared.delegate as! AppDelegate
+        if !appDel.userDefaults.bool(forKey: appDel.removeAdsIdentifier){
             loadAds()
         }
         //Planer.deleteAllPlanerData(appDel.managedObjectContext)
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         InfoViewCenterXAlignment.constant -= 800
         setDashBoardUI()
         setNotesBadge()
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if shouldDisplayWelcomeMessage(){
             showWelcomeMessage()
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: Selector("handleNowStackTap:"))
-        self.nowStack.userInteractionEnabled = true
+        self.nowStack.isUserInteractionEnabled = true
         self.nowStack.addGestureRecognizer(tapGesture)
         let tapGesture2 = UITapGestureRecognizer(target: self, action: Selector("handleNextStackTap:"))
-        self.nextStack.userInteractionEnabled = true
+        self.nextStack.isUserInteractionEnabled = true
         self.nextStack.addGestureRecognizer(tapGesture2)
     }
     override func didReceiveMemoryWarning() {
@@ -76,16 +76,16 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
         // Dispose of any resources that can be recreated.
     }
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+        return UIInterfaceOrientationMask.portrait
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+        return .lightContent
     }    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
-    private func openNoteDetailWithID(){
-        self.performSegueWithIdentifier("ShowNoteDetailFromMain", sender: nil)
+    @objc private func openNoteDetailWithID(){
+        self.performSegue(withIdentifier: "ShowNoteDetailFromMain", sender: nil)
     }
     
     /*MARK: Advertising    ###############################################################################################################*/
@@ -98,14 +98,14 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
         self.appDel.adBannerView.center = CGPoint(x: view.bounds.size.width / 2, y: view.bounds.size.height - self.appDel.adBannerView.frame.size.height / 2 - 50)
         
         self.appDel.adBannerView.delegate = self
-        self.appDel.adBannerView.hidden = true
+        self.appDel.adBannerView.isHidden = true
         view.addSubview(self.appDel.adBannerView)
     }
     func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        self.appDel.adBannerView.hidden = true
+        self.appDel.adBannerView.isHidden = true
     }
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        self.appDel.adBannerView.hidden = false
+        self.appDel.adBannerView.isHidden = false
     }
     
     /*MARK: Navigation    ###############################################################################################################*/

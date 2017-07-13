@@ -42,7 +42,7 @@
             startingLineNumber = "175"
             endingLineNumber = "175"
             landmarkName = "setDashBoardUI()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -183,8 +183,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "15"
             endingLineNumber = "15"
-            landmarkName = "tabBarController(_:didSelectViewController:)"
-            landmarkType = "5">
+            landmarkName = "tabBarController(tabBarController:didSelectViewController:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -623,7 +623,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
             endingLineNumber = "18"
-            landmarkName = "animateTransition(transitionContext:)"
+            landmarkName = "animateTransition(using:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
