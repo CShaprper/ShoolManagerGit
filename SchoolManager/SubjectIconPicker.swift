@@ -37,17 +37,17 @@ class SubjectIconPicker: UIViewController, UICollectionViewDataSource, UICollect
         return iconCollection.count
     }
     // create collection view cell content
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPathIndexPath) -> UICollectionViewCell {
+    private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // deque reusable cell from collection view.
-        if let cell = collectionView.dequeueReusableCellWithReuseIdentifier("IconPickerCell", forIndexPath: indexPath as IndexPath) as? IconPickerCell{
-            cell.configureCell(self.iconCollection[indexPath.row])
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IconPickerCell", for: indexPath as IndexPath) as? IconPickerCell{
+            cell.configureCell(imagePath: self.iconCollection[indexPath.row])
             return cell
         }else{
             return IconPickerCell()
         }
     }
     // function - called when clicked on a collection view cell
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "unwindToSubjects", sender: iconCollection[indexPath.row])
     }
     
@@ -55,7 +55,7 @@ class SubjectIconPicker: UIViewController, UICollectionViewDataSource, UICollect
     ###############################################################################################################*/
     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let dest = segue.destination as? SubjectsVC{
-            print("Segue from: \(String(describing: segue.sourceViewController.title)) to: \(String(describing: segue.destination.title))")
+            print("Segue from: \(String(describing: segue.source.title)) to: \(String(describing: segue.destination.title))")
             dest.selectedImageName = sender as! String!
             dest.unwindToSubjects(segue: segue)
         }
@@ -65,7 +65,7 @@ class SubjectIconPicker: UIViewController, UICollectionViewDataSource, UICollect
     func loadIconList(){
         
         // create path for Colors.plist resource file.
-        let iconFilePath = Bundle.mainBundle().pathForResource("SubjectIcons", ofType: "plist")
+        let iconFilePath = Bundle.main.pathForResource("SubjectIcons", ofType: "plist")
         
         // save piist file array content to NSArray object
         let iconPathArray = NSArray(contentsOfFile: iconFilePath!)

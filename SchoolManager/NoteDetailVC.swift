@@ -58,14 +58,14 @@ class NoteDetailVC: UIViewController, ADBannerViewDelegate, UITextViewDelegate {
         self.appDel.adBannerView.center = CGPoint(x: view.bounds.size.width / 2, y: view.bounds.size.height - self.appDel.adBannerView.frame.size.height / 2)
         
         self.appDel.adBannerView.delegate = self
-        self.appDel.adBannerView.hidden = true
+        self.appDel.adBannerView.isHidden = true
         view.addSubview(self.appDel.adBannerView)
     }
     func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        self.appDel.adBannerView.hidden = true
+        self.appDel.adBannerView.isHidden = true
     }
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        self.appDel.adBannerView.hidden = false
+        self.appDel.adBannerView.isHidden = false
     }
     
     

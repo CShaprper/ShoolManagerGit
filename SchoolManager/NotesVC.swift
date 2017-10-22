@@ -8,7 +8,7 @@ class NotesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDel
     /*MARK: Outlet / Member    ###############################################################################################################*/
     let transition = BounceTransition()
     var notesCollection = [Note]()
-    let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     var selectedNote:Note!
     @IBOutlet var NotesCollectionView: UICollectionView!
     
@@ -19,7 +19,7 @@ class NotesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDel
             loadAds()
         }
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.reloadNotesCollection()
         self.setNotesBadge()
@@ -45,7 +45,7 @@ class NotesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDel
         self.appDel.adBannerView.hidden = true
         view.addSubview(self.appDel.adBannerView)
     }
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
+    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: Error!) {
         self.appDel.adBannerView.hidden = true
     }
     func bannerViewDidLoadAd(banner: ADBannerView!) {
@@ -53,8 +53,8 @@ class NotesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDel
     }
     
     /*MARK: CollectionView Delegates    ###############################################################################################################*/
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if let cell = NotesCollectionView.dequeueReusableCellWithReuseIdentifier("NotesViewCell", forIndexPath: indexPath) as? NotesCollectionViewCell{
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath UICollectionViewCell {
+        if let cell = NotesCollectionView.dequeueReusableCellWithReuseIdentifier("NotesViewCell", forIndexPath: indexPath as IndexPath) as? NotesCollectionViewCell{
             let note = self.notesCollection[indexPath.row]
             cell.configureCell(note)
             return cell
@@ -64,11 +64,11 @@ class NotesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDel
         }
 
     }
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
         self.selectedNote = self.notesCollection[indexPath.row]
-        self.performSegueWithIdentifier("ShowNotesDetail", sender: selectedNote)
+        self.performSegue(withIdentifier: "ShowNotesDetail", sender: selectedNote)
     }
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.notesCollection.count
     }
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -77,11 +77,11 @@ class NotesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDel
     
     
     /*MARK: Navigation    ###############################################################################################################*/
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dest = segue.destinationViewController as? AddNoteVC{
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let dest = segue.destination as? AddNoteVC{
             dest.transitioningDelegate = transition
         }
-        if let dest = segue.destinationViewController as? NoteDetailVC{
+        if let dest = segue.destination as? NoteDetailVC{
             dest.selectedNote = sender as! Note
             dest.isUserChosen = true
             dest.transitioningDelegate = transition
@@ -97,7 +97,7 @@ class NotesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDel
     
     /*MARK: Helper Functions    ###############################################################################################################*/
     func reloadNotesCollection(){
-        self.notesCollection = Note.FetchData(appDel.managedObjectContext)!
+        self.notesCollection = Note.FetchData(context: appDel.managedObjectContext)!
         if notesCollection.count > 0 {
         self.tabBarController!.tabBarItem.badgeValue = "\(notesCollection.count)"
         } else {

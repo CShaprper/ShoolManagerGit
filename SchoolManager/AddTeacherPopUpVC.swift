@@ -9,7 +9,7 @@ class AddTeacherererVC: UIViewController, UITextFieldDelegate, UIPopoverPresenta
     @IBOutlet var genderSelector: UISegmentedControl!
     
     //AppDelegate instance
-    let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     
     /*ViewController Delegates
     ##############################################################################################################*/
@@ -17,16 +17,16 @@ class AddTeacherererVC: UIViewController, UITextFieldDelegate, UIPopoverPresenta
         super.viewDidLoad()
         txtTeacherName.delegate = self
         popoverPresentationController?.delegate = self
-        UIDesignHelper.ShadowMaker(UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(15), layer: self.view.layer)
+        UIDesignHelper.ShadowMaker(UIColor.black, shadowOffset: CGFloat(15), shadowRadius: CGFloat(15), layer: self.view.layer)
         self.view.layer.borderWidth = 5
-        self.view.layer.borderColor = UIColor.clearColor().CGColor  
+        self.view.layer.borderColor = UIColor.clear.cgColor  
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().postNotificationName("load", object: nil)
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.defaultCenter().postNotificationName("load", object: nil)
     }
     //Textfield Delegate
     func textFieldShouldReturn(userText: UITextField) -> Bool {
@@ -39,8 +39,8 @@ class AddTeacherererVC: UIViewController, UITextFieldDelegate, UIPopoverPresenta
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segue.identifier!{
         case "unwindToTeacherTableView":
-            let dest = segue.destinationViewController  as! TeacherTableVC
-            dest.unwindToTeacherTableView(segue)
+            let dest = segue.destination  as! TeacherTableVC
+            dest.unwindToTeacherTableView(segue: segue)
             break
         default:
             break
@@ -56,10 +56,10 @@ class AddTeacherererVC: UIViewController, UITextFieldDelegate, UIPopoverPresenta
         if txtTeacherName.text! != ""{
             Teacher.SaveTeacher(txtTeacherName.text!, imageName: imageName, context: appDel.managedObjectContext)
         }
-        self.performSegueWithIdentifier("unwindToTeacherTableView", sender: nil)
+        self.performSegue(withIdentifier: "unwindToTeacherTableView", sender: nil)
     }
     @IBAction func btnCancelAction() {
-        self.performSegueWithIdentifier("unwindToTeacherTableView", sender: nil)
+        self.performSegue(withIdentifier: "unwindToTeacherTableView", sender: nil)
     }
    
 }

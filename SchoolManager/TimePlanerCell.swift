@@ -71,7 +71,7 @@ class TimePlanerCell: UICollectionViewCell {
             self.subjectLabel.text = ele.subject!.subject!
             self.roomLabel.text = "\("MainVC_NowRoomLabelText".localized) \(ele.room!)"
             self.roomLabel.font = UIFont(name: "Chalkboard SE", size: 12)
-            self.layer.backgroundColor = UIColor.black.CGColor
+            self.layer.backgroundColor = UIColor.black.cgColor
             //UIDesignHelper.ShadowMaker(UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(5), layer: self.layer)
         }
         if (ele.isEmptyElement == true && ele.isHeaderElement == false){
@@ -79,16 +79,16 @@ class TimePlanerCell: UICollectionViewCell {
             self.hideUIElements()
             self.BackgroundImage.isHidden = false
             self.BackgroundImage.image = UIImage(named: "PalmsTransparent")
-            self.layer.backgroundColor = UIColor.clear.CGColor
+            self.layer.backgroundColor = UIColor.clear.cgColor
         }
         if (ele.isEmptyElement == true && ele.isHeaderElement == true){
             //Build an empty orange element
             self.hideUIElements()
-            self.layer.backgroundColor = UIColor.brown.CGColor
+            self.layer.backgroundColor = UIColor.brown.cgColor
         }
         if (ele.isEmptyElement == false && ele.isHeaderElement == true){
             self.hideUIElements()
-            self.layer.backgroundColor = UIColor.brown.CGColor
+            self.layer.backgroundColor = UIColor.brown.cgColor
             if (ele.day != nil && ele.hour == nil){
                 self.roomLabel.isHidden = false
                 self.roomLabel.text = ele.day!.day
@@ -96,11 +96,11 @@ class TimePlanerCell: UICollectionViewCell {
                 self.roomLabel.textAlignment = NSTextAlignment.center
             }else if (ele.day == nil && ele.hour != nil) {
                 self.roomLabel.isHidden = false
-                self.roomLabel.text = NSDate.hourFormatter(ele.hour!.startTime!)
+                self.roomLabel.text = NSDate.hourFormatter(date: ele.hour!.startTime! as NSDate)
                 self.roomLabel.font = UIFont(name: "Chalkboard SE", size: 12)
                 self.roomLabel.textAlignment = NSTextAlignment.center
                 self.teacherLabel.isHidden = false
-                self.teacherLabel.text = NSDate.hourFormatter(ele.hour!.endTime!)
+                self.teacherLabel.text = NSDate.hourFormatter(date: ele.hour!.endTime! as NSDate)
                 self.teacherLabel.font = UIFont(name: "Chalkboard SE", size: 12)
                 self.teacherLabel.textAlignment = NSTextAlignment.center
             }

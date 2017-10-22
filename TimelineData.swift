@@ -113,8 +113,8 @@ class TimelineData: NSManagedObject {
         
         let obj = TimelineData.InsertIntoManagedObjectContext(context)
         obj.hour = hour
-        obj.startTime = sDate as! NSDate
-        obj.endTime = eDate as! NSDate
+        obj.startTime = sDate! as NSDate as Date
+        obj.endTime = eDate! as NSDate as Date
         
         do{ try context.save()
             print("TimelineData saved in Core Data from TimelineData class")

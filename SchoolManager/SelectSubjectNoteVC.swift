@@ -27,7 +27,7 @@ class SelectSubjectNoteVC: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     /*MARK: TableView Delagates    ###############################################################################################################*/
-    private func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "SelectSubjectAtNoteCell") as? SelectSubjectAtNoteCell{
             cell.configureCell(sub: self.subjectsCollection[indexPath.row])
             return cell

@@ -75,13 +75,14 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+/*TODO: Overwork
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.portrait
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .lightContent
-    }    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    } */
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     @objc private func openNoteDetailWithID(){
@@ -101,7 +102,7 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
         self.appDel.adBannerView.isHidden = true
         view.addSubview(self.appDel.adBannerView)
     }
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
+    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: Error!) {
         self.appDel.adBannerView.isHidden = true
     }
     func bannerViewDidLoadAd(banner: ADBannerView!) {
@@ -109,10 +110,10 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
     }
     
     /*MARK: Navigation    ###############################################################################################################*/
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier! == "ShowAddNotesFromMain"{
             if selectedNowSubject != nil || selectedNextSubject != nil{
-                let dest = segue.destinationViewController as! AddNoteVC
+                let dest = segue.destination as! AddNoteVC
                 if selectedNowSubject != nil && isNowStackTapped{
                     dest.selectedSubject = selectedNowSubject
                 } else if selectedNextSubject != nil && !isNowStackTapped{
@@ -127,7 +128,7 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
     /*MARK: Helper Functions    ###############################################################################################################*/
     func setDashBoardUI(){
         clearDashboardUI()
-        let myWeekday = NSCalendar.currentCalendar().components(NSCalendarUnit.Weekday, fromDate: NSDate()).weekday
+        let myWeekday = NSCalendar.currentCalendar().components(NSCalendar.Unit.Weekday, fromDate: NSDate()).weekday
         print("Weekday: \(myWeekday)")
         let fetch:[Planer] = Planer.fetchPlanerObjectsWithDaySortnumberPredicate(NSNumber(integer: myWeekday ), context: appDel.managedObjectContext)!
         print(fetch)
@@ -138,22 +139,22 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
             selectedNextSubject = nil
         }else{
             for plan in fetch{
-                let startTime = DateHelper.createDateFromComponents(2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(plan.hour!.startTime!), minute: DateHelper.GetTimeAsMinute(plan.hour!.startTime!))
-                let endtime = DateHelper.createDateFromComponents(2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(plan.hour!.endTime!), minute: DateHelper.GetTimeAsMinute(plan.hour!.endTime!))
-                let currentTime = DateHelper.createDateFromComponents(2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(NSDate()), minute: DateHelper.GetTimeAsHour(NSDate()))
+                let startTime = DateHelper.createDateFromComponents(year: 2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(plan.hour!.startTime!), minute: DateHelper.GetTimeAsMinute(plan.hour!.startTime!))
+                let endtime = DateHelper.createDateFromComponents(year: 2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(plan.hour!.endTime!), minute: DateHelper.GetTimeAsMinute(plan.hour!.endTime!))
+                let currentTime = DateHelper.createDateFromComponents(year: 2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(NSDate()), minute: DateHelper.GetTimeAsHour(NSDate()))
                 
                 let CurrentWeekNumber  = NSCalendar.currentCalendar().component(.WeekOfYear, fromDate: currentTime)
                 let isCurrentWeekEvenWeek:Bool = CurrentWeekNumber  % 2 == 0
                 
-                let hourFormatter = NSDateFormatter()
+                let hourFormatter = DateFormatter()
                 hourFormatter.dateFormat = "HH:mm"
                 print("isGreaterThan: \(hourFormatter.stringFromDate(currentTime)) - \(hourFormatter.stringFromDate(startTime)) = \(DateHelper.isGreaterThanDate(currentTime, dateToCompare: startTime)) && isLessThan: \(hourFormatter.stringFromDate(currentTime)) - \(hourFormatter.stringFromDate(endtime)) = \(DateHelper.isLessThanDate(currentTime, dateToCompare: endtime))")
                 if (DateHelper.isGreaterThanDate(currentTime, dateToCompare: startTime) || DateHelper.isSameToDate(currentTime, dateToCompare: startTime)) && (DateHelper.isLessThanDate(currentTime, dateToCompare: endtime) || DateHelper.isSameToDate(currentTime, dateToCompare: endtime)){
                     if isCurrentWeekEvenWeek && (plan.selectedWeek == 0 || plan.selectedWeek == 2){
-                        configureNowUIElement(plan)
+                        configureNowUIElement(plan: plan)
                         break
                     }else if !isCurrentWeekEvenWeek && (plan.selectedWeek == 1 || plan.selectedWeek == 2){
-                        configureNowUIElement(plan)
+                        configureNowUIElement(plan: plan)
                         break
                     }
                 } else {
@@ -162,13 +163,13 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
                 }
             }
             for plan in fetch{
-                let startTime = DateHelper.createDateFromComponents(2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(plan.hour!.startTime!), minute: DateHelper.GetTimeAsMinute(plan.hour!.startTime!))
-                let endtime = DateHelper.createDateFromComponents(2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(plan.hour!.endTime!), minute: DateHelper.GetTimeAsMinute(plan.hour!.endTime!))
-                let currentTime = DateHelper.createDateFromComponents(2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(NSDate()), minute: DateHelper.GetTimeAsHour(NSDate()))
+                let startTime = DateHelper.createDateFromComponents(year: 2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(plan.hour!.startTime!), minute: DateHelper.GetTimeAsMinute(plan.hour!.startTime!))
+                let endtime = DateHelper.createDateFromComponents(year: 2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(plan.hour!.endTime!), minute: DateHelper.GetTimeAsMinute(plan.hour!.endTime!))
+                let currentTime = DateHelper.createDateFromComponents(year: 2016, month: 01, day: 01, hour: DateHelper.GetTimeAsHour(NSDate()), minute: DateHelper.GetTimeAsHour(NSDate()))
                 
                 print("isLessThan: \(NSDate.hourFormatter(currentTime)) - \(NSDate.hourFormatter(startTime)) = \(DateHelper.isLessThanDate(currentTime, dateToCompare: startTime)) && isLessThan: \(NSDate.hourFormatter(currentTime)) - \(NSDate.hourFormatter(endtime)) = \(DateHelper.isLessThanDate(currentTime, dateToCompare: endtime))")
                 if DateHelper.isLessThanDate(currentTime, dateToCompare: startTime) && DateHelper.isLessThanDate(currentTime, dateToCompare: endtime){
-                    configureNextUIElement(plan)
+                    configureNextUIElement(plan: plan)
                     break
                 }
             }
@@ -185,8 +186,8 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
         self.nowTeacherLabel.text = plan.teacher!.name!
         self.nowBackgroundImageView.image = nil
         self.nowHourNumberLabel.text = "\(plan.hour!.hour!)."
-        self.nowHourLabel.text = "\("MainVC_NowHourStartLabelText".localized)  \(NSDate.hourFormatter(plan.hour!.startTime!))"
-        self.nowendHourLabel.text = "\("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(plan.hour!.endTime!))"
+        self.nowHourLabel.text = "\("MainVC_NowHourStartLabelText".localized)  \(NSDate.hourFormatter(date: plan.hour!.startTime!))"
+        self.nowendHourLabel.text = "\("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(date: plan.hour!.endTime!))"
         selectedNowSubject = plan.subject
     }
     func configureNextUIElement(plan:Planer){
@@ -199,8 +200,8 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
         self.nextRoomLabel.text = "\("MainVC_NowRoomLabelText".localized) \(plan.room!)"
         self.nextTeacherLabel.text = plan.teacher!.name!
         self.nextHourNumberLabel.text = "\(plan.hour!.hour!)."
-        self.nextHourLabel.text = "\("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(plan.hour!.startTime!))"
-        self.nextEndTimeLabel.text = "\("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(plan.hour!.endTime!))"
+        self.nextHourLabel.text = "\("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(date: plan.hour!.startTime!))"
+        self.nextEndTimeLabel.text = "\("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(date: plan.hour!.endTime!))"
         selectedNextSubject = plan.subject!
     }
     
@@ -212,7 +213,7 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
         self.nowRoomLabel.text = ""
         self.nowendHourLabel.text = ""
         self.nowHourNumberLabel.text = ""
-        self.SubjectColorView.backgroundColor = UIColor.clearColor()
+        self.SubjectColorView.backgroundColor = UIColor.clear
         self.nowBackgroundImageView.image = nil
         self.nowSubjectImage.image = nil
         self.nowTeacherGenderImage.image = nil
@@ -221,7 +222,7 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
         self.nextHourLabel.text = ""
         self.nextRoomLabel.text = ""
         self.nextSubjectImageView.image = nil
-        self.nextSubjectColorView.backgroundColor = UIColor.clearColor()
+        self.nextSubjectColorView.backgroundColor = UIColor.clear
         self.nextSubjectLabel.text = ""
         self.nextTeacherGenderImageView.image = nil
         self.nextTeacherLabel.text = ""
@@ -230,7 +231,7 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
     }
     
     @IBAction func hideWelcomeMessageAction() {
-        UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
             self.InfoViewCenterXAlignment.constant -= 800
             self.view.layoutIfNeeded()
             }, completion: { (hideWelcomeMessageAction) -> Void in self.tabBarController?.selectedIndex = 3 })
@@ -238,7 +239,7 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
     private func showWelcomeMessage(){
         WelcomeLabel.text = "DashboardWelcomeHeader".localized
         WelcomeTextView.text = "DashboardWelcomeMessage".localized
-        UIView.animateWithDuration(1.0, delay: 0.2, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+        UIView.animate(withDuration: 1.0, delay: 0.2, options: UIViewAnimationOptions.curveEaseOut, animations: {
             self.InfoViewCenterXAlignment.constant += 800
             self.view.layoutIfNeeded()
             }, completion: nil)
@@ -255,7 +256,7 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
     }
     
     private func setNotesBadge(){
-        let notes = Note.FetchData(appDel.managedObjectContext)
+        let notes = Note.FetchData(context: appDel.managedObjectContext)
         let tabBarController = appDel.window?.rootViewController as! UITabBarController
         let tabBarRootViewControllers: Array = tabBarController.viewControllers!
         if notes!.count > 0{
@@ -268,14 +269,14 @@ class MainVC:UIViewController, UITabBarControllerDelegate, ADBannerViewDelegate,
     func handleNowStackTap(sender: UITapGestureRecognizer? = nil) {
         if selectedNowSubject != nil {
             isNowStackTapped = true
-            self.performSegueWithIdentifier("ShowAddNotesFromMain", sender: selectedNowSubject)
+            self.performSegue(withIdentifier: "ShowAddNotesFromMain", sender: selectedNowSubject)
         }
     }
     
     func handleNextStackTap(sender: UITapGestureRecognizer? = nil) {
         if selectedNextSubject != nil{
             isNowStackTapped = false
-            self.performSegueWithIdentifier("ShowAddNotesFromMain", sender: selectedNextSubject)
+            self.performSegue(withIdentifier: "ShowAddNotesFromMain", sender: selectedNextSubject)
         }
     }
     

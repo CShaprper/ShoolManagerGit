@@ -41,7 +41,7 @@ class DateHelper{
      */
    static func GetTimeAsHour(date:NSDate)->Int{
         let dateComponents = NSDateComponents()
-        dateComponents.hour = NSCalendar.current.components(NSCalendar.Unit.Hour, fromDate: date).hour
+    dateComponents.hour = NSCalendar.current.component(.hour, from: date as Date)
         return dateComponents.hour
     }
     /**
@@ -53,7 +53,7 @@ class DateHelper{
      */
    static func GetTimeAsMinute(date:NSDate)->Int{
         let dateComponents = NSDateComponents()
-        dateComponents.minute = NSCalendar.current.components(NSCalendar.Unit.Minute, fromDate: date).minute
+    dateComponents.minute = NSCalendar.current.component(.minute, from: date as Date)
         return dateComponents.minute
     }
     

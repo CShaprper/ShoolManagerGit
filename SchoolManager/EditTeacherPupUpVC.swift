@@ -21,7 +21,7 @@ class EditTeacherVC: UIViewController, UIPopoverPresentationControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         txtTeacherName.delegate = self
-        UIDesignHelper.ShadowMaker(UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.saveButton.layer)
+        UIDesignHelper.ShadowMaker(shadowColor: UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.saveButton.layer)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -43,7 +43,7 @@ class EditTeacherVC: UIViewController, UIPopoverPresentationControllerDelegate, 
         return true;
     }
     
-    func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         btnSaveTeacherAction()
         return true
     }
@@ -51,9 +51,9 @@ class EditTeacherVC: UIViewController, UIPopoverPresentationControllerDelegate, 
     
     /*Prepare For Segue    ##############################################################################################################*/
     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("Segue from: \(segue.sourceViewController.title) to: \(segue.destinationViewController.title)")
-        if let dest = segue.destinationViewController as? TeacherTableVC{
-            dest.unwindToTeacherTableView(segue)
+        print("Segue from: \(String(describing: segue.sourceViewController.title)) to: \(String(describing: segue.destinationViewController.title))")
+        if let dest = segue.destination as? TeacherTableVC{
+            dest.unwindToTeacherTableView(segue: segue)
         }
     }
 
@@ -68,6 +68,6 @@ class EditTeacherVC: UIViewController, UIPopoverPresentationControllerDelegate, 
              myTeacherToEdit!.iamgeName = "FemaleIcon"
         }
         Teacher.EditTeacher(myTeacherToEdit!, context: appDel.managedObjectContext)
-        self.performSegueWithIdentifier("unwindToTeacherTableView", sender: nil)
+    self.performSegue(withIdentifier: "unwindToTeacherTableView", sender: nil)
     }
 }

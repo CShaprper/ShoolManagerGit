@@ -25,9 +25,9 @@ class NotificationManager {
     static func fixNotificationDate(dateToFix: NSDate) -> NSDate {
         let calendar = NSCalendar.current
         let dateComponents:NSDateComponents!
-        dateComponents = dateComponents.components([NSCalendar.Unit.Year, NSCalendar.Unit.Month, .Day, NSCalendar.Unit.Hour, NSCalendar.Unit.Minute], fromDate: dateToFix)
+        //dateComponents = dateComponents.calendar!.component(.year, .month, .day, .hour, .minute, from: dateToFix) //TODO: Overwork
         dateComponents.second = 0
-        let fixedDate: NSDate! = NSCalendar.currentCalendar.dateComponents(dateComponents)
+        let fixedDate: NSDate! = NSCalendar.current.date(from: dateComponents as DateComponents) as! NSDate
         return fixedDate
     }
     
@@ -47,7 +47,7 @@ class NotificationManager {
         notification.category = notificationCategory
         notification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
         let infoDict :  Dictionary<String,String?> = ["objectId" : objectID]
-        notification.userInfo = infoDict  ?? "";
+        notification.userInfo = infoDict;
         UIApplication.shared.scheduleLocalNotification(notification)
     }
     
@@ -68,7 +68,7 @@ class NotificationManager {
         notification.category = notificationCategory
         notification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
         let infoDict :  Dictionary<String,String?> = ["objectId" : objectID]
-        notification.userInfo = infoDict ?? "";
+        notification.userInfo = infoDict;
         UIApplication.shared.scheduleLocalNotification(notification)
     }
     
