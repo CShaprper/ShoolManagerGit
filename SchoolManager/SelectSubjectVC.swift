@@ -12,20 +12,20 @@ class SelectSubjectVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     /*MARK: Outlets Members    ###############################################################################################################*/
     @IBOutlet var subjectsTableView: UITableView!
     
-    let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     var subjectsCollection:[Subject]!
     
     /*MARK: ViewController Delagates    ###############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
         popoverPresentationController?.delegate = self
-        subjectsTableView.backgroundColor  = UIColor.clearColor()
+        subjectsTableView.backgroundColor  = UIColor.clear
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadSubjectsTableView()
     }
@@ -35,16 +35,16 @@ class SelectSubjectVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.subjectsCollection.count
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {        
-       self.performSegueWithIdentifier("unwindToPlanerSetup", sender: self.subjectsCollection[indexPath.row])
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "unwindToPlanerSetup", sender: self.subjectsCollection[indexPath.row])
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("SelectSubjectCell") as? SelectSubjectCell{
-            cell.configureCell(self.subjectsCollection[indexPath.row])
+    private func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "SelectSubjectCell") as? SelectSubjectCell{
+            cell.configureCell(sub: self.subjectsCollection[indexPath.row])
             return cell
         }else{
             return SelectSubjectCell()
@@ -52,11 +52,11 @@ class SelectSubjectVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
 
    /*MARK: Navigation    ###############################################################################################################*/
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("Segue from: \(segue.sourceViewController.title) to: \(segue.destinationViewController.title)")
-        if let dest = segue.destinationViewController as? PlanerSetupVC{
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("Segue from: \(String(describing: segue.source.title)) to: \(String(describing: segue.destination.title))")
+        if let dest = segue.destination as? PlanerSetupVC{
             dest.selectedSubject = sender as? Subject
-            dest.unwindToPlanerSetup(segue)
+            dest.unwindToPlanerSetup(segue: segue)
         }
     }
 

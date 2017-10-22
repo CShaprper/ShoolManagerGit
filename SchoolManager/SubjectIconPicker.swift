@@ -23,7 +23,7 @@ class SubjectIconPicker: UIViewController, UICollectionViewDataSource, UICollect
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
@@ -53,7 +53,7 @@ class SubjectIconPicker: UIViewController, UICollectionViewDataSource, UICollect
     
     /*MARK: Navigation
     ###############################################################################################################*/
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let dest = segue.destinationViewController as? SubjectsVC{
             print("Segue from: \(segue.sourceViewController.title) to: \(segue.destinationViewController.title)")
             dest.selectedImageName = sender as! String!

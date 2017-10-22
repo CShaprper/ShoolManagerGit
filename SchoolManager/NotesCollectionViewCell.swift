@@ -18,7 +18,7 @@ class NotesCollectionViewCell: UICollectionViewCell {
     func configureCell(note:Note){
         self.subjectLabel.text = note.subject!.subject
         self.notesTextLabel.text = note.note
-        self.dueDateLabel.text = NSDate.dateTimeFormatter(note.reminderDate!)
+        self.dueDateLabel.text = NSDate.dateTimeFormatter(date: note.reminderDate!)
         self.notesBGImage.image = UIImage(named: "WhiteNote")
     }
 }

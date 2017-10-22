@@ -19,7 +19,7 @@ class SelectSubjectCell: UITableViewCell {
         self.SubjectImage.image = UIImage(named: sub.imageName!)
         self.SubjectLabel.text = sub.subject
         self.SubjectLabel.layer.cornerRadius = 15
-        self.subjectColorView.backgroundColor  = UIColor.clearColor()
+        self.subjectColorView.backgroundColor  = UIColor.clear
         self.subjectColorView.layer.cornerRadius = 5
         self.subjectColorView.backgroundColor = ColorHelper.convertHexToUIColor(hexColor: sub.color!)
     }   

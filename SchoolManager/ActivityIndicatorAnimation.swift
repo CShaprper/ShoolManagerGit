@@ -14,18 +14,18 @@ class ActivityIndicatorAnimation : IAnimation {
     
     init(presentingView:UIViewController){
         self._presentingView = presentingView
-        self._indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+        self._indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         self._indicatorView.center = CGPoint(x: self._presentingView.view.bounds.width / 2, y: self._presentingView.view.bounds.height / 2)
         self._presentingView.view.addSubview(self._indicatorView)
     }
     
     func beginAnimation() {
-        self._indicatorView.hidden = false
+        self._indicatorView.isHidden = false
         self._indicatorView.startAnimating()
     }
     
     func endAnimation() {
-        self._indicatorView.hidden = true
+        self._indicatorView.isHidden = true
         self._indicatorView.stopAnimating()
     }
 }

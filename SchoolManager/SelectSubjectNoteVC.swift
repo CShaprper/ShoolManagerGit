@@ -12,7 +12,7 @@ class SelectSubjectNoteVC: UIViewController, UITableViewDataSource, UITableViewD
     /*MARK: Outlets Members    ###############################################################################################################*/
     @IBOutlet var subjectsTableView: UITableView!
     
-    let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     var subjectsCollection:[Subject]!
     
     /*MARK: ViewController Delegates    ###############################################################################################################*/
@@ -21,7 +21,7 @@ class SelectSubjectNoteVC: UIViewController, UITableViewDataSource, UITableViewD
         popoverPresentationController?.delegate = self
         subjectsTableView.backgroundColor  = UIColor.clearColor()
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadSubjectsTableView()
     }
@@ -46,7 +46,7 @@ class SelectSubjectNoteVC: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     /*MARK: Navigation    ###############################################################################################################*/
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let dest = segue.destinationViewController as? AddNoteVC{
             dest.selectedSubject = sender as? Subject
             dest.unwindToAddNote(segue)

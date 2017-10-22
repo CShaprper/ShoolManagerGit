@@ -30,7 +30,7 @@ class DateHelper{
         dateComponents.second = 0
         dateComponents.timeZone = NSTimeZone.system
         let calendar = NSCalendar.current
-        return calendar.dateFromComponents(dateComponents)!
+        return calendar.dateComponents(dateComponents)!
     }
     /**
      **Gets hour as Integer value from an NSDate**

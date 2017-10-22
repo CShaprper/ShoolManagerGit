@@ -15,7 +15,7 @@ class TeacherTableVC: UIViewController,UITableViewDataSource, UITableViewDelegat
     /*Members    ###############################################################################################################*/
     var myTeachers:[NSManagedObject]? = nil
     var selectedTeacher:Teacher!
-    let appDel = UIApplication.sharedApplication().delegate  as! AppDelegate
+    let appDel = UIApplication.shared.delegate  as! AppDelegate
     private var iiEditAction:Bool = false
     
     
@@ -23,33 +23,34 @@ class TeacherTableVC: UIViewController,UITableViewDataSource, UITableViewDelegat
     /*ViewController Delegates    ##############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
+        if !appDel.userDefaults.bool(forKey: appDel.removeAdsIdentifier){
             loadAds()
         }
-        tableview.backgroundColor  = UIColor.clearColor()
-        UIDesignHelper.ShadowMaker(UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.txtTeacherName.layer)
-        UIDesignHelper.ShadowMaker(UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.genderSelector.layer)
-        UIDesignHelper.ShadowMaker(UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.saveButton.layer)
+        tableview.backgroundColor  = UIColor.clear
+        UIDesignHelper.ShadowMaker(shadowColor: UIColor.black, shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.txtTeacherName.layer)
+        UIDesignHelper.ShadowMaker(shadowColor: UIColor.black, shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.genderSelector.layer)
+        UIDesignHelper.ShadowMaker(shadowColor: UIColor.black, shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.saveButton.layer)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         myTeachers = Teacher.FetchData(appDel.managedObjectContext)
         self.tableview.reloadData()
         self.tableview.AnimateTable()
     }
-    override func shouldAutorotate() -> Bool {
+    func shouldAutorotate() -> Bool {
         return false
     }
+/*TODO: Overwork
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+        return UIInterfaceOrientationMask.portrait
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
-    }
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        return .lightContentlightContent
+    }*/
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
@@ -64,20 +65,20 @@ class TeacherTableVC: UIViewController,UITableViewDataSource, UITableViewDelegat
         self.appDel.adBannerView.center = CGPoint(x: view.bounds.size.width / 2, y: view.bounds.size.height - self.appDel.adBannerView.frame.size.height / 2)
         
         self.appDel.adBannerView.delegate = self
-        self.appDel.adBannerView.hidden = true
+        self.appDel.adBannerView.isHidden = true
         view.addSubview(self.appDel.adBannerView)
     }
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        self.appDel.adBannerView.hidden = true
+    func bannerView(_ banner: ADBannerView!, didFailToReceiveAdWithError error: Error!) {
+        self.appDel.adBannerView.isHidden = true
     }
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        self.appDel.adBannerView.hidden = false
+        self.appDel.adBannerView.isHidden = false
     }
     
     /*Prepare For Segue    ##############################################################################################################*/
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dest = segue.destinationViewController as? EditTeacherVC, popPC = dest.popoverPresentationController{
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let dest = segue.destination as? EditTeacherVC, let popPC = dest.popoverPresentationController{
             dest.myTeacherToEdit = self.selectedTeacher
             popPC.popoverLayoutMargins = UIEdgeInsetsMake(60, 30, 30, 30)
             popPC.delegate = self
@@ -89,15 +90,15 @@ class TeacherTableVC: UIViewController,UITableViewDataSource, UITableViewDelegat
     
     
     /*TableView Delegate    ##############################################################################################################*/
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         _ = tableview.indexPathForSelectedRow
         self.selectedTeacher = self.myTeachers![indexPath.row] as! Teacher
         createActionSheetAlert(selectedElement: self.selectedTeacher)
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "TeacherCell") as? TeacherCell{
             cell.CofigureCell(teacher: myTeachers![indexPath.row] as! Teacher)
             return cell
@@ -127,7 +128,7 @@ class TeacherTableVC: UIViewController,UITableViewDataSource, UITableViewDelegat
         if txtTeacherName.text! != ""{
             Teacher.SaveTeacher(txtTeacherName.text!, imageName: tisimageName, context: appDel.managedObjectContext)
         }
-        textFieldShouldReturn(textField: txtTeacherName)
+        textFieldShouldReturn(txtTeacherName)
         ReloadTableView()
     }
     

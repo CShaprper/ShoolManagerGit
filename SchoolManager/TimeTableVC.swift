@@ -70,13 +70,14 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+/*TODO: Overwork
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
     return true
-    }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    }*/
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
@@ -93,7 +94,7 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
         self.appDel.adBannerView.isHidden = true
         view.addSubview(self.appDel.adBannerView)
     }
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
+    func bannerView(_ banner: ADBannerView!, didFailToReceiveAdWithError error: Error!) {
         self.appDel.adBannerView.isHidden = true
     }
     func bannerViewDidLoadAd(banner: ADBannerView!) {
@@ -110,7 +111,7 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
             return TimePlanerCell()
         }
     }
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row != 0 && indexPath.section != 0{
             let tte = timeTableCollection[indexPath.section].planerElements[indexPath.row]
             if tte.isEmptyElement as! Bool{
@@ -138,7 +139,7 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
     
     
     /*MARK: Navigation    ###############################################################################################################*/
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if !appDel.userDefaults.bool(forKey: appDel.removeAdsIdentifier){
             counter += 1
             if counter == 3 {
@@ -155,8 +156,8 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
             }
         }
         if self.isEditAction!{
-            if let editElement:Planer? = sender as? Planer{
-                if  editElement != nil && editElement?.isEmptyElement as! Bool == false{
+            if let editElement:Planer = sender as? Planer{
+                if  editElement != nil && editElement.isEmptyElement as! Bool == false{
                     if let dest = segue.destination as? PlanerSetupVC{
                         dest.planerToEdit = editElement
                         dest.isEditAction = self.isEditAction
@@ -165,9 +166,9 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
                 }
             }
         }else if self.isAddAction!{
-            if let indexP:NSIndexPath? = sender as? NSIndexPath{
+            if let indexP:NSIndexPath = sender as? NSIndexPath{
                 if let dest = segue.destination as? PlanerSetupVC{
-                    dest.indexPath = indexP!
+                    dest.indexPath = indexP
                     dest.isAddAction = self.isAddAction
                     dest.transitioningDelegate = transition
                 }
@@ -195,7 +196,7 @@ class TimeTableVC: UIViewController, UITabBarControllerDelegate, UICollectionVie
         var isVeryFirstElement = true
         //Iterate all hours / TimeLindeData for Section Headers
         for tld in tldCollection{
-            print(tld.hour)
+            print(tld.hour!)
             //VeryFirstElement needs to be empty
             if isVeryFirstElement{
                 //Create TimeTableElement for each Timeline hour to append to TableViewCollection

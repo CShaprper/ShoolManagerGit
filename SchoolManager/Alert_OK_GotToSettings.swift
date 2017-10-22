@@ -17,18 +17,18 @@ class Alert_OK_GoToSettings: IAlert_OneAction{
     }
     
     func showAlert_OneAction(title:String, message:String, actionTitle:String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (UIAlertAction) -> Void in  }))
-        alert.addAction(UIAlertAction(title: actionTitle, style: .Default, handler: { (UIAlertAction) -> Void in
-            alert.dismissViewControllerAnimated(true, completion: nil)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (UIAlertAction) -> Void in  }))
+        alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { (UIAlertAction) -> Void in
+            alert.dismiss(animated: true, completion: nil)
             
             let url: NSURL? = NSURL(string: UIApplicationOpenSettingsURLString)
             if url != nil{
-                UIApplication.sharedApplication().openURL(url!)
+                UIApplication.shared.openURL(url! as URL)
             }
             
         }))
         
-        self._presentingView.presentViewController(alert, animated: true, completion: nil)
+        self._presentingView.present(alert, animated: true, completion: nil)
     }
 }

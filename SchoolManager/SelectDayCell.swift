@@ -13,7 +13,7 @@ class SelectDayCell: UITableViewCell {
     @IBOutlet var DayLabel: UILabel!
 
     func configureCell(day: Day){
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         DayLabel.text = day.day
     }
 }

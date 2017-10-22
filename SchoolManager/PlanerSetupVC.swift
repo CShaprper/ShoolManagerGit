@@ -15,7 +15,7 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
     @IBOutlet var weekSegementControl: UISegmentedControl!
     @IBOutlet var saveButton: UIButton!
     
-    let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     var isEditAction:Bool = false
     var isAddAction:Bool = false
     var selectedRoom:String!
@@ -32,7 +32,7 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
     ###############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
+        if !appDel.userDefaults.bool(forKey: appDel.removeAdsIdentifier){
             loadAds()
         }
         popoverPresentationController?.delegate = self
@@ -40,13 +40,13 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
         self.SubjectColorView.layer.cornerRadius = 5
         self.weekSegementControl.selectedSegmentIndex = -1
         self.selectedWeekSegment = -1
-        UIDesignHelper.ShadowMaker(UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.saveButton.layer)
+        UIDesignHelper.ShadowMaker(shadowColor: UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.saveButton.layer)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setEditActionUIValues()
     }
@@ -55,6 +55,7 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
         userText.resignFirstResponder()
         return true;
     }
+/*TODO: Overwork
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait
     }
@@ -63,7 +64,7 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
-    }
+    }*/
     
     /*MARK: Advertising    ###############################################################################################################*/
     func loadAds(){
@@ -75,57 +76,57 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
         self.appDel.adBannerView.center = CGPoint(x: view.bounds.size.width / 2, y: view.bounds.size.height - self.appDel.adBannerView.frame.size.height / 2)
         
         self.appDel.adBannerView.delegate = self
-        self.appDel.adBannerView.hidden = true
+        self.appDel.adBannerView.isHidden = true
         view.addSubview(self.appDel.adBannerView)
     }
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        self.appDel.adBannerView.hidden = true
+    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: Error!) {
+        self.appDel.adBannerView.isHidden = true
     }
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        self.appDel.adBannerView.hidden = false
+        self.appDel.adBannerView.isHidden = false
     }
     
     /*MARK: Navigation    ###############################################################################################################*/
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("Segue from: \(segue.sourceViewController.title!) to: \(segue.destinationViewController.title!)")
-        if let dest = segue.destinationViewController as? SelectTeacherVC,
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("Segue from: \(segue.source.title!) to: \(segue.destination.title!)")
+        if let dest = segue.destination as? SelectTeacherVC,
             let popPC = dest.popoverPresentationController{
                 popPC.delegate = self
         }
-        if let dest = segue.destinationViewController as? SelectDayVC,
+        if let dest = segue.destination as? SelectDayVC,
             let popPC = dest.popoverPresentationController{
                 popPC.delegate = self
         }
-        if let dest = segue.destinationViewController as? SelectHourVC,
+        if let dest = segue.destination as? SelectHourVC,
             let popPC = dest.popoverPresentationController{
                 popPC.delegate = self
         }
-        if let dest = segue.destinationViewController as? SelectSubjectVC,
+        if let dest = segue.destination as? SelectSubjectVC,
             let popPC = dest.popoverPresentationController{
                 popPC.delegate = self
         }
-        if let dest = segue.destinationViewController as? TimeTableVC{
-            dest.unwindToTimeTable(segue)
+        if let dest = segue.destination as? TimeTableVC{
+            dest.unwindToTimeTable(segue: segue)
             dest.transitioningDelegate = transition
         }
     }
     @IBAction func unwindToPlanerSetup(segue: UIStoryboardSegue){
-        if let _ = segue.sourceViewController as? SelectTeacherVC{
+        if let _ = segue.source as? SelectTeacherVC{
             print("Selected Teacher: \(selectedTeacher!.name!)")
             self.SelectTeacherLabel.text = self.selectedTeacher!.name
         }
-        if let _ = segue.sourceViewController as? SelectSubjectVC{
+        if let _ = segue.source as? SelectSubjectVC{
             print("Selected Subject: \(selectedSubject!.subject!)")
             self.SelectSubjectLabel.text = self.selectedSubject!.subject
             self.SubjectColorView.backgroundColor = ColorHelper.convertHexToUIColor(hexColor: self.selectedSubject!.color!)
         }
-        if let _ = segue.sourceViewController as? SelectDayVC{
+        if let _ = segue.source as? SelectDayVC{
             print("Selected Day: \(selectedDay!.day!)")
             self.SelectDayLabel.text = self.selectedDay!.day
         }
-        if let _ = segue.sourceViewController as? SelectHourVC{
-            print("Selected Hour: \(selectedHour!.hour!) \("MainVC_NowHourStartLabelText".localized) \(self.GetTimeAsHour(self.selectedHour!.startTime!)) \("MainVC_NowHourEndLabelText".localized) \(self.GetTimeAsMinute(selectedHour!.endTime!))")
-            self.SelectHourLabel.text = "\(self.selectedHour!.hour!). \("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(self.selectedHour!.startTime!)) \("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(self.selectedHour!.endTime!))"
+        if let _ = segue.source as? SelectHourVC{
+            print("Selected Hour: \(selectedHour!.hour!) \("MainVC_NowHourStartLabelText".localized) \(self.GetTimeAsHour(date: self.selectedHour!.startTime!)) \("MainVC_NowHourEndLabelText".localized) \(self.GetTimeAsMinute(selectedHour!.endTime!))")
+            self.SelectHourLabel.text = "\(self.selectedHour!.hour!). \("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(date: self.selectedHour!.startTime!)) \("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(self.selectedHour!.endTime!))"
         }
     }
     
@@ -135,42 +136,42 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
         selectedWeekSegment = sender.selectedSegmentIndex
     }
     @IBAction func SaveButtonAction() {
-        textFieldShouldReturn(RoomTextField)
+        textFieldShouldReturn(userText: RoomTextField)
         
         if RoomTextField.text != nil && RoomTextField.text == ""{
-            let alert = UIAlertController( title: "Alert_MissingData_Title".localized, message: "PlanerSetup_MissingRoom_Message".localized, preferredStyle: .Alert )
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController( title: "Alert_MissingData_Title".localized, message: "PlanerSetup_MissingRoom_Message".localized, preferredStyle: .alert )
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
             return
         }
         if selectedSubject == nil{
-            let alert = UIAlertController(title: "Alert_MissingData_Title".localized, message: "PlanerSetup_MissingSubject_Message".localized,preferredStyle: .Alert )
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil) )
-            presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Alert_MissingData_Title".localized, message: "PlanerSetup_MissingSubject_Message".localized,preferredStyle: .alert )
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil) )
+            present(alert, animated: true, completion: nil)
             return
         }
         if selectedTeacher == nil{
-            let alert = UIAlertController(title: "Alert_MissingData_Title".localized, message: "PlanerSetup_MissingTeacher_Message".localized, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Alert_MissingData_Title".localized, message: "PlanerSetup_MissingTeacher_Message".localized, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
             return
         }
         if selectedHour == nil{
-            let alert = UIAlertController( title: "Alert_MissingData_Title".localized, message: "PlanerSetup_MissingHour_Message".localized,preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController( title: "Alert_MissingData_Title".localized, message: "PlanerSetup_MissingHour_Message".localized,preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
             return
         }
         if selectedDay == nil{
-            let alert = UIAlertController( title: "Alert_MissingData_Title".localized, message: "PlanerSetup_MissingDay_Message".localized,preferredStyle: .Alert )
-            alert.addAction(UIAlertAction(title: "OK", style: .Default,handler: nil))
-            presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController( title: "Alert_MissingData_Title".localized, message: "PlanerSetup_MissingDay_Message".localized,preferredStyle: .alert )
+            alert.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))
+            present(alert, animated: true, completion: nil)
             return
         }
         if selectedWeekSegment == -1{
-            let alert = UIAlertController( title: "Alert_MissingData_Title".localized, message: "PlanerSetup_MissingWeeknumber_Message".localized, preferredStyle: .Alert )
-            alert.addAction(UIAlertAction(title: "OK", style: .Default,handler: nil))
-            presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController( title: "Alert_MissingData_Title".localized, message: "PlanerSetup_MissingWeeknumber_Message".localized, preferredStyle: .alert )
+            alert.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))
+            present(alert, animated: true, completion: nil)
             return
         }
         
@@ -183,21 +184,21 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
             planerToEdit.day = selectedDay
             planerToEdit.room = RoomTextField.text
             planerToEdit.isEmptyElement = false
-            planerToEdit.selectedWeek = selectedWeekSegment
-            Planer.EditPlanerObject(planerToEdit, context: appDel.managedObjectContext)
+            planerToEdit.selectedWeek = selectedWeekSegment as NSNumber
+            Planer.EditPlanerObject(planerToEdit: planerToEdit, context: appDel.managedObjectContext)
             self.isEditAction = false
-            self.performSegueWithIdentifier("unwindToTimeTable", sender: nil)
+            self.performSegue(withIdentifier: "unwindToTimeTable", sender: nil)
         }else if self.isAddAction{
             print("selectedWeekSegment: \(selectedWeekSegment) selectedDay: \((selectedDay?.day)!)")
-            let planer = Planer.fetchExistingPlanerElement(selectedHour!.hour!, day: selectedDay!.day!,context: appDel.managedObjectContext)
+            let planer = Planer.fetchExistingPlanerElement(hourSortnumber: selectedHour!.hour!, day: selectedDay!.day!,context: appDel.managedObjectContext)
             if planer!.count > 0 && (selectedWeekSegment  == 2  || planer![0].selectedWeek == selectedWeekSegment as Int) {
                 let alert = UIAlertController(title: "Alert_AddingDisabled_Title".localized, message: "\("PlanerSetup_Hour_Message".localized) \(selectedHour!.hour!) \("PlanerSetup_HourOnDay_Message".localized) \(selectedDay!.day!) \("PlanerSetup_HourCollides_Message".localized) \((planer?[0].subject?.subject)!) \("PlanerSetup_AtTime_Message".localized) \((planer?[0].hour?.hour)!). \((planer?[0].hour?.startTime)!) - \((planer?[0].hour?.endTime)!) \("PlanerSetup_OnDay_Message".localized) \((planer?[0].day?.day)!) \("PlanerSetup_RestMessage".localized)", preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                 presentViewController(alert, animated: true, completion: nil)
             }else{
-                Planer.savePlaner(false, strRoom: RoomTextField.text!, selectedWeek: selectedWeekSegment, subject: selectedSubject!, hour: selectedHour!, day: selectedDay!, teacher: selectedTeacher!, context: appDel.managedObjectContext)
+                Planer.savePlaner(isHeaderElement: false, strRoom: RoomTextField.text!, selectedWeek: selectedWeekSegment, subject: selectedSubject!, hour: selectedHour!, day: selectedDay!, teacher: selectedTeacher!, context: appDel.managedObjectContext)
                 resetPlanerUIAndSelectedValues()
-                self.performSegueWithIdentifier("unwindToTimeTable", sender: nil)
+                self.performSegue(withIdentifier: "unwindToTimeTable", sender: nil)
             }
         }
     }
@@ -211,12 +212,12 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
             self.selectedRoom = planerToEdit.room!
             self.selectedSubject = planerToEdit.subject!
             self.RoomTextField.text = planerToEdit.room!
-            self.selectedWeekSegment = planerToEdit.selectedWeek!.integerValue
-            self.weekSegementControl.selectedSegmentIndex = planerToEdit.selectedWeek!.integerValue
+            self.selectedWeekSegment = planerToEdit.selectedWeek!.intValue
+            self.weekSegementControl.selectedSegmentIndex = planerToEdit.selectedWeek!.intValue
             self.SelectDayLabel.text = planerToEdit.day!.day!
             self.SelectTeacherLabel.text = planerToEdit.teacher!.name!
             self.SelectSubjectLabel.text = planerToEdit.subject!.subject!
-            self.SelectHourLabel.text = "\("PlanerSetup_Hour".localized) \(planerToEdit.hour!.hour!) \("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(planerToEdit.hour!.startTime!)) \("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(planerToEdit.hour!.endTime!))"
+            self.SelectHourLabel.text = "\("PlanerSetup_Hour".localized) \(planerToEdit.hour!.hour!) \("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(date: planerToEdit.hour!.startTime!)) \("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(planerToEdit.hour!.endTime!))"
             self.SubjectColorView.backgroundColor = ColorHelper.convertHexToUIColor(hexColor: planerToEdit.subject!.color!)
             self.isAddAction = false
         }else if isAddAction{
@@ -224,7 +225,7 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
             let hours = TimelineData.FetchData(appDel.managedObjectContext) 
             self.selectedHour = hours![indexPath.section - 1]
             self.selectedDay = days![indexPath.row - 1]
-            self.SelectHourLabel.text = "\("PlanerSetup_Hour".localized) \(selectedHour!.hour!) \("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(selectedHour!.startTime!)) \("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(selectedHour!.endTime!))"
+            self.SelectHourLabel.text = "\("PlanerSetup_Hour".localized) \(selectedHour!.hour!) \("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(date: selectedHour!.startTime!)) \("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(selectedHour!.endTime!))"
             self.SelectDayLabel.text = selectedDay!.day!
             self.isEditAction = false
         }
@@ -241,10 +242,10 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
         self.SelectDayLabel.text = "PlanerSetup_MissingDay_Message".localized
         self.SelectHourLabel.text = "PlanerSetup_MissingHour_Message".localized
         self.SelectSubjectLabel.text = "PlanerSetup_MissingSubject_Message".localized
-        self.SelectSubjectLabel.backgroundColor = UIColor.clearColor()
+        self.SelectSubjectLabel.backgroundColor = UIColor.clear
         self.SelectTeacherLabel.text = "PlanerSetup_MissingTeacher_Message".localized
         self.RoomTextField.text = ""
-        self.SubjectColorView.backgroundColor = UIColor.clearColor()
+        self.SubjectColorView.backgroundColor = UIColor.clear
         self.weekSegementControl.selectedSegmentIndex = -1
         self.selectedWeekSegment = -1
     }

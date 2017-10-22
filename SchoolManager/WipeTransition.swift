@@ -57,7 +57,7 @@ class WipeTransition: NSObject, UIViewControllerAnimatedTransitioning, UIViewCon
             // slide fromView off either the left or right edge of the screen
             // depending if we're presenting or dismissing this view
             fromView.transform = self.presenting ? offScreenLeft : offScreenRight
-            toView.transform = CGAffineTransformIdentity
+            toView.transform = .identity
             
             }, completion: { finished in
                 // tell our transitionContext object that we've finished animating

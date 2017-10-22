@@ -2,7 +2,8 @@
 import UIKit
 import iAd
 
-class SubjectsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPopoverPresentationControllerDelegate, UITextFieldDelegate, ADBannerViewDelegate, ColorPickerDelegate {
+class SubjectsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPopoverPresentationControllerDelegate, UITextFieldDelegate, ADBannerViewDelegate { 
+    
     /*MARK: Outlet / Member    ###############################################################################################################*/
     @IBOutlet var SubjectImageButton: UIButton!
     @IBOutlet var ColorButton: UIButton!
@@ -11,7 +12,7 @@ class SubjectsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     @IBOutlet var SaveButton: UIButton!
     @IBOutlet var BackgroundImageView: UIImageView!
     
-    let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     var selectedColor:UIColor!
     var selectedHexColor:String?
     var selectedTeacher:Teacher?
@@ -25,7 +26,7 @@ class SubjectsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     /*MARK: ViewController Delegates    ###############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
+        if !appDel.userDefaults.bool(forKey: appDel.removeAdsIdentifier){
             loadAds()
         }
         ColorButton.layer.cornerRadius = 5
@@ -37,27 +38,28 @@ class SubjectsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         self.layers.append(SubjectTextfield.layer)
         self.layers.append(SaveButton.layer)
         selectedHexColor = ""
-        UIDesignHelper.ShadowMakerMultipleLayers(UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(15), layers: layers)
+        UIDesignHelper.ShadowMakerMultipleLayers(shadowColor: UIColor.black, shadowOffset: CGFloat(15), shadowRadius: CGFloat(15), layers: layers)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        subjectsTableView.backgroundColor  = UIColor.clearColor()
+        subjectsTableView.backgroundColor  = UIColor.clear
         reloadSubjectCollection()
     }
+/*TODO: Overwork
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+        return UIInterfaceOrientationMask.portrait
     }
     override func shouldAutorotate() -> Bool {
         return false
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
-    }
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        return .lightContent
+    }*/
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
@@ -72,35 +74,36 @@ class SubjectsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         self.appDel.adBannerView.center = CGPoint(x: view.bounds.size.width / 2, y: view.bounds.size.height - self.appDel.adBannerView.frame.size.height / 2)
         
         self.appDel.adBannerView.delegate = self
-        self.appDel.adBannerView.hidden = true
+        self.appDel.adBannerView.isHidden = true
         view.addSubview(self.appDel.adBannerView)
     }
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        self.appDel.adBannerView.hidden = true
+    func bannerView(_ banner: ADBannerView!, didFailToReceiveAdWithError error: Error!) {
+        self.appDel.adBannerView.isHidden = true
     }
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        self.appDel.adBannerView.hidden = false
+        self.appDel.adBannerView.isHidden = false
     }
     
     /*MARK: - Navigation    ###############################################################################################################*/
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        /* TODO: New ColorPicker needed
         if let dest = segue.destinationViewController as? ColorPickerViewController,
-            popPC = dest.popoverPresentationController{
+            let popPC = dest.popoverPresentationController{
                 dest.colorPickerDelegate = self
                 popPC.delegate = self
-        }
-        if let dest = segue.destinationViewController as? SubjectIconPicker,
-            popPC = dest.popoverPresentationController{
+        }*/
+        if let dest = segue.destination as? SubjectIconPicker,
+            let popPC = dest.popoverPresentationController{
                 //dest.colorPickerDelegate = self
                 popPC.delegate = self
         }
-        if let dest = segue.destinationViewController as? SettingsMenueVC{
+        if let dest = segue.destination as? SettingsMenueVC{
             dest.transitioningDelegate = wTransition
         }
     }
     @IBAction func unwindToSubjects(segue:UIStoryboardSegue){
-        if let _ = segue.sourceViewController as? SubjectIconPicker{
-            SubjectImageButton.setImage(UIImage(named: selectedImageName!), forState: .Normal)
+        if let _ = segue.source as? SubjectIconPicker{
+            SubjectImageButton.setImage(UIImage(named: selectedImageName!), for: .normal)
         }
     }
     
@@ -116,63 +119,63 @@ class SubjectsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         self.ColorButton.backgroundColor = selectedUIColor
     }
     /*MARK: TableViewDelegate    ###############################################################################################################*/
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("SubjectCell") as? SubjectCell{
-            cell.configureCell(subjectsCollection[indexPath.row])
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "SubjectCell") as? SubjectCell{
+            cell.configureCell(sub: subjectsCollection[indexPath.row])
             return cell
         }
         else{
             return SubjectCell()
         }
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         _ = subjectsTableView.indexPathForSelectedRow
         self.selectedSubject = self.subjectsCollection![indexPath.row]
-        createActionSheetAlert(selectedSubject)
+        createActionSheetAlert(selectedElement: selectedSubject)
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return subjectsCollection.count
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         Subject.DeleteSubject(subjectsCollection[indexPath.row], context: appDel.managedObjectContext)
-        subjectsCollection.removeAtIndex(indexPath.row)
-        subjectsTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        subjectsCollection.remove(at: indexPath.row)
+        subjectsTableView.deleteRows(at: [indexPath], with: .fade)
     }
     
     /*@IBActions    ###############################################################################################################*/
     @IBAction func SubjectImageButtonAction() {
     }
     @IBAction func ColorButtonAction() {
-        self.performSegueWithIdentifier("ShowColorPicker", sender: nil)
+        self.performSegue(withIdentifier: "ShowColorPicker", sender: nil)
     }
     @IBAction func SaveButtonAction(sender: AnyObject) {
         if SubjectTextfield.text != nil && SubjectTextfield.text == ""{
             let noSubjectAlert = UIAlertController(
                 title: "Alert_MissingData_Title".localized,
                 message: "Alert_MissingSubject_Message".localized,
-                preferredStyle: .Alert
+                preferredStyle: .alert
             )
             noSubjectAlert.addAction(UIAlertAction(title: "OK",
-                style: .Default,
+                                                   style: .default,
                 handler: nil)
             )
-            presentViewController(noSubjectAlert, animated: true, completion: nil)
+            present(noSubjectAlert, animated: true, completion: nil)
             return
         }
         if selectedHexColor! == ""{
             let noColorAlert = UIAlertController(
                 title: "Alert_MissingData_Title".localized,
                 message: "Alert_MissingColor_Message".localized,
-                preferredStyle: .Alert
+                preferredStyle: .alert
             )
             noColorAlert.addAction(UIAlertAction(title: "OK",
-                style: .Default,
+                                                 style: .default,
                 handler: nil)
             )
-            presentViewController(noColorAlert, animated: true, completion: nil)
+            present(noColorAlert, animated: true, completion: nil)
             return
         }
         if selectedImageName == nil || selectedImageName == ""{
@@ -205,16 +208,16 @@ class SubjectsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     
     func resetUI(){
         selectedSubject = nil
-        SubjectImageButton.setImage(UIImage(named: "placeholder-add"), forState: .Normal)
-        ColorButton.setImage(UIImage(named: "placeholder-add"), forState: .Normal)
-        ColorButton.backgroundColor = UIColor.clearColor()
+        SubjectImageButton.setImage(UIImage(named: "placeholder-add"), for: .normal)
+        ColorButton.setImage(UIImage(named: "placeholder-add"), for: .normal)
+        ColorButton.backgroundColor = UIColor.clear
         SubjectTextfield.text = ""
         selectedHexColor = ""        
     }
     
     // show color picker from UIButton
     private func showColorPicker(){
-        
+/* TODO: New Color Picker needed
         // initialise color picker view controller
         let colorPickerVc = storyboard?.instantiateViewControllerWithIdentifier("ColorPicker") as! ColorPickerViewController
         
@@ -243,13 +246,14 @@ class SubjectsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         
         //show color popover
         presentViewController(colorPickerVc, animated: true, completion: nil)
+ */
     }
     func createActionSheetAlert(selectedElement:Subject){
         let alert = UIAlertController(
-            title: "ActionSheet_ElementAction_Title".localized, message: "SubjectsVC_ActionSheetTimeTableActions_Message".localized, preferredStyle: .ActionSheet)
-        alert.addAction(UIAlertAction(title: "Alert_Action_Edit".localized + " \(selectedElement.subject!)", style: .Default, handler: { (UIAlertAction) -> Void in
+            title: "ActionSheet_ElementAction_Title".localized, message: "SubjectsVC_ActionSheetTimeTableActions_Message".localized, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Alert_Action_Edit".localized + " \(selectedElement.subject!)", style: .default, handler: { (UIAlertAction) -> Void in
             let img = UIImage(named: selectedElement.imageName!)
-            self.SubjectImageButton.setImage(img, forState: .Normal)
+            self.SubjectImageButton.setImage(img, for: .normal)
             self.SubjectTextfield.text = selectedElement.subject
             let col:UIColor = ColorHelper.convertHexToUIColor(hexColor: selectedElement.color!)
             self.selectedHexColor = selectedElement.color
@@ -257,16 +261,16 @@ class SubjectsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             self.ColorButton.backgroundColor = col
             self.isEditAction = true
         }))
-        let plans = Planer.fetchPlanerObjectsWithSubjectPredicate(selectedElement.subject!, context: self.appDel.managedObjectContext)!
+        let plans = Planer.fetchPlanerObjectsWithSubjectPredicate(subject: selectedElement.subject!, context: self.appDel.managedObjectContext)!
         if plans.count == 0{
-            alert.addAction(UIAlertAction(title: "Alert_Action_Delete".localized + " \(selectedElement.subject!)", style: .Destructive, handler: {  (action: UIAlertAction)-> Void in
+            alert.addAction(UIAlertAction(title: "Alert_Action_Delete".localized + " \(selectedElement.subject!)", style: .destructive, handler: {  (action: UIAlertAction)-> Void in
                 Subject.DeleteSubject(selectedElement, context: self.appDel.managedObjectContext)
-                self.textFieldShouldReturn(self.SubjectTextfield)
+                self.textFieldShouldReturn(self.SubjectTextfield) //layer.shadowOffset = CGSize(shadowOffset, shadowOffset/2); //TODO: Overwork
                 self.reloadSubjectCollection()
             }))
         }
-        alert.addAction(UIAlertAction(title: "Alert_Action_Cancel".localized, style: .Cancel, handler: { (UIAlertAction) -> Void in }))
-        presentViewController(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Alert_Action_Cancel".localized, style: .cancel, handler: { (UIAlertAction) -> Void in }))
+        present(alert, animated: true, completion: nil)
     }
     
 }

@@ -27,7 +27,7 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
     /*Members    ###############################################################################################################*/
     //Transition Object
     let transition = WipeTransition()
-    let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     
     /*ViewController Delegates    ###############################################################################################################*/
     override func viewDidLoad() {
@@ -40,10 +40,10 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
         // Dispose of any resources that can be recreated.
     }
     /*Unhide Toolbar from Navigation Controller*/
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.infoViewCenterConstraint.constant = -800
         self.navigationController?.setToolbarHidden(true, animated: animated)
@@ -51,7 +51,7 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
         removeAdsButon.setImage(UIImage(named: "RemoveAds".localized), forState: .Normal)
         rateNowButton.setImage(UIImage(named: "RateNow".localized), forState: .Normal)
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         showInfoMessage()
         if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
@@ -59,12 +59,13 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
             UIViewController.prepareInterstitialAds()
         }
     }
+/*TODO: Overwork
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
-    }
+    }*/
     
     /*MARK: Advertising    ###############################################################################################################*/
     func loadAds(){
@@ -93,7 +94,7 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
   
     
     /*MARK: Navigation    ###############################################################################################################*/
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
             counter++
             if counter == 2{

@@ -16,7 +16,7 @@ class TimeTableHeaderCell: UICollectionReusableView {
         if((tte.planerElements[indexPath.row].isEmptyElement as? Bool) == nil){
             timeTableHeaderLabel.text = ""
         }else{
-        let headerString = "\("Hour_Number") \(tte.planerElements[indexPath.row].hour!.hour!) \(NSLocalizedString("MainVC_NowHourStartLabelText", comment: "-")) \(NSDate.hourFormatter(tte.planerElements[indexPath.row].hour!.startTime!)) \(NSLocalizedString("MainVC_NowHourEndLabelText", comment: "-")) \(NSDate.hourFormatter(tte.planerElements[indexPath.row].hour!.endTime!))"
+            let headerString = "\("Hour_Number") \(tte.planerElements[indexPath.row].hour!.hour!) \(NSLocalizedString("MainVC_NowHourStartLabelText", comment: "-")) \(NSDate.hourFormatter(date: tte.planerElements[indexPath.row].hour!.startTime! as NSDate)) \(NSLocalizedString("MainVC_NowHourEndLabelText", comment: "-")) \(NSDate.hourFormatter(date: tte.planerElements[indexPath.row].hour!.endTime! as NSDate))"
         timeTableHeaderLabel.text = headerString
         }
     }

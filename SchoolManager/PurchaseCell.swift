@@ -20,7 +20,7 @@ class PurchaseCell: UITableViewCell {
     func configureCell(product:SKProduct){
         self.productDescription.text! = product.localizedDescription
         self.productTitle.text! = product.localizedTitle
-        self.productPrice.backgroundColor = UIColor.blackColor()    
+        self.productPrice.backgroundColor = UIColor.black 
         self.productPrice.text! = String(product.localizedPrice())
         self.productPrice.layer.cornerRadius  = 5
     }

@@ -12,7 +12,7 @@ class SelectHourVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     /*MARK: Outlet / Member
     ###############################################################################################################*/
     @IBOutlet var hoursTableView: UITableView!
-    let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     var hoursCollection:[TimelineData]!
     
     /*MARK: ViewController Delegates
@@ -20,31 +20,31 @@ class SelectHourVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         popoverPresentationController?.delegate = self
-        hoursTableView.backgroundColor  = UIColor.clearColor()  
+        hoursTableView.backgroundColor  = UIColor.clear
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadHoursCollection()
     }
     
     
     /*MARK: TableView Delegates    ###############################################################################################################*/
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          _ = tableView.indexPathForSelectedRow
-        self.performSegueWithIdentifier("unwindToPlanerSetup", sender: hoursCollection[indexPath.row])
+        self.performSegue(withIdentifier: "unwindToPlanerSetup", sender: hoursCollection[indexPath.row])
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("SelectHourCell") as? SelectHourCell{
-            cell.cofigureCell(hoursCollection[indexPath.row])
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "SelectHourCell") as? SelectHourCell{
+            cell.cofigureCell(timeline: hoursCollection[indexPath.row])
             return cell
         }
         return SelectHourCell()
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.hoursCollection.count
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -54,11 +54,11 @@ class SelectHourVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     /*MARK: Navigation
     ###############################################################################################################*/
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dest = segue.destinationViewController as? PlanerSetupVC{
-            print("Segue from: \(segue.sourceViewController.title) to: \(segue.destinationViewController.title)")
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let dest = segue.destination as? PlanerSetupVC{
+            print("Segue from: \(String(describing: segue.source.title)) to: \(String(describing: segue.destination.title))")
             dest.selectedHour = sender as? TimelineData
-            dest.unwindToPlanerSetup(segue)
+            dest.unwindToPlanerSetup(segue: segue)
         }
     }
     

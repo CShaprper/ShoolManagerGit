@@ -23,27 +23,29 @@ class AddNoteVC: UIViewController,UIPopoverPresentationControllerDelegate, UITex
     @IBOutlet var notesTextView: UITextView!
     var selectedDate:NSDate!;
     var selectedSubject:Subject?
-    let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     let eventStore = EKEventStore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !appDel.userDefaults.boolForKey(appDel.removeAdsIdentifier){
+        if !appDel.userDefaults.bool(forKey: appDel.removeAdsIdentifier){
             loadAds()
         }
-        notesTextView.backgroundColor = UIColor.clearColor()
-        UIDesignHelper.ShadowMaker(UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.saveButton.layer)
-        UIDesignHelper.ShadowMaker(UIColor.blackColor(), shadowOffset: CGFloat(10), shadowRadius: CGFloat(3), layer: self.notePad.layer)
+        notesTextView.backgroundColor = UIColor.clear
+        UIDesignHelper.ShadowMaker(shadowColor: UIColor.black, shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.saveButton.layer)
+        UIDesignHelper.ShadowMaker(shadowColor: UIColor.black, shadowOffset: CGFloat(10), shadowRadius: CGFloat(3), layer: self.notePad.layer)
         notesTextView.delegate = self
-        notesTextView.textColor = UIColor.grayColor()
+        notesTextView.textColor = UIColor.gray
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)        
         setUI()
     }
+/* TODO: Overwork
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+        return .lightContent
     }
+ */
     
     /*MARK: Advertising    ###############################################################################################################*/
     func loadAds(){
@@ -55,44 +57,44 @@ class AddNoteVC: UIViewController,UIPopoverPresentationControllerDelegate, UITex
         self.appDel.adBannerView.center = CGPoint(x: view.bounds.size.width / 2, y: view.bounds.size.height - self.appDel.adBannerView.frame.size.height / 2)
         
         self.appDel.adBannerView.delegate = self
-        self.appDel.adBannerView.hidden = true
+        self.appDel.adBannerView.isHidden = true
         view.addSubview(self.appDel.adBannerView)
     }
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        self.appDel.adBannerView.hidden = true
+    func bannerView(_ banner: ADBannerView!, didFailToReceiveAdWithError error: Error!) {
+        self.appDel.adBannerView.isHidden = true
     }
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        self.appDel.adBannerView.hidden = false
+        self.appDel.adBannerView.isHidden = false
     }
     
     
     
     /*MARK: TextView Delegates
     ###############################################################################################################*/
-    func textViewDidBeginEditing(textView: UITextView) {
-        if textView.textColor == UIColor.grayColor() {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.gray {
             textView.text = nil
-            textView.textColor = UIColor.blackColor()
+            textView.textColor = UIColor.black
         }
     }
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "AddNotePlaceholderText".localized
-            textView.textColor = UIColor.grayColor()
+            textView.textColor = UIColor.gray
         }
     }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     /*MARK: Navigation    ###############################################################################################################*/
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dest = segue.destinationViewController as? SelectSubjectNoteVC,
-            popPC = dest.popoverPresentationController{
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let dest = segue.destination as? SelectSubjectNoteVC,
+            let popPC = dest.popoverPresentationController{
                 popPC.delegate = self
         }
-        if let dest = segue.destinationViewController as? SelectReminderDateVC,
-            popPC = dest.popoverPresentationController{
+        if let dest = segue.destination as? SelectReminderDateVC,
+            let popPC = dest.popoverPresentationController{
                 popPC.delegate = self
         }
     }
@@ -104,7 +106,7 @@ class AddNoteVC: UIViewController,UIPopoverPresentationControllerDelegate, UITex
             self.SubjectImageView.image = UIImage(named: selectedSubject!.imageName!)
         }
         if selectedDate != nil{
-            reminderDateLabel.text = NSDate.dateTimeFormatter(selectedDate)
+            reminderDateLabel.text = NSDate.dateTimeFormatter(date: selectedDate)
         }
     }
     
@@ -114,27 +116,27 @@ class AddNoteVC: UIViewController,UIPopoverPresentationControllerDelegate, UITex
     }
     @IBAction func saveNoteAction() {
         if notesTextView.text == "" {
-            createOKOnlyAlert("Alert_MissingData_Title".localized, message: "AddNoteAddNoteText".localized)
+            createOKOnlyAlert(title: "Alert_MissingData_Title".localized, message: "AddNoteAddNoteText".localized)
             return
         }
         if selectedDate != nil{
-            if selectedDate.compare(NSDate()) == NSComparisonResult.OrderedAscending{
-                createOKOnlyAlert("Alert_WrongUserInput_Title".localized, message: "Alert_WrongReminderDate_Message".localized)
+            if selectedDate.compare(NSDate() as Date) == ComparisonResult.orderedAscending{
+                createOKOnlyAlert(title: "Alert_WrongUserInput_Title".localized, message: "Alert_WrongReminderDate_Message".localized)
                 return
             }
         }
         if selectedSubject == nil{
-            createOKOnlyAlert("Alert_MissingData_Title".localized, message: "PlanerSetup_MissingSubject_Message".localized)
+            createOKOnlyAlert(title: "Alert_MissingData_Title".localized, message: "PlanerSetup_MissingSubject_Message".localized)
             return
         }
-        let uid = randomAlphaNumericString(10)
+        let uid = randomAlphaNumericString(length: 10)
         print(uid)
-        Note.SaveNote(selectedDate, strUUID: uid, strNote: self.notesTextView.text, subject: selectedSubject!, context: appDel.managedObjectContext)
+        Note.SaveNote(dueDate: selectedDate, strUUID: uid, strNote: self.notesTextView.text, subject: selectedSubject!, context: appDel.managedObjectContext)
         
         if selectedDate != nil{
-            NotificationManager.createSingleNotification(selectedDate, alertBody: notesTextView.text, category: appDel.firstCategory, objectID: uid)
+            NotificationManager.createSingleNotification(fireDate: selectedDate, alertBody: notesTextView.text, category: appDel.firstCategory, objectID: uid)
         }
-        self.performSegueWithIdentifier("unwindToNotes", sender: nil)
+        self.performSegue(withIdentifier: "unwindToNotes", sender: nil)
     }
     
     /*MARK: Helper Functions    ###############################################################################################################*/
@@ -150,30 +152,30 @@ class AddNoteVC: UIViewController,UIPopoverPresentationControllerDelegate, UITex
     func randomAlphaNumericString(length: Int) -> String {
         let allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let allowedCharsCount = UInt32(allowedChars.characters.count)
-        var randomString = ""
+        let randomString = ""
         
         for _ in (0..<length) {
             let randomNum = Int(arc4random_uniform(allowedCharsCount))
-            let newCharacter = allowedChars[allowedChars.startIndex.advancedBy(randomNum)]
-            randomString += String(newCharacter)
+            //let newCharacter = allowedChars[allowedChars.startIndex.advancedBy(randomNum)] //TODO: Overwork needed
+           // randomString += String(newCharacter)
         }
         
         return randomString
     }
     
     func requestCalendarAuthorization(){
-        switch EKEventStore.authorizationStatusForEntityType(.Reminder){
-        case .Authorized:
+        switch EKEventStore.authorizationStatus(for: .reminder){
+        case .authorized:
             break
-        case .Denied:
-            createAlert("Need Calendar Access", message: "Calendar access is needed to create reminder.")
+        case .denied:
+            createAlert(title: "Need Calendar Access", message: "Calendar access is needed to create reminder.")
             break
-        case .NotDetermined:
-            eventStore.requestAccessToEntityType(.Reminder, completion: { (granted, error) -> Void in
+        case .notDetermined:
+            eventStore.requestAccess(to: .reminder, completion: { (granted, error) -> Void in
                 if granted{
                     //
                 }else{
-                    self.createAlert("Need Calendar Access", message: "Calendar access is needed to create reminder.")
+                    self.createAlert(title: "Need Calendar Access", message: "Calendar access is needed to create reminder.")
                 }
             })
             break
@@ -183,19 +185,19 @@ class AddNoteVC: UIViewController,UIPopoverPresentationControllerDelegate, UITex
     }
     
     func requestReminderAuthorization(){
-        switch EKEventStore.authorizationStatusForEntityType(.Event){
-        case .Authorized:
-            self.createReminder(self.eventStore, title: "School Manager", note: self.notesTextView.text, reminderdate: self.selectedDate)
+        switch EKEventStore.authorizationStatus(for: .event){
+        case .authorized:
+            self.createReminder(eventStore: self.eventStore, title: "School Manager", note: self.notesTextView.text, reminderdate: self.selectedDate)
             break
-        case .Denied:
-            createAlert("Need Reminder Access", message: "Reminder access is needed to create reminder.")
+        case .denied:
+            createAlert(title: "Need Reminder Access", message: "Reminder access is needed to create reminder.")
             break
-        case .NotDetermined:
-            eventStore.requestAccessToEntityType(.Reminder, completion: { (granted, error) -> Void in
+        case .notDetermined:
+            eventStore.requestAccess(to: .reminder, completion: { (granted, error) -> Void in
                 if granted{
-                    self.createReminder(self.eventStore, title: "School Manager", note: self.notesTextView.text, reminderdate: self.selectedDate)
+                    self.createReminder(eventStore: self.eventStore, title: "School Manager", note: self.notesTextView.text, reminderdate: self.selectedDate)
                 }else{
-                    self.createAlert("Need Reminder Access", message: "Reminder access is needed to create reminder.")
+                    self.createAlert(title: "Need Reminder Access", message: "Reminder access is needed to create reminder.")
                 }
             })
             break
@@ -210,35 +212,35 @@ class AddNoteVC: UIViewController,UIPopoverPresentationControllerDelegate, UITex
      - message: **String:**   Body of alert
      */
     func createOKOnlyAlert(title:String, message:String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) -> Void in  }))
-        presentViewController(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) -> Void in  }))
+        present(alert, animated: true, completion: nil)
     }
     
     func createAlert(title:String, message:String){
         //Create an alert to get acess to calendar
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
-        alert.addAction(UIAlertAction(title: "Alert_GotToSettings".localized, style: .Default, handler: { (UIAlertAction) -> Void in
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Alert_GotToSettings".localized, style: .default, handler: { (UIAlertAction) -> Void in
             let openSettingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
-            UIApplication.sharedApplication().openURL(openSettingsUrl!)
+            UIApplication.shared.openURL(openSettingsUrl! as URL)
         }))
-        alert.addAction(UIAlertAction(title: "Alert_Action_Cancel".localized, style: .Cancel, handler: { (UIAlertAction) -> Void in }))
-        presentViewController(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Alert_Action_Cancel".localized, style: .cancel, handler: { (UIAlertAction) -> Void in }))
+        present(alert, animated: true, completion: nil)
     }
     
     func createEvent(eventStore:EKEventStore, title:String, note:String, startdate:NSDate, enddate:NSDate){
         let event = EKEvent(eventStore: eventStore)
         event.title = title
         event.notes = note
-        event.startDate = startdate
-        event.endDate = enddate
+        event.startDate = startdate as Date
+        event.endDate = enddate as Date
         event.calendar = eventStore.defaultCalendarForNewEvents
         do{
-            try eventStore.saveEvent(event, span: .ThisEvent)
+            try eventStore.save(event, span: .thisEvent)
         }catch let error as NSError{
-            let alert = UIAlertController(title: "Alert_Error_Title".localized, message: error.localizedDescription, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) -> Void in  }))
-            presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Alert_Error_Title".localized, message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) -> Void in  }))
+            present(alert, animated: true, completion: nil)
         }
     }
     
@@ -246,15 +248,15 @@ class AddNoteVC: UIViewController,UIPopoverPresentationControllerDelegate, UITex
         let event = EKReminder(eventStore: eventStore)
         event.title = title
         event.notes = note
-        let alarm = EKAlarm(absoluteDate: reminderdate)
+        let alarm = EKAlarm(absoluteDate: reminderdate as Date)
         event.addAlarm(alarm)
         event.calendar = eventStore.defaultCalendarForNewReminders()
         do{
-            try eventStore.saveReminder(event, commit: true)
+            try eventStore.save(event, commit: true)
         }catch let error as NSError{
-            let alert = UIAlertController(title: "Alert_Error_Title".localized, message: error.localizedDescription, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) -> Void in  }))
-            presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Alert_Error_Title".localized, message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) -> Void in  }))
+            present(alert, animated: true, completion: nil)
         }
     }
     

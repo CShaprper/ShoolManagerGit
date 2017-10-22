@@ -24,12 +24,13 @@ class NotesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDel
         self.reloadNotesCollection()
         self.setNotesBadge()
     }
+/*TODO: Overwork
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
-    }
+    }*/
     
     /*MARK: Advertising    ###############################################################################################################*/
     func loadAds(){

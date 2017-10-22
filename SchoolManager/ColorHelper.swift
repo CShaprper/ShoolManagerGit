@@ -9,14 +9,14 @@ class ColorHelper{
         let characterSet = NSCharacterSet.whitespacesAndNewlines as NSCharacterSet
         
         //trim unnecessary character set from string
-        var colorString : String = hexColor.stringByTrimmingCharactersInSet(characterSet)
+        var colorString : String = hexColor.trimmingCharacters(in: characterSet as CharacterSet)
         
         // convert to uppercase
         colorString = colorString.uppercased()
         
         //if # found at start then remove it.
         if colorString.hasPrefix("#") {
-            colorString =  colorString.substringFromIndex(colorString.startIndex.advancedBy(1))
+            colorString =  colorString.substring(from: colorString.startIndex.advanced(by: 1))
         }
         
         // hex color must 6 chars. if invalid character count then return black color.

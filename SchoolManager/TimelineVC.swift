@@ -5,6 +5,7 @@ import iAd
 
 class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDataSource, UITableViewDelegate, UIPopoverPresentationControllerDelegate, ADBannerViewDelegate {
     
+    
     /* MARK: @IBOutlet & Menbers
     ###############################################################################################################*/
     @IBOutlet var StartTimePicker: UIDatePicker!
@@ -77,6 +78,7 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         SetHoursPerDayPickerElementCount()
         ReloadTableView()
     }
+/*TODO: Overwork
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.portrait
     }
@@ -85,7 +87,7 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .lightContent
-    }
+    }*/
     
     /*MARK: Advertising    ###############################################################################################################*/
     func loadAds(){
@@ -121,27 +123,29 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
             return 0
         }
     }
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("SelectedHourPicker changed: \(HoursPerDayPickerArray[row])")
         SelectedHoursPickerValue = HoursPerDayPickerArray[row]
     }
-    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let attributedString = NSAttributedString(string: HoursPerDayPickerArray[row], attributes: [NSForegroundColorAttributeName : UIColor.white])
         return attributedString
     }
     
+
+    
     /* MARK: TableView Delegates
     ###############################################################################################################*/
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         _ = tableView.indexPathForSelectedRow
         self.SelectedTimeLineData = self.timelineDataArray[indexPath.row]
         self.SelectedTimelineDatoRowIndex = indexPath.row
         createActionSheetAlert(selectedElement: SelectedTimeLineData)
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (timelineDataArray?.count)! > 0{
             if let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineCell") as? TimelineCell {
                 cell.CofigureCell(timeline: timelineDataArray![indexPath.row])
@@ -161,7 +165,7 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timelineDataArray!.count
     }
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             TimelineData.DeleteTimelineData(timelineDataArray[indexPath.row], context: appDel.managedObjectContext)
             timelineDataArray.remove(at: indexPath.row)

@@ -11,7 +11,7 @@ import UIKit
 class UIDesignHelper {
     static func ShadowMaker(shadowColor:UIColor, shadowOffset:CGFloat, shadowRadius:CGFloat, layer:CALayer){
         layer.shadowColor = shadowColor.cgColor
-        layer.shadowOffset = CGSizeMake(shadowOffset, shadowOffset/2);
+         //layer.shadowOffset = CGSize(shadowOffset, shadowOffset/2); //TODO: Overwork
         layer.shadowRadius = shadowRadius;
         layer.shadowOpacity = 1.0;
         layer.masksToBounds = false;
@@ -20,7 +20,7 @@ class UIDesignHelper {
     static func ShadowMakerMultipleLayers(shadowColor:UIColor, shadowOffset:CGFloat, shadowRadius:CGFloat, layers:[CALayer]){
         for layer in layers{
             layer.shadowColor = shadowColor.cgColor
-            layer.shadowOffset = CGSizeMake(shadowOffset, shadowOffset/2);
+            //layer.shadowOffset = CGSize(shadowOffset, shadowOffset/2); //TODO: Overwork
             layer.shadowRadius = shadowRadius;
             layer.shadowOpacity = 1.0;
             layer.masksToBounds = false;

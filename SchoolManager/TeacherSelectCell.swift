@@ -17,7 +17,7 @@ class TeacherSelectCell: UITableViewCell {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
@@ -26,7 +26,7 @@ class TeacherSelectCell: UITableViewCell {
     func CofigureCell(teacher:Teacher){
         teacherimage.image = UIImage(named: teacher.iamgeName!)
         teacherlabel.text = teacher.name
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
     }
     
 }

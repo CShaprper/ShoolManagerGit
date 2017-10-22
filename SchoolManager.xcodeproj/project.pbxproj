@@ -59,7 +59,6 @@
 		CF70E6211C80C3ED002641FB /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF70E6201C80C3ED002641FB /* StoreKitManager.swift */; };
 		CF70E6231C80D68E002641FB /* ISendProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF70E6221C80D68E002641FB /* ISendProducts.swift */; };
 		CF70E6251C80D8BF002641FB /* PurchaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF70E6241C80D8BF002641FB /* PurchaseCell.swift */; };
-		CF764C811C30758E00592F2A /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF764C801C30758E00592F2A /* ColorPickerViewController.swift */; };
 		CF764C831C30759A00592F2A /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF764C821C30759A00592F2A /* Colors.plist */; };
 		CF79E3951C883E2700BE4C69 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF79E3931C883E2700BE4C69 /* Start.storyboard */; };
 		CF79E3971C883EDD00BE4C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF79E3961C883EDD00BE4C69 /* Assets.xcassets */; };
@@ -173,7 +172,6 @@
 		CF70E6201C80C3ED002641FB /* StoreKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		CF70E6221C80D68E002641FB /* ISendProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISendProducts.swift; sourceTree = "<group>"; };
 		CF70E6241C80D8BF002641FB /* PurchaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseCell.swift; sourceTree = "<group>"; };
-		CF764C801C30758E00592F2A /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPickerViewController.swift; path = "../../../../../../Users/petersypek/Desktop/SwiftColorPicker-master/SwiftColorPicker/SwiftColorPicker/ColorPickerViewController.swift"; sourceTree = SOURCE_ROOT; };
 		CF764C821C30759A00592F2A /* Colors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Colors.plist; path = "../../../../../../../Users/petersypek/Desktop/SwiftColorPicker-master/SwiftColorPicker/SwiftColorPicker/Colors.plist"; sourceTree = "<group>"; };
 		CF79E3941C883E2700BE4C69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Start.storyboard; sourceTree = "<group>"; };
 		CF79E3961C883EDD00BE4C69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -354,7 +352,6 @@
 				CF016AFF1C2B28990044D67B /* EditTimelinePopUpVC.swift */,
 				CF6BA92F1C3143FA00850A93 /* SubjectsVC.swift */,
 				CF6DBC301C34153600D33BE7 /* SubjectIconPicker.swift */,
-				CF764C801C30758E00592F2A /* ColorPickerViewController.swift */,
 				CF6BA9311C3169DA00850A93 /* SelectTeacherVC.swift */,
 				CFD989F11C32953300D72EB2 /* PlanerSetupVC.swift */,
 				CFD989F41C32AD9100D72EB2 /* SelectDayVC.swift */,
@@ -583,7 +580,6 @@
 				CF316D6A1C19F44800236201 /* HoursPerDayData+CoreDataProperties.swift in Sources */,
 				CF4AEC591C176E5F007CB21F /* HoursPerDayData.swift in Sources */,
 				CF70E6251C80D8BF002641FB /* PurchaseCell.swift in Sources */,
-				CF764C811C30758E00592F2A /* ColorPickerViewController.swift in Sources */,
 				CF4CE7591C1C6578009E3BE9 /* WipeTransition.swift in Sources */,
 				CF6DBC2D1C340D9E00D33BE7 /* ColorHelper.swift in Sources */,
 				CFA37CF11C0790A000F2BE51 /* Day.swift in Sources */,

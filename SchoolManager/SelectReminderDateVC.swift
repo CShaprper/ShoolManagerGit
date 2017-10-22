@@ -19,10 +19,10 @@ class SelectReminderDateVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         selectedDate = NSDate()
-        datePicker.minimumDate = selectedDate
-        datePicker.date = selectedDate
-        datePicker.setValue(UIColor.whiteColor(), forKey: "textColor")
-        UIDesignHelper.ShadowMaker(UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.saveButton.layer)
+        datePicker.minimumDate = selectedDate! as Date
+        datePicker.date = selectedDate as Date
+        datePicker.setValue(UIColor.white, forKey: "textColor")
+        UIDesignHelper.ShadowMaker(shadowColor: UIColor.black, shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.saveButton.layer)
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,24 +34,24 @@ class SelectReminderDateVC: UIViewController {
     
     /*MARK: DatePicker Delegates    ###############################################################################################################*/
     @IBAction func DatePickerValueChanged(sender: UIDatePicker) {
-        selectedDate = sender.date
+        selectedDate = sender.date as NSDate
     }
 
  
     /*MARK: Navigation    ###############################################################################################################*/
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dest = segue.destinationViewController as? AddNoteVC{
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let dest = segue.destination as? AddNoteVC{
         dest.selectedDate = selectedDate
-        dest.unwindToAddNote(segue)
+            dest.unwindToAddNote(segue: segue)
         }
     }
 
     @IBAction func saveDateAction() {        
-        if selectedDate.compare(NSDate())  == NSComparisonResult.OrderedAscending{
-            createOKOnlyAlert("Alert_WrongUserInput_Title".localized, message: "Alert_WrongReminderDate_Message".localized)
+        if selectedDate.compare(NSDate() as Date)  == ComparisonResult.orderedAscending{
+            createOKOnlyAlert(title: "Alert_WrongUserInput_Title".localized, message: "Alert_WrongReminderDate_Message".localized)
             return
         }        
-        self.performSegueWithIdentifier("unwindToAddNote", sender: nil)
+        self.performSegue(withIdentifier: "unwindToAddNote", sender: nil)
     }
   
     
@@ -62,8 +62,8 @@ class SelectReminderDateVC: UIViewController {
      - message: **String:**   Body of alert
      */
     func createOKOnlyAlert(title:String, message:String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) -> Void in  }))
-        presentViewController(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) -> Void in  }))
+        present(alert, animated: true, completion: nil)
     }
 }
