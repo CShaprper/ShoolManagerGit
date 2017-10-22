@@ -16,7 +16,7 @@ class TimePlanerCollectionViewLayout: UICollectionViewLayout {
     var CELL_WIDTH = 120.0
     let HEADER_CELL_WIDTH = 50.0
     let HEADER_CELL_HEIGHT = 40.0
-    let STATUS_BAR = UIApplication.sharedApplication().statusBarFrame.height
+    let STATUS_BAR = UIApplication.shared.statusBarFrame.height
     var contentWidth:Double!
     var contentHeight:Double!
     
@@ -37,12 +37,12 @@ class TimePlanerCollectionViewLayout: UICollectionViewLayout {
     // this value if an update was performed.
     var dataSourceDidUpdate = true
     
-    override func collectionViewContentSize() -> CGSize {
+    func collectionViewContentSize() -> CGSize {
         return self.contentSize
     }
     
-    override func prepareLayout() {
-        super.prepareLayout()
+    override func prepare() {
+        super.prepare()
         
         // Only update header cells.
         if !dataSourceDidUpdate {
@@ -51,14 +51,14 @@ class TimePlanerCollectionViewLayout: UICollectionViewLayout {
             let xOffset = collectionView!.contentOffset.x
             let yOffset = collectionView!.contentOffset.y
             
-            if collectionView?.numberOfSections() > 0 {
-                for section in 0...collectionView!.numberOfSections()-1 {
+            if collectionView?.numberOfSections > 0 {
+                for section in 0...collectionView!.numberOfSections-1 {
                     // Confirm the section has items.
                     if collectionView?.numberOfItemsInSection(section) > 0 {
                         
                         // Update all items in the first row.
                         if section == 0 {
-                            for item in 0...collectionView!.numberOfItemsInSection(section)-1 {
+                            for item in 0...collectionView!.numberOfItems(inSection: section)-1 {
                                 
                                 // Build indexPath to get attributes from dictionary.
                                 let indexPath = NSIndexPath(forItem: item, inSection: section)
@@ -110,8 +110,8 @@ class TimePlanerCollectionViewLayout: UICollectionViewLayout {
         var xPos:Double = 0.0
         var yPos:Double = 0.0
         // Cycle through each section of the data source.
-        if collectionView?.numberOfSections() > 0 {
-            for section in 0...collectionView!.numberOfSections()-1 {
+        if collectionView?.numberOfSections > 0 {
+            for section in 0...collectionView!.numberOfSections-1 {
                 if section == 0{
                     CELL_HEIGHT = HEADER_CELL_HEIGHT
                     yPos = 0.0
@@ -126,7 +126,7 @@ class TimePlanerCollectionViewLayout: UICollectionViewLayout {
                 
                 // Cycle through each item in the section.
                 if collectionView?.numberOfItemsInSection(section) > 0 {
-                    for item in 0...collectionView!.numberOfItemsInSection(section)-1 {
+                    for item in 0...collectionView!.numberOfItems(inSection: section)-1 {
                         if item == 0{
                             CELL_WIDTH = self.HEADER_CELL_WIDTH
                             xPos = -70
@@ -140,7 +140,7 @@ class TimePlanerCollectionViewLayout: UICollectionViewLayout {
 //                        let xPos = Double(item) * CELL_WIDTH
 //                        let yPos = Double(section) * CELL_HEIGHT
                         
-                        let cellAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: cellIndex)
+                        let cellAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: cellIndex as IndexPath)
                         cellAttributes.frame = CGRect(x: xPos, y: yPos, width: CELL_WIDTH, height: CELL_HEIGHT)
                         
                         // Determine zIndex based on cell type.
@@ -160,8 +160,8 @@ class TimePlanerCollectionViewLayout: UICollectionViewLayout {
                 }
             }
             // Update content size.
-            contentWidth = Double(collectionView!.numberOfItemsInSection(0)) * CELL_WIDTH
-            contentHeight = Double(collectionView!.numberOfSections()) * CELL_HEIGHT
+            contentWidth = Double(collectionView!.numberOfItems(inSection: 0)) * CELL_WIDTH
+            contentHeight = Double(collectionView!.numberOfSections) * CELL_HEIGHT
         } else {
             contentWidth = CELL_WIDTH
             contentHeight = CELL_HEIGHT
@@ -171,14 +171,14 @@ class TimePlanerCollectionViewLayout: UICollectionViewLayout {
         
     }
     
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
         // Create an array to hold all elements found in our current view.
         var attributesInRect = [UICollectionViewLayoutAttributes]()
         
         // Check each element to see if it should be returned.
         for cellAttributes in cellAttrsDictionary.values {
-            if CGRectIntersectsRect(rect, cellAttributes.frame) {
+            if rect.intersects(cellAttributes.frame) {
                 attributesInRect.append(cellAttributes)
             }
         }
@@ -187,11 +187,11 @@ class TimePlanerCollectionViewLayout: UICollectionViewLayout {
         return attributesInRect
     }
     
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+    func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         return cellAttrsDictionary[indexPath]!
     }
     
-    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
 }

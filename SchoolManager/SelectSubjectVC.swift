@@ -42,7 +42,7 @@ class SelectSubjectVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "unwindToPlanerSetup", sender: self.subjectsCollection[indexPath.row])
     }
-    private func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "SelectSubjectCell") as? SelectSubjectCell{
             cell.configureCell(sub: self.subjectsCollection[indexPath.row])
             return cell

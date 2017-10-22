@@ -16,7 +16,7 @@ class SubjectIconPicker: UIViewController, UICollectionViewDataSource, UICollect
     /*MARK: ViewController Delegates    ###############################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        ImageCollectionView.backgroundColor = UIColor.clearColor()
+        ImageCollectionView.backgroundColor = UIColor.clear
         loadIconList()
     }
     override func didReceiveMemoryWarning() {
@@ -33,13 +33,13 @@ class SubjectIconPicker: UIViewController, UICollectionViewDataSource, UICollect
         return 1
     }
     // return number of cell shown within collection view
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return iconCollection.count
     }
     // create collection view cell content
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPathIndexPath) -> UICollectionViewCell {
         // deque reusable cell from collection view.
-        if let cell = collectionView.dequeueReusableCellWithReuseIdentifier("IconPickerCell", forIndexPath: indexPath) as? IconPickerCell{
+        if let cell = collectionView.dequeueReusableCellWithReuseIdentifier("IconPickerCell", forIndexPath: indexPath as IndexPath) as? IconPickerCell{
             cell.configureCell(self.iconCollection[indexPath.row])
             return cell
         }else{
@@ -47,17 +47,17 @@ class SubjectIconPicker: UIViewController, UICollectionViewDataSource, UICollect
         }
     }
     // function - called when clicked on a collection view cell
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("unwindToSubjects", sender: iconCollection[indexPath.row])
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "unwindToSubjects", sender: iconCollection[indexPath.row])
     }
     
     /*MARK: Navigation
     ###############################################################################################################*/
     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dest = segue.destinationViewController as? SubjectsVC{
-            print("Segue from: \(segue.sourceViewController.title) to: \(segue.destinationViewController.title)")
+        if let dest = segue.destination as? SubjectsVC{
+            print("Segue from: \(String(describing: segue.sourceViewController.title)) to: \(String(describing: segue.destination.title))")
             dest.selectedImageName = sender as! String!
-            dest.unwindToSubjects(segue)
+            dest.unwindToSubjects(segue: segue)
         }
     }
     
@@ -65,7 +65,7 @@ class SubjectIconPicker: UIViewController, UICollectionViewDataSource, UICollect
     func loadIconList(){
         
         // create path for Colors.plist resource file.
-        let iconFilePath = NSBundle.mainBundle().pathForResource("SubjectIcons", ofType: "plist")
+        let iconFilePath = Bundle.mainBundle().pathForResource("SubjectIcons", ofType: "plist")
         
         // save piist file array content to NSArray object
         let iconPathArray = NSArray(contentsOfFile: iconFilePath!)

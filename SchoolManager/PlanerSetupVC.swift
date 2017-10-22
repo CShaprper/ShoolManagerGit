@@ -40,7 +40,7 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
         self.SubjectColorView.layer.cornerRadius = 5
         self.weekSegementControl.selectedSegmentIndex = -1
         self.selectedWeekSegment = -1
-        UIDesignHelper.ShadowMaker(shadowColor: UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.saveButton.layer)
+        UIDesignHelper.ShadowMaker(shadowColor: UIColor.black, shadowOffset: CGFloat(15), shadowRadius: CGFloat(3), layer: self.saveButton.layer)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -79,7 +79,7 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
         self.appDel.adBannerView.isHidden = true
         view.addSubview(self.appDel.adBannerView)
     }
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: Error!) {
+    func bannerView(_ banner: ADBannerView, didFailToReceiveAdWithError error: Error) {
         self.appDel.adBannerView.isHidden = true
     }
     func bannerViewDidLoadAd(banner: ADBannerView!) {
@@ -125,8 +125,8 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
             self.SelectDayLabel.text = self.selectedDay!.day
         }
         if let _ = segue.source as? SelectHourVC{
-            print("Selected Hour: \(selectedHour!.hour!) \("MainVC_NowHourStartLabelText".localized) \(self.GetTimeAsHour(date: self.selectedHour!.startTime!)) \("MainVC_NowHourEndLabelText".localized) \(self.GetTimeAsMinute(selectedHour!.endTime!))")
-            self.SelectHourLabel.text = "\(self.selectedHour!.hour!). \("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(date: self.selectedHour!.startTime!)) \("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(self.selectedHour!.endTime!))"
+            print("Selected Hour: \(selectedHour!.hour!) \("MainVC_NowHourStartLabelText".localized) \(self.GetTimeAsHour(date: self.selectedHour!.startTime! as NSDate)) \("MainVC_NowHourEndLabelText".localized) \(self.GetTimeAsMinute(date: selectedHour!.endTime! as NSDate))")
+            self.SelectHourLabel.text = "\(self.selectedHour!.hour!). \("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(date: self.selectedHour!.startTime! as NSDate)) \("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(date: self.selectedHour!.endTime! as NSDate))"
         }
     }
     
@@ -191,10 +191,10 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
         }else if self.isAddAction{
             print("selectedWeekSegment: \(selectedWeekSegment) selectedDay: \((selectedDay?.day)!)")
             let planer = Planer.fetchExistingPlanerElement(hourSortnumber: selectedHour!.hour!, day: selectedDay!.day!,context: appDel.managedObjectContext)
-            if planer!.count > 0 && (selectedWeekSegment  == 2  || planer![0].selectedWeek == selectedWeekSegment as Int) {
-                let alert = UIAlertController(title: "Alert_AddingDisabled_Title".localized, message: "\("PlanerSetup_Hour_Message".localized) \(selectedHour!.hour!) \("PlanerSetup_HourOnDay_Message".localized) \(selectedDay!.day!) \("PlanerSetup_HourCollides_Message".localized) \((planer?[0].subject?.subject)!) \("PlanerSetup_AtTime_Message".localized) \((planer?[0].hour?.hour)!). \((planer?[0].hour?.startTime)!) - \((planer?[0].hour?.endTime)!) \("PlanerSetup_OnDay_Message".localized) \((planer?[0].day?.day)!) \("PlanerSetup_RestMessage".localized)", preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                presentViewController(alert, animated: true, completion: nil)
+            if planer!.count > 0 && (selectedWeekSegment  == 2  || planer![0].selectedWeek! == selectedWeekSegment) {
+                let alert = UIAlertController(title: "Alert_AddingDisabled_Title".localized, message: "\("PlanerSetup_Hour_Message".localized) \(selectedHour!.hour!) \("PlanerSetup_HourOnDay_Message".localized) \(selectedDay!.day!) \("PlanerSetup_HourCollides_Message".localized) \((planer?[0].subject?.subject)!) \("PlanerSetup_AtTime_Message".localized) \((planer?[0].hour?.hour)!). \((planer?[0].hour?.startTime)!) - \((planer?[0].hour?.endTime)!) \("PlanerSetup_OnDay_Message".localized) \((planer?[0].day?.day)!) \("PlanerSetup_RestMessage".localized)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(alert, animated: true, completion: nil)
             }else{
                 Planer.savePlaner(isHeaderElement: false, strRoom: RoomTextField.text!, selectedWeek: selectedWeekSegment, subject: selectedSubject!, hour: selectedHour!, day: selectedDay!, teacher: selectedTeacher!, context: appDel.managedObjectContext)
                 resetPlanerUIAndSelectedValues()
@@ -217,7 +217,7 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
             self.SelectDayLabel.text = planerToEdit.day!.day!
             self.SelectTeacherLabel.text = planerToEdit.teacher!.name!
             self.SelectSubjectLabel.text = planerToEdit.subject!.subject!
-            self.SelectHourLabel.text = "\("PlanerSetup_Hour".localized) \(planerToEdit.hour!.hour!) \("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(date: planerToEdit.hour!.startTime!)) \("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(planerToEdit.hour!.endTime!))"
+            self.SelectHourLabel.text = "\("PlanerSetup_Hour".localized) \(planerToEdit.hour!.hour!) \("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(date: planerToEdit.hour!.startTime! as NSDate)) \("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(date: planerToEdit.hour!.endTime! as NSDate))"
             self.SubjectColorView.backgroundColor = ColorHelper.convertHexToUIColor(hexColor: planerToEdit.subject!.color!)
             self.isAddAction = false
         }else if isAddAction{
@@ -225,7 +225,7 @@ class PlanerSetupVC: UIViewController, UIPopoverPresentationControllerDelegate, 
             let hours = TimelineData.FetchData(appDel.managedObjectContext) 
             self.selectedHour = hours![indexPath.section - 1]
             self.selectedDay = days![indexPath.row - 1]
-            self.SelectHourLabel.text = "\("PlanerSetup_Hour".localized) \(selectedHour!.hour!) \("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(date: selectedHour!.startTime!)) \("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(selectedHour!.endTime!))"
+            self.SelectHourLabel.text = "\("PlanerSetup_Hour".localized) \(selectedHour!.hour!) \("MainVC_NowHourStartLabelText".localized) \(NSDate.hourFormatter(date: selectedHour!.startTime! as NSDate)) \("MainVC_NowHourEndLabelText".localized) \(NSDate.hourFormatter(date: selectedHour!.endTime! as NSDate))"
             self.SelectDayLabel.text = selectedDay!.day!
             self.isEditAction = false
         }

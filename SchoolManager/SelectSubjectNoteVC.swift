@@ -19,7 +19,7 @@ class SelectSubjectNoteVC: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         popoverPresentationController?.delegate = self
-        subjectsTableView.backgroundColor  = UIColor.clearColor()
+        subjectsTableView.backgroundColor  = UIColor.clear
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,19 +27,19 @@ class SelectSubjectNoteVC: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     /*MARK: TableView Delagates    ###############################################################################################################*/
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("SelectSubjectAtNoteCell") as? SelectSubjectAtNoteCell{
-            cell.configureCell(self.subjectsCollection[indexPath.row])
+    private func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "SelectSubjectAtNoteCell") as? SelectSubjectAtNoteCell{
+            cell.configureCell(sub: self.subjectsCollection[indexPath.row])
             return cell
         }else{
             return SelectSubjectAtNoteCell()
         }
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return subjectsCollection.count
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("unwindToAddNote", sender: self.subjectsCollection[indexPath.row])
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "unwindToAddNote", sender: self.subjectsCollection[indexPath.row])
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -47,9 +47,9 @@ class SelectSubjectNoteVC: UIViewController, UITableViewDataSource, UITableViewD
     
     /*MARK: Navigation    ###############################################################################################################*/
     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dest = segue.destinationViewController as? AddNoteVC{
+        if let dest = segue.destination as? AddNoteVC{
             dest.selectedSubject = sender as? Subject
-            dest.unwindToAddNote(segue)
+            dest.unwindToAddNote(segue: segue)
         }
     }
     

@@ -68,7 +68,7 @@ class NotificationManager {
         notification.category = notificationCategory
         notification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
         let infoDict :  Dictionary<String,String?> = ["objectId" : objectID]
-        notification.userInfo = infoDict;
+        notification.userInfo = infoDict ?? "";
         UIApplication.shared.scheduleLocalNotification(notification)
     }
     

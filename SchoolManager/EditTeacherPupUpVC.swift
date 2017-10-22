@@ -11,7 +11,7 @@ class EditTeacherVC: UIViewController, UIPopoverPresentationControllerDelegate, 
     /*Members
     ###############################################################################################################*/
      //AppDelegate Object
-    let appDel = UIApplication.sharedApplication().delegate  as! AppDelegate
+    let appDel = UIApplication.shared.delegate  as! AppDelegate
     
     //Teacher Array for CoraData fetches
     var myTeacherToEdit:Teacher?
@@ -27,7 +27,7 @@ class EditTeacherVC: UIViewController, UIPopoverPresentationControllerDelegate, 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         txtTeacherName.text = myTeacherToEdit!.name
         if myTeacherToEdit!.iamgeName! == "MaleIcon" {
@@ -50,7 +50,7 @@ class EditTeacherVC: UIViewController, UIPopoverPresentationControllerDelegate, 
 
     
     /*Prepare For Segue    ##############################################################################################################*/
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print("Segue from: \(segue.sourceViewController.title) to: \(segue.destinationViewController.title)")
         if let dest = segue.destinationViewController as? TeacherTableVC{
             dest.unwindToTeacherTableView(segue)

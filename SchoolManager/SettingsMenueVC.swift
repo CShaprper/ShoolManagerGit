@@ -77,7 +77,7 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
         self.appDel.adBannerView.center = CGPoint(x: view.bounds.size.width / 2, y: view.bounds.size.height - self.appDel.adBannerView.frame.size.height / 2 - 50)
         
         self.appDel.adBannerView.delegate = self
-        self.appDel.adBannerView.hidden = true
+        self.appDel.adBannerView.isHidden = true
         view.addSubview(self.appDel.adBannerView)
     }
     func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
@@ -103,19 +103,19 @@ class SettingsMenueVC: UIViewController, UITabBarControllerDelegate, ADBannerVie
                 destination.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Automatic
             }
         }
-        if let dest = segue.destinationViewController as? EnabledDaysSettingsVC{
+        if let dest = segue.destination as? EnabledDaysSettingsVC{
             dest.transitioningDelegate = transition
         }
-        if let dest = segue.destinationViewController as? TeacherTableVC{
+        if let dest = segue.destination as? TeacherTableVC{
             dest.transitioningDelegate = transition
         }
-        if let dest = segue.destinationViewController as? TimelineVC{
+        if let dest = segue.destination as? TimelineVC{
             dest.transitioningDelegate = transition
         }
-        if let dest = segue.destinationViewController as? SubjectsVC{
+        if let dest = segue.destination as? SubjectsVC{
             dest.transitioningDelegate = transition
         }
-        if let dest = segue.destinationViewController as? PurchaseProductVC{
+        if let dest = segue.destination as? PurchaseProductVC{
             dest.transitioningDelegate = transition
         }
     }

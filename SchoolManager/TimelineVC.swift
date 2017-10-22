@@ -131,7 +131,7 @@ class TimelineVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         SelectedHoursPickerValue = HoursPerDayPickerArray[row]
     }
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let attributedString = NSAttributedString(string: HoursPerDayPickerArray[row], attributes: [NSForegroundColorAttributeName : UIColor.white])
+        let attributedString = NSAttributedString(string: HoursPerDayPickerArray[row], attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
         return attributedString
     }
     

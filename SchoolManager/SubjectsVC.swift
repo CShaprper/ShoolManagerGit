@@ -77,7 +77,7 @@ class SubjectsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         self.appDel.adBannerView.isHidden = true
         view.addSubview(self.appDel.adBannerView)
     }
-    func bannerView(_ banner: ADBannerView!, didFailToReceiveAdWithError error: Error!) {
+    func bannerView(_ banner: ADBannerView, didFailToReceiveAdWithError error: Error) {
         self.appDel.adBannerView.isHidden = true
     }
     func bannerViewDidLoadAd(banner: ADBannerView!) {

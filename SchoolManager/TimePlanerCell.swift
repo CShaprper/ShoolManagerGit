@@ -30,39 +30,39 @@ class TimePlanerCell: UICollectionViewCell {
     
     func setup(){
         self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.whiteColor().CGColor
+        self.layer.borderColor = UIColor.white.cgColor
         self.layer.cornerRadius = 5
     }
     func unhideUIElements(){
-        self.BackgroundImage.hidden = false
-        self.teacherLabel.hidden = false
-        self.teacherImage.hidden = false
-        self.subjectImage.hidden = false
-        self.subjectLabel.hidden = false
-        self.roomLabel.hidden = false
-        self.subjectColorView.hidden = false
-        self.roomLabel.textAlignment = NSTextAlignment.Left
-        self.subjectLabel.textAlignment = NSTextAlignment.Left
-        self.teacherLabel.textAlignment = NSTextAlignment.Left
+        self.BackgroundImage.isHidden = false
+        self.teacherLabel.isHidden = false
+        self.teacherImage.isHidden = false
+        self.subjectImage.isHidden = false
+        self.subjectLabel.isHidden = false
+        self.roomLabel.isHidden = false
+        self.subjectColorView.isHidden = false
+        self.roomLabel.textAlignment = NSTextAlignment.left
+        self.subjectLabel.textAlignment = NSTextAlignment.left
+        self.teacherLabel.textAlignment = NSTextAlignment.left
     }
     
     func hideUIElements(){
-        self.BackgroundImage.hidden = true
-        self.subjectColorView.hidden = true
-        self.teacherLabel.hidden = true
-        self.teacherImage.hidden = true
-        self.subjectImage.hidden = true
-        self.subjectLabel.hidden = true
-        self.roomLabel.hidden = true
+        self.BackgroundImage.isHidden = true
+        self.subjectColorView.isHidden = true
+        self.teacherLabel.isHidden = true
+        self.teacherImage.isHidden = true
+        self.subjectImage.isHidden = true
+        self.subjectLabel.isHidden = true
+        self.roomLabel.isHidden = true
     }
     
     func configureCell(tte:TimeTableElement, indexPath:NSIndexPath){
         let ele = tte.planerElements[indexPath.row]
         if (ele.isEmptyElement == false && ele.isHeaderElement == false){
             self.unhideUIElements()
-            self.BackgroundImage.hidden = true
+            self.BackgroundImage.isHidden = true
             let col = ColorHelper.convertHexToUIColor(hexColor: ele.subject!.color!)
-            self.subjectColorView.layer.backgroundColor = col.CGColor
+            self.subjectColorView.layer.backgroundColor = col.cgColor
             self.subjectColorView.layer.cornerRadius = 5
             self.layer.cornerRadius = 5
             self.teacherLabel.text = ele.teacher!.name
@@ -71,38 +71,38 @@ class TimePlanerCell: UICollectionViewCell {
             self.subjectLabel.text = ele.subject!.subject!
             self.roomLabel.text = "\("MainVC_NowRoomLabelText".localized) \(ele.room!)"
             self.roomLabel.font = UIFont(name: "Chalkboard SE", size: 12)
-            self.layer.backgroundColor = UIColor.blackColor().CGColor
+            self.layer.backgroundColor = UIColor.black.CGColor
             //UIDesignHelper.ShadowMaker(UIColor.blackColor(), shadowOffset: CGFloat(15), shadowRadius: CGFloat(5), layer: self.layer)
         }
         if (ele.isEmptyElement == true && ele.isHeaderElement == false){
             //Build an empty clear element
             self.hideUIElements()
-            self.BackgroundImage.hidden = false
+            self.BackgroundImage.isHidden = false
             self.BackgroundImage.image = UIImage(named: "PalmsTransparent")
-            self.layer.backgroundColor = UIColor.clearColor().CGColor
+            self.layer.backgroundColor = UIColor.clear.CGColor
         }
         if (ele.isEmptyElement == true && ele.isHeaderElement == true){
             //Build an empty orange element
             self.hideUIElements()
-            self.layer.backgroundColor = UIColor.brownColor().CGColor
+            self.layer.backgroundColor = UIColor.brown.CGColor
         }
         if (ele.isEmptyElement == false && ele.isHeaderElement == true){
             self.hideUIElements()
-            self.layer.backgroundColor = UIColor.brownColor().CGColor
+            self.layer.backgroundColor = UIColor.brown.CGColor
             if (ele.day != nil && ele.hour == nil){
-                self.roomLabel.hidden = false
+                self.roomLabel.isHidden = false
                 self.roomLabel.text = ele.day!.day
                 self.roomLabel.font = UIFont(name: "Chalkboard SE", size: 25)
-                self.roomLabel.textAlignment = NSTextAlignment.Center
+                self.roomLabel.textAlignment = NSTextAlignment.center
             }else if (ele.day == nil && ele.hour != nil) {
-                self.roomLabel.hidden = false
+                self.roomLabel.isHidden = false
                 self.roomLabel.text = NSDate.hourFormatter(ele.hour!.startTime!)
                 self.roomLabel.font = UIFont(name: "Chalkboard SE", size: 12)
-                self.roomLabel.textAlignment = NSTextAlignment.Center
-                self.teacherLabel.hidden = false
+                self.roomLabel.textAlignment = NSTextAlignment.center
+                self.teacherLabel.isHidden = false
                 self.teacherLabel.text = NSDate.hourFormatter(ele.hour!.endTime!)
                 self.teacherLabel.font = UIFont(name: "Chalkboard SE", size: 12)
-                self.teacherLabel.textAlignment = NSTextAlignment.Center
+                self.teacherLabel.textAlignment = NSTextAlignment.center
             }
         }
     }

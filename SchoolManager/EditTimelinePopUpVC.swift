@@ -9,6 +9,7 @@
 import UIKit
 
 class EditTimelinePopUpVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIPopoverPresentationControllerDelegate {
+    
     /*Outlets    ###############################################################################################################*/
     @IBOutlet var StartDatePicker: UIDatePicker!
     @IBOutlet var EndDatePicker: UIDatePicker!
@@ -55,9 +56,10 @@ class EditTimelinePopUpVC: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return myHoursPickerSource.count
     }
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
-        return 1
-    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+         return 1
+    } 
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("SelectedHourPicker tp Edit changed: \(myHoursPickerSource[row])")
         SelectedHoursPickerValue = myHoursPickerSource[row]
@@ -65,7 +67,7 @@ class EditTimelinePopUpVC: UIViewController, UIPickerViewDelegate, UIPickerViewD
         canDeleteTimelineData = false
     }
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let attributedString = NSAttributedString(string: myHoursPickerSource[row], attributes: [NSForegroundColorAttributeName : UIColor.white])
+        let attributedString = NSAttributedString(string: myHoursPickerSource[row], attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
         return attributedString
     }
     
